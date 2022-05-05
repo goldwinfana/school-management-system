@@ -1,0 +1,132 @@
+/* your styles go here */
+.login-card{
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.register-card{
+    margin: 150px 30px;
+}
+
+#ticket_table_wrapper > .row {
+    width:100% !important;
+}
+
+#ticket_table_wrapper{
+    display: block !important;
+}
+
+.col-sm-12{
+    padding: 0px !important;
+}
+.pagination >li {
+    padding: 5px;
+    border-radius: 5px;
+    background: grey;
+    margin: 2px;
+}
+.pagination >li >a {
+    color: gainsboro;
+}
+
+header{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+}
+
+nav{
+    position: fixed;
+    z-index: 2;
+    height: -webkit-fill-available;
+}
+/*nav#sidebar {*/
+/*    width: 280px;*/
+/*    background: #2d3035;*/
+/*    color: #6a6c70;*/
+/*    border-right: 1px solid #34373d;*/
+/*    !* shrinked navbar *!*/
+/*}*/
+
+/*nav#sidebar a {*/
+/*    color: inherit;*/
+/*    text-decoration: none;*/
+/*    position: relative;*/
+/*}*/
+
+/*nav#sidebar a[data-toggle="collapse"]::after {*/
+/*    content: '\f104';*/
+/*    display: inline-block;*/
+/*    -webkit-transform: translateY(-50%);*/
+/*    transform: translateY(-50%);*/
+/*    font-family: 'FontAwesome';*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 20px;*/
+/*}*/
+#sidebar{
+    margin-top: 130px;
+}
+#sidebar.shrinked{
+    margin-top: 130px;
+}
+.page-content{
+    padding-bottom: 70px;
+    margin-left: auto;
+    margin-top: 120px;
+}
+
+.input-post{
+    background: black;
+    border-radius: 5px;
+}
+.logo-small{
+    display: none;
+}
+.sidebar-toggle{
+    height: max-content;
+    margin: 15px;
+    border: none;
+    border-radius: 5px;
+}
+.close{
+    margin-left: auto !important;
+    padding: 5px !important;
+    font-size: initial !important;
+}
+.modal-header{
+    justify-content: center;
+    background: white;
+    margin: 10px 15px;
+    border-radius: 5px;
+    color: black;
+    font-weight: bolder;
+    padding: 10px;
+}
+.form-group{
+    display: flex;
+}
+
+.admins{
+    display: none;
+}
+/* Navbar Media Query ----------------------------------- */
+@media (min-width: 768px) {
+    .post-modals .modal-content{
+        width: 120% !important;
+    }
+}
+@media (min-width: 950px) {
+    .login-card{
+        margin-right: 150px;
+        margin-left: 150px;
+    }
+
+    .register-card{
+        margin: 150px 70px;
+    }
+}
+
+
+
+
