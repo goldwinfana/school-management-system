@@ -141,104 +141,6 @@
 </div></div>
 <!--student-->
 
-<div class="modal fade" id="add-users">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
-            <div class="modal-header">
-                <span>Add new user</span>
-            </div>
-            <div class="modal-body">
-
-                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data" onsubmit="return sendForm('addUser')">
-
-                    <div class="form-group row">
-                        <label for="add-user" class="col-md-4 col-form-label text-md-right">Select user</label>
-
-                        <div class="col-md-6">
-                            <select class="form-control" name="user" required>
-                                <option value="" selected disabled>Select user to add</option>
-                                <option>Admin</option>
-                                <option>Student</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="add-name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                        <div class="col-md-6">
-                            <input id="add-name" type="text" class="form-control is-invalid" name="add-name" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
-                        </div>
-                        <span class="text-center" role="alert" style="display: block">
-                            </span>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="add-email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-
-                        <div class="col-md-6">
-                            <input id="add-email" type="email" class="form-control is-invalid" name="add-email" maxlength="30" onkeyup="validateEmail('addUser')"  required autocomplete="">
-                        </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyEmail"></strong>
-                            </span>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <label for="add-idNo" class="col-md-4 col-form-label text-md-right">ID Number</label>
-
-                        <div class="col-md-6">
-                            <input id="add-idNo" type="text" class="form-control is-invalid" name="add-idNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="validateID('addUser')" required autocomplete="off">
-                        </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyID"></strong>
-                            </span>
-                    </div>
-
-
-                    <input id="add-gender" type="text" class="form-control is-invalid" name="add-gender" hidden>
-
-
-
-                    <div class="form-group row">
-                        <label for="add-password" class="col-md-4 col-form-label text-md-right">Password&nbsp;</label>
-
-                        <div  class="col-md-6">
-                            <input id="add-password" type="text" class="form-control" name="add-password" placeholder="e.g 1234*Abcd" minlength="8" onkeyup="createPassword('addUser')" required autocomplete="off">
-
-                        </div>
-
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyPass"></strong>
-                            </span>
-                    </div>
-
-
-
-                    <div class="form-group row">
-                        <label for="add-passwordMatch" class="col-md-4 col-form-label text-md-right">Confirm Password&nbsp;</label>
-
-                        <div class="col-md-6">
-                            <input id="add-passwordMatch" type="password" class="form-control" name="add-passwordMatch" minlength="8" onkeyup="matchPassword('addUser')" required autocomplete="off">
-                        </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyMatch"></strong>
-                            </span>
-                    </div>
-
-
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div></div>
-
 <div class="modal fade" id="approve-student">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -403,10 +305,8 @@
                 <hr/>
                 <div style="display: grid;float: left;">
                     <label class=" col-form-label">Name: <span class="admin-name"></span></label>
-                    <label class=" col-form-label">E-Mail Address: <span class="admin-email"></span></label>
-                    <label class=" col-form-label">ID Number: <span class="admin-idNo"></span></label>
-                    <label class=" col-form-label">Age: <span class="admin-age"></span></label>
-                    <label class=" col-form-label">Gender: <span class="admin-gender"></span></label>
+                    <label class=" col-form-label">Surname: <span class="admin-surname"></span></label>
+                    <label class=" col-form-label">Email Address: <span class="admin-email"></span></label>
 
                 </div>
 
@@ -495,13 +395,13 @@
         <div class="modal-content">
             <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
             <div class="modal-header">
-                <span>Delete Book</span>
+                <span>Delete Admin</span>
             </div>
             <div class="modal-body">
 
                 <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
 
-                    <input name="delete-book" hidden>
+                    <input name="delete-admin" hidden>
 
                     <span id="lbl-admin"></span>
 
@@ -533,6 +433,116 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<!--Teacher-->
+<div class="modal fade" id="approve-teacher">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Approve Teacher</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="acc_approval" hidden>
+                    <input name="acc_teacher" hidden>
+                    <span id="apv-teacher"></span>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+
+<!--Drivers-->
+
+<div class="modal fade" id="add-transport">
+    <div class="modal-dialog" style="width: 150%">
+        <div class="modal-content" style="width: inherit">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Add Transportation</span>
+            </div>
+            <div class="modal-body">
+                <form id="regForm" method="POST" action="sql.php" >
+                    <input name="add-transport" value="register" hidden>
+
+
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                        <div class="col-md-6">
+                            <input id="name" type="text" class="form-control is-invalid" name="name" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
+                        </div>
+                        <span class="text-center" role="alert" style="display: block">
+                            </span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Surname</label>
+
+                        <div class="col-md-6">
+                            <input id="surname" type="text" class="form-control is-invalid" name="surname" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
+                        </div>
+                        <span class="text-center" role="alert" style="display: block">
+                            </span>
+                    </div>
+
+
+                    <div class="form-group row userID" >
+                        <label class="col-md-4 col-form-label text-md-right">ID Number</label>
+
+                        <div class="col-md-6">
+                            <input id="DidNo" type="text" class="form-control is-invalid idNumber" name="DidNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" autocomplete="off" required>
+                        </div>
+
+                        <span class="invalid-feedback text-center" role="alert" style="display: block">
+                                <strong id="verifyDiD"></strong>
+                            </span>
+                    </div>
+
+
+                    <div class="form-group row userMobile">
+                        <label for="Dmobile" class="col-md-4 col-form-label text-md-right">Mobile</label>
+
+                        <div class="col-md-6">
+                            <input id="Dmobile" type="text" class="form-control is-invalid" name="Dmobile" minlength="10" maxlength="10" onkeyup="ValidateMobile()" onkeypress="return /[0-9]/i.test(event.key)" required autocomplete="off">
+                        </div>
+                        <span class="invalid-feedback text-center" role="alert" style="display: block">
+                                <strong id="verifyDmobile"></strong>
+                            </span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="bus" class="col-md-4 col-form-label text-md-right">Bus Name</label>
+
+                        <div class="col-md-6">
+                            <input id="bus" type="text" class="form-control is-invalid" name="bus" minlength="5" maxlength="10" required autocomplete="off">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-success form-control text-white">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>

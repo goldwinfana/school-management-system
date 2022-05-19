@@ -959,17 +959,10 @@ $(function () {
             },
             dataType: 'json',
             success: function (response) {
-console.log(response);
-                // var year = new Date();
-                // var age=response.id_number;
-                // age = age.substr(0,2);
-                // age = "19"+age;
-                // age = year.getFullYear()- parseInt(age);
-                // $('.admin-name').html(response.name);
-                // $('.admin-email').html(response.email);
-                // $('.admin-idNo').html(response.id_number);
-                // $('.admin-gender').html(response.gender);
-                // $('.admin-age').html(age);
+
+                $('.admin-name').html(response.name);
+                $('.admin-email').html(response.email);
+                $('.admin-surname').html(response.surname);
 
             },
         error: function (e) {
@@ -1041,8 +1034,93 @@ console.log(response);
         $('#edit-student').modal('show');
     });
 
-});
 
+    //drivers
+    $('.add-transport').on('click', function () {
+        $('#add-transport').modal('show');
+    });
+
+    $('.register-transport').on('click', function () {
+        var id = this.id;
+        var bus_name = $(this).attr('for');
+        $('#reg-bus').html('Confirm if you would like to use <span class="text-success mar-5">'+bus_name+'</span> ?');
+        $('input[name=reg-bus]').val(id);
+        $('#register-transport').modal('show');
+
+    });
+
+
+    //Exams
+    $('.q_type').change(function (){
+        let q = this.value;
+        if(q=='tbox'){
+            $('.q2_type').html('<textarea name="tbox" rows="4" placeholder="Type your answer here..." style="width: 100%;border-radius: 5px" required></textarea>\n');
+        }else if(q=='tf'){
+            $('.q2_type').html(
+                '<h5>Choose the correct answer below: </h5>'+
+                '<input name="tf_option" type="radio" value="true" required> <label>True</label> <br/>'+
+                '<input name="tf_option" type="radio" value="false"> <label>False</label> '
+
+            );
+        }else if(q=='options'){
+            $('.q2_type').html(
+                '<h5>Type in your correct answer on the first box and other three possible options below: </h5>'+
+                '<input class="form-control is-valid" name="option[]" type="text" placeholder="Type your correct answer here" required><br/>'+
+                '<input class="form-control is-invalid" name="option[]" type="text" placeholder="First option" required><br/>'+
+                '<input class="form-control is-invalid" name="option[]" type="text" placeholder="Second option" required><br/>'+
+                '<input class="form-control is-invalid" name="option[]" type="text" placeholder="Third option" required>'
+
+            );
+        }else{
+            $('.q2_type').html('');
+        }
+    });
+    $('input[name=tf_option]:checked').on(':checked',function (){
+     console.log('ss')
+    });
+
+});
+function getSubjects(val) {
+    $.ajax({
+        type: 'POST',
+        url: './sql.php',
+        data: {
+            getSubjects: val
+        },
+        dataType: 'json',
+        success: function (response) {
+            var subjects = response.subjects.replaceAll(/'/g,'').split(',');
+            $('.select-sub').html('<select class="form-control" id="choose-sub" name="choose-sub" onchange="conBtn()" required></select>');
+            var option = document.createElement("option");
+            option.value='';
+            option.disabled = true;
+            option.selected=true;
+            option.text='Select subject from list';
+            document.getElementById('choose-sub').add(option);
+            $.each(subjects, function (a,i) {
+                var option = document.createElement("option");
+                option.value=i;
+                option.text=i;
+                document.getElementById('choose-sub').add(option);
+            })
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
+function conBtn(){
+    $('.test_name').html('<input name="test_name" class="form-control" minlength="5" maxlength="15" onkeyup="enableConBtn(this.value)" required>');
+}
+
+function enableConBtn(val){
+    if(val.length > 4){
+        $('.confirm-details').attr('disabled',false);
+    }else{
+        $('.confirm-details').attr('disabled',true);
+    }
+}
 setTimeout(function () {
     $('.message-alert').fadeOut('slow');
 },8000);

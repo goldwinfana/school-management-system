@@ -79,12 +79,15 @@ if(isset($_SESSION['error'])){
                                         <td>'.$key.'</td>
                                         <td>Grade '.$data["grade_code"].'</td>';
 
+
+                                $search = strlen($data["grade_code"])>2? substr($data["grade_code"],0,2):$data["grade_code"];
+
                                 $init2 = $pdo->open();
-                                $sql2 = $init2->prepare("SELECT * FROM subject WHERE grade_code LIKE'%{$data["grade_code"]}%' 
-                                                                                OR grade_code_1 LIKE '%{$data["grade_code"]}%'
-                                                                                OR grade_code_2 LIKE '%{$data["grade_code"]}%'
-                                                                                OR grade_code_3 LIKE '%{$data["grade_code"]}%'
-                                                                                OR grade_code_4 LIKE '%{$data["grade_code"]}%'");
+                                $sql2 = $init2->prepare("SELECT * FROM subject WHERE grade_code LIKE'{$data["grade_code"]}%' 
+                                                                                OR grade_code_1 LIKE '{$search}%'
+                                                                                OR grade_code_2 LIKE '{$search}%'
+                                                                                OR grade_code_3 LIKE '{$search}%'
+                                                                                OR grade_code_4 LIKE '{$search}%'");
                                 $sql2->execute();
 
                                 echo '<td><ul>';

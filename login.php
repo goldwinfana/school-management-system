@@ -2,15 +2,14 @@
 if(isset($_SESSION["islogged"])){
 
     if($_SESSION['user']=='admin'){
-        header('location: ./admin/dashboard.php');
-    }else if($_SESSION['user']=='saloon'){
-        header('location: ./saloon/dashboard.php');
+        header('location: admin/dashboard.php');
+    }else if($_SESSION['user']=='student'){
+        header('location: student/dashboard.php');
     }
-    else if($_SESSION['user']=='customer'){
-        header('location: ./customer/dashboard.php');
+    else if($_SESSION['user']=='parent'){
+        header('location: parent/dashboard.php');
     }
 }
-
 ?>
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

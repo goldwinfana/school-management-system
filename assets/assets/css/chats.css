@@ -305,3 +305,79 @@
     /*}*/
 
 }
+
+
+.ms-container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.ms-darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.ms-container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.ms-container ms-img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.ms-container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.ms-time-right {
+    float: right;
+    color: white;
+}
+
+.ms-time-left {
+    float: left;
+    color: white;
+}
+
+.ms-gray-bg{
+    background: grey;
+    color: white;
+}
+
+.ms-green-bg{
+    background: #51db8f;
+    color: white;
+}
+.sender-msg{
+    width: 100%;
+    padding-left: 30%;
+}
+.receiver-msg{
+    width: 100%;
+    padding-right: 30%;
+}
+
+.msg-count{
+    position: absolute;
+    left: 16%;
+    margin-top: -5px;
+    font-size: small;
+}
+
+.block{
+    display: block !important;
+}
+/*position: absolute;*/
+/*bottom: 30%;*/
+/*padding-right: 5%;*/

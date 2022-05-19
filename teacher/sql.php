@@ -354,6 +354,103 @@ if(isset($_POST['upload-images'])){
 }
 
 
+
+if(isset($_POST['message'])) {
+    $message= $_POST['message'];
+    $user_type = $_POST['user_type'];
+    $user_id = $_POST['user_id'];
+
+    try{
+        if($user_type=='student'){
+            $sql = $init->prepare("SELECT * FROM student WHERE teacher_id=:user_id ");
+        }elseif ($user_type=='admin'){
+            $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:user_id ");
+        }else{
+            $_SESSION['error'] = 'Something went wrong';
+        }
+        $sql->execute(['user_id'=>$user_id]);
+
+        if ($sql->rowCount() < 1) {
+            $_SESSION['error'] = 'User does not exits';
+        } else {
+
+            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+            $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
+            $_SESSION['success'] = 'Message sent successfully';
+        }
+    }catch (Exception $e){
+        $_SESSION['error'] = $e;
+    }
+
+    header('Location: '.$return);
+}
+
+
+if (isset($_POST['getSubjects'])) {
+    $sub= $_POST['getSubjects'];
+
+    $sql = $init->prepare("SELECT * FROM grade WHERE grade_code=:grade ");
+    $sql->execute(['grade' => $sub]);
+    $results = $sql->fetch();
+
+    echo json_encode($results);
+}
+
+if (isset($_POST['question_creation'])) {
+
+    $grade= $_POST['choose-grade'];
+    $sub= $_POST['choose-sub'];
+    $test= $_POST['test_name'];
+    $ques= $_POST['q_number'];
+    $question = $_POST['question'];
+
+    $q_type=$_POST['q_type'];
+    if($q_type=='options'){
+        $options = json_encode($_POST['option']);
+        $answer = current($_POST['option']);
+    }else if($q_type=='tbox'){
+        $options='';
+        $answer = $_POST['tbox'];
+    }else{
+        $options = $_POST['tf_option'];
+        $answer = $_POST['tf_option'];
+    }
+
+    $exam='';
+    try{
+        $sql = $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
+        $sql->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
+        $data = $sql->fetch();
+        if($sql->rowCount() < 1){
+            $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id) VALUES (:grade,:subject,:test_name,:teacher_id)");
+            $sql2->execute(['grade'=>$grade,'subject'=>$sub,'test_name'=>$test,'teacher_id'=>$_SESSION['id']]);
+
+        }else{
+            $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
+            $s->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
+            $exam = $s->fetch();
+
+            $sql3 = $init->prepare("SELECT * FROM questions WHERE exam_id=:exam_id AND question_id=:question_id ");
+            $sql3->execute(['exam_id'=>$data['exam_id'],'question_id'=>$ques]);
+            $results = $sql3->fetch();
+
+
+            if($sql3->rowCount() < 1){
+                $sql4 = $init->prepare("INSERT INTO questions (question_id,exam_id,question,q_type,options,answer) VALUES (:question_id,:exam_id,:question,:q_type,:options,:answer)");
+                $sql4->execute(['question_id'=>$ques,'exam_id'=>$exam['exam_id'],'question'=>$question,'q_type'=>$q_type,'options'=>$options,'answer'=>$answer]);
+                $_SESSION['success']="Question ".$ques." created successfully";
+            }else{
+                $_SESSION['error']="Question ".$ques." already exits";
+            }
+        }
+
+    }catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
 $pdo->close();
 
 ?>

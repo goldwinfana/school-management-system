@@ -122,3 +122,26 @@
 </div></div>
 
 
+<div class="modal fade" id="register-transport">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Register Transport</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="reg-bus" hidden>
+                    <h4 id="reg-bus"></h4>
+                    <p class="text-danger"><strong>NB: Note that once you register this, to change it you will need to contact admin</strong></p>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>

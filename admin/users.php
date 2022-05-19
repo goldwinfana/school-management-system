@@ -138,6 +138,10 @@ if(isset($_SESSION['error'])){
 
                                 if($sql->rowCount() > 0){
                                     foreach ($sql as $data){
+                                        $delAdmin='';
+                                        if($data["admin_id"]!=$_SESSION['id']){
+                                            $delAdmin = '<a id="'.$data["admin_id"].'" class="contributions bg-danger text-white action_spans delete-admin" title="Delete"><i class="fa fa-trash"></i></a>';
+                                        }
 
                                         echo '
                                      <tr>
@@ -148,7 +152,7 @@ if(isset($_SESSION['error'])){
                                             <div class="d-flex" >
                                                 <a id="'.$data["admin_id"].'" class="contributions bg-info text-white action_spans view-admin-profile" title="View"><i class="fa fa-eye"></i></a>
                                                 <a id="'.$data["admin_id"].'" class="contributions bg-warning text-white action_spans edit-admin" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a id="'.$data["admin_id"].'" class="contributions bg-danger text-white action_spans delete-admin" title="Delete"><i class="fa fa-trash"></i></a>
+                                                '.$delAdmin.'
                                             </div>
                                         </td>
                                      </tr>
@@ -182,7 +186,7 @@ if(isset($_SESSION['error'])){
                                 foreach ($sql as $data){
                                     $stBtn='';
                                     if($data["status"]==0){
-                                        $stBtn= '<a id="'.$data["teacher_id"].'" class="bg-success text-white action_spans approve_teacher" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
+                                        $stBtn= '<a href="javascript:void(0)" id="'.$data["email"].'" class="bg-success text-white action_spans approve_teacher" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
                                     }
                                     echo '
                                      <tr>
@@ -230,7 +234,7 @@ if(isset($_SESSION['error'])){
                                 foreach ($sql as $data){
                                     $stBtn='';
                                     if($data["status"]==0){
-                                        $stBtn= '<a id="'.$data["email"].'" class="bg-success text-white action_spans approve_parent" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
+                                        $stBtn= '<a id="'.$data["email"].'" href="javascript:void(0)" class="bg-success text-white action_spans approve_parent" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
                                     }
                                     echo '
                                      <tr>

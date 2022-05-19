@@ -3,11 +3,11 @@ if(isset($_SESSION["islogged"])){
 
     if($_SESSION['user']=='admin'){
         header('location: ./admin/dashboard.php');
-    }else if($_SESSION['user']=='saloon'){
-        header('location: ./saloon/dashboard.php');
+    }else if($_SESSION['user']=='parent'){
+        header('location: ./parent/dashboard.php');
     }
-    else if($_SESSION['user']=='customer'){
-        header('location: ./customer/dashboard.php');
+    else if($_SESSION['user']=='student'){
+        header('location: ./student/dashboard.php');
     }
 }
 ?>
@@ -152,6 +152,14 @@ if(isset($_SESSION["islogged"])){
                             <span class="invalid-feedback text-center" role="alert" style="display: block">
                                 <strong id="verifyMobile"></strong>
                             </span>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">Home Address</label>
+
+                            <div class="col-md-6">
+                                <textarea id="address" rows="3" class="form-control is-invalid" name="address" required autocomplete="off"></textarea>
+                            </div>
                         </div>
 
 

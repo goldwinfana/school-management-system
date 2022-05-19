@@ -21,7 +21,9 @@
             echo '
             <li class="active"><a href="./../admin/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
             <li><a id="'.$_SESSION['id'].'" class="update-user-profile edit-admin"> <i class="fa fa-user-circle"></i>Profile</a></li>
-            <li><a href="./../admin/users.php" class="view-students"> <i class="fa fa-users"></i>Users</a></li>
+            <li><a href="./../admin/users.php" > <i class="fa fa-users"></i>Users</a></li>
+            <li><a href="./../admin/transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
+            <li><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
         
        ';}
 
@@ -30,13 +32,17 @@
             <li class="active"><a href="./../student/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
             <li><a id="'.$_SESSION['id'].'" class="update-user-profile view-student-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
             <li><a href="./subject.php" class="maps"> <i class="fa fa-book"></i>Subjects</a></li>
+            <li><a href="./transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
+            <li><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
        ';}
 
         if($_SESSION['user'] == 'teacher'){
             echo '
-            <li class="active"><a href="./../saloon/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
-            <li><a id="'.$_SESSION['id'].'" class="update-user-profile edit-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
-            <li hidden><a class="create-shout book-session"> <i class="fa fa-plus-circle"></i>Book Session</a></li>
+            <li class="'.($page=='home'?'active':'').'"><a href="./dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
+            <li class="'.($page=='edit-profile'?'active':'').'"><a id="'.$_SESSION['id'].'" class=" update-user-profile edit-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
+            <li class="'.($page=='exam'?'active':'').'"><a href="./exam.php"> <i class="fa fa-book"></i>Exam</a></li>
+            <li class="'.($page=='setexam'?'active':'').'"><a href="./setexam.php"> <i class="fa fa-bookmark-o"></i>Set Exam</a></li>
+            <li class="'.($page=='message'?'active':'').'"><a href="./message.php"> <i class="fa fa-comment-o"><small class="msg-count text-white">5</small></i>Messages</a></li>
        ';}
 
         if($_SESSION['user'] == 'parent'){

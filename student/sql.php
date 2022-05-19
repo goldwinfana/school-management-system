@@ -58,51 +58,52 @@ if(isset($_POST['add-category'])) {
     header('Location: '.$return);
 }
 
-if(isset($_POST['add-book'])) {
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
+if(isset($_POST['message'])) {
+    $message= $_POST['message'];
+    $user_type = $_POST['user_type'];
+    $user_id = $_POST['user_id'];
 
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
+    try{
+        if($user_type=='teacher'){
+            $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id=:user_id ");
+        }elseif ($user_type=='admin'){
+            $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:user_id ");
+        }else{
+            $_SESSION['error'] = 'Something went wrong';
+        }
+        $sql->execute(['user_id'=>$user_id]);
 
-    if ($sql->rowCount() > 0) {
-        $_SESSION['error'] = 'Book already exits';
-    } else {
+        if ($sql->rowCount() < 1) {
+            $_SESSION['error'] = 'User does not exits';
+        } else {
 
-        $sql = $init->prepare("INSERT INTO book(bookName, categoryID,quantity,author, shelveNumber, price) 
-						VALUES (:bookName,:categoryID,:quantity,:author, :shelveNumber, :price)");
-        $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price]);
-        $_SESSION['success'] = 'Book added successfully';
+            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+            $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
+            $_SESSION['success'] = 'Message sent successfully';
+        }
+    }catch (Exception $e){
+        $_SESSION['error'] = $e;
     }
+
     header('Location: '.$return);
 }
 
-if(isset($_POST['edit-book'])) {
-    $id = $_POST['edit-book'];
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
+if(isset($_POST['reg-bus'])) {
+    $transport_id = $_POST['reg-bus'];
 
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
+    $sql = $init->prepare("SELECT * FROM transport WHERE transport_id=:transport_id ");
+    $sql->execute(['transport_id' => $transport_id]);
 
     if ($sql->rowCount() < 0) {
-        $_SESSION['error'] = 'Book does not exit';
+        $_SESSION['error'] = 'Transport does not exit';
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE book SET bookName=:bookName, categoryID=:categoryID, quantity=:quantity,
-                                         author=:author,shelveNumber=:shelveNumber,price=:price
-                                         WHERE id=:id");
-            $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price,'id'=>$id]);
-            $_SESSION['success'] = 'Book updated successfully';
+            $sql = $init->prepare("UPDATE student SET transport=:transport
+                                         WHERE student_id=:id");
+            $sql->execute(['transport'=>$transport_id,'id'=>$_SESSION['id']]);
+            $_SESSION['success'] = 'Transport registered successfully';
         }catch (Exception $e){
             $_SESSION['error'] = $e->getMessage();
         }
@@ -134,25 +135,23 @@ if (isset($_POST['getStudent'])) {
 }
 
 if(isset($_POST['edit-student'])) {
-    $studNo = $_SESSION['studentNo'];
-    $name = $_POST['edit-name'];
-    $email = $_POST['edit-email'];
-    $id_number = $_POST['edit-idNo'];
-    $gender = $_POST['edit-gender'];
+    $studNo = $_SESSION['edit-student'];
+    $name = $_POST['edit-st-name'];
+    $email = $_POST['edit-st-email'];
+    $id_number = $_POST['edit-st-idNo'];
     $password= $_POST['edit-password'];
 
-    $sql = $init->prepare("SELECT * FROM student WHERE studentNo=:studentNo ");
-    $sql->execute(['studentNo' => $_POST['studentNo']]);
+    $sql = $init->prepare("SELECT * FROM student WHERE student_id=:studentNo ");
+    $sql->execute(['studentNo' => $studNo]);
 
     if ($sql->rowCount() < 0) {
         $_SESSION['error'] = 'Student does not exit';
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE student SET name=:name, email=:email, id_number=:id_number,
-                                         gender=:gender,password=:password
-                                         WHERE studentNo=:studentNo");
-            $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'gender'=>$gender, 'password'=>$password,'studentNo'=>$studNo]);
+            $sql = $init->prepare("UPDATE student SET name=:name, email=:email, id_number=:id_number,password=:password
+                                         WHERE student_id=:studentNo");
+            $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'password'=>$password,'studentNo'=>$studNo]);
             $_SESSION['success'] = 'Student updated successfully';
             $_SESSION['name'] = $name;
         }catch (Exception $e){

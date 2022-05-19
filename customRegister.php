@@ -11,6 +11,7 @@ if(isset($_POST['register'])){
         $email = $_POST['email'];
         $mobile= $_POST['mobile'];
         $idNumber = $_POST['idNumber'];
+        $address = $_POST['address'];
         $password = $_POST['password'];
         $accType = $_POST['accountType'];
 
@@ -58,10 +59,10 @@ if(isset($_POST['register'])){
         if($accType =='student'){
             try {
 
-                $stmt = $conn->prepare("INSERT INTO student (name,surname, email,id_number,parent_id_number,mobile, password,status) 
-            VALUES (:name,:surname,:email,:idNo,:p_id,:mobile,:password,:status)");
+                $stmt = $conn->prepare("INSERT INTO student (name,surname, email,id_number,parent_id_number,mobile,address, password,status) 
+            VALUES (:name,:surname,:email,:idNo,:p_id,:mobile,:address,:password,:status)");
                 $stmt->execute(['name' => $name,'surname' => $surname, 'email' => $email,'idNo' => $idNumber,'p_id' => $_POST['PidNumber'],
-                    'mobile' => $mobile,'password' => $password,'status'=>0]);
+                    'mobile' => $mobile,'address'=>$address,'password' => $password,'status'=>0]);
 
                 $_SESSION['success'] = 'Account successfully created. Proceed to Login';
                 header('location: login.php');
@@ -73,10 +74,10 @@ if(isset($_POST['register'])){
         }else if($accType =='teacher'){
             try {
 
-                $stmt = $conn->prepare("INSERT INTO teacher (name,surname, email,id_number,mobile, password,status) 
-            VALUES (:name,:surname,:email,:idNo,:mobile,:password,:status)");
+                $stmt = $conn->prepare("INSERT INTO teacher (name,surname, email,id_number,mobile,address, password,status) 
+            VALUES (:name,:surname,:email,:idNo,:mobile,:address,:password,:status)");
                 $stmt->execute(['name' => $name,'surname' => $surname, 'email' => $email,'idNo' => $idNumber,
-                    'mobile' => $mobile,'password' => $password,'status'=>0]);
+                    'mobile' => $mobile,'address'=>$address,'password' => $password,'status'=>0]);
 
                 $_SESSION['success'] = 'Account successfully created. Proceed to Login';
                 header('location: login.php');
@@ -88,10 +89,10 @@ if(isset($_POST['register'])){
         }else if($accType =='parent'){
             try {
 
-                $stmt = $conn->prepare("INSERT INTO parent (name,surname, email,id_number,mobile, password,status) 
-            VALUES (:name,:surname,:email,:idNo,:mobile,:password,:status)");
+                $stmt = $conn->prepare("INSERT INTO parent (name,surname, email,id_number,mobile,address, password,status) 
+            VALUES (:name,:surname,:email,:idNo,:mobile,:address,:password,:status)");
                 $stmt->execute(['name' => $name,'surname' => $surname, 'email' => $email,'idNo' => $idNumber,
-                    'mobile' => $mobile,'password' => $password,'status'=>0]);
+                    'mobile' => $mobile,'address'=>$address,'password' => $password,'status'=>0]);
 
                 $_SESSION['success'] = 'Account successfully created. Proceed to Login';
                 header('location: login.php');

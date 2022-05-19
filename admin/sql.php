@@ -425,7 +425,32 @@ if(isset($_POST['edit-admin'])) {
 }
 
 
+if(isset($_POST['delete-admin'])){
+    $adminNo = $_POST['delete-admin'];
 
+
+    try{
+        $stmt = $init->prepare("SELECT * FROM admin WHERE admin_id=:id");
+        $stmt->execute(['id'=>$adminNo]);
+        $res = $stmt->fetch();
+        echo $res['admin_id'];
+        if($res['admin_id'] == $_SESSION['id']){
+            $_SESSION['error'] = 'Not permitted to delete self account...';
+        }else{
+            $sql = $init->prepare("DELETE FROM admin WHERE admin_id=:id_number");
+            $sql->execute(['id_number'=>$adminNo]);
+
+            $_SESSION['success'] = 'Admin deleted successfully';
+        }
+
+
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+
+}
 
 if (isset($_POST['profile_admin'])) {
     $id = $_SESSION['admin'];
@@ -453,31 +478,6 @@ if (isset($_POST['profile_admin'])) {
     header('location: welcome.php');
 }
 
-if (isset($_POST['profile_farmer'])) {
-    $id = $_SESSION['admin'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $name = $_POST['name'];
-    $mobile = $_POST['mobile'];
-
-    $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM admin WHERE email=:email AND id <>:id");
-    $stmt->execute(['email'=>$email, 'id'=>$id]);
-    $row = $stmt->fetch();
-    if($row['numrows'] > 0){
-        $_SESSION['error'] = 'Email already exits';
-    }
-    else {
-
-        $stmt = $conn->prepare("UPDATE admin SET email=:email, password=:password, firstName=:name,
-                                         mobile=:mobile
-                                         WHERE id=:id");
-        $stmt->execute(['email' => $email, 'password' => $password, 'name' =>
-            $name, 'mobile' => $mobile,'id'=>$id]);
-
-        $_SESSION['success'] = 'Record updated successfully';
-    }
-    header('location: welcome.php');
-}
 
 if (isset($_POST['edit_admin'])) {
     $id = $_POST['edit_admin'];
@@ -506,34 +506,6 @@ if (isset($_POST['edit_admin'])) {
 }
 
 
-if (isset($_POST['edit_farmer'])) {
-    $id = $_POST['edit_farmer'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $gender = $_POST['gender'];
-    $mobile = $_POST['mobile'];
-    $address = $_POST['address'];
-
-    $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM farmer WHERE email=:email AND id <>:id");
-    $stmt->execute(['email'=>$email, 'id'=>$id]);
-    $row = $stmt->fetch();
-    if($row['numrows'] > 0){
-        $_SESSION['error'] = 'Email already exits';
-    }
-    else {
-
-        $stmt = $conn->prepare("UPDATE farmer SET email=:email, password=:password, firstName=:firstname,
-                                         lastName=:lastname,gender=:gender,mobile=:mobile,address=:address
-                                         WHERE id=:id");
-        $stmt->execute(['email' => $email, 'password' => $password, 'firstname' =>
-            $firstname, 'lastname' => $lastname, 'gender' => $gender,'mobile' => $mobile, 'address' => $address,'id'=>$id]);
-
-        $_SESSION['success'] = 'Record updated successfully';
-    }
-    header('location: welcome.php');
-}
 
 if (isset($_POST['search'])) {
 
@@ -618,22 +590,64 @@ if(isset($_POST['report'])){
 }
 
 
-if(isset($_POST['admin_delete'])){
-    $id = $_POST['admin_delete'];
 
-    try{
-        $stmt = $conn->prepare("DELETE FROM admin WHERE id=:id");
-        $stmt->execute(['id'=>$id]);
 
-        $_SESSION['success'] = 'Admin deleted successfully';
-    }
-    catch(PDOException $e){
+
+//Driver
+if(isset($_POST['add-transport'])){
+
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $idNo = $_POST['DidNo'];
+    $mobile= $_POST['Dmobile'];
+    $bus= $_POST['bus'];
+    try {
+
+        $stmt = $init->prepare("INSERT INTO transport (name,surname,id_number,mobile,bus) 
+            VALUES (:name,:surname,:idNo,:mobile,:bus)");
+        $stmt->execute(['name' => $name,'surname' => $surname,'idNo' => $idNo,'mobile' => $mobile,'bus' => $bus]);
+
+        $_SESSION['success'] = 'Driver successfully created';
+        header('location: '.$return);
+
+    } catch (PDOException $e) {
         $_SESSION['error'] = $e->getMessage();
+        header('location: '.$return);
     }
-    header('Location: welcome.php');
+
 
 }
 
+if(isset($_POST['message'])) {
+    $message= $_POST['message'];
+    $user_type = $_POST['user_type'];
+    $user_id = $_POST['user_id'];
+
+    try{
+        if($user_type=='teacher'){
+            $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id=:user_id ");
+        }elseif ($user_type=='student'){
+            $sql = $init->prepare("SELECT * FROM student WHERE student_id=:user_id ");
+        }else{
+            $_SESSION['error'] = 'Something went wrong';
+        }
+        $sql->execute(['user_id'=>$user_id]);
+
+        if ($sql->rowCount() < 1) {
+            $_SESSION['error'] = 'User does not exits';
+        } else {
+
+            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+            $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
+            $_SESSION['success'] = 'Message sent successfully';
+        }
+    }catch (Exception $e){
+        $_SESSION['error'] = $e;
+    }
+
+    header('Location: '.$return);
+}
 
 $pdo->close();
 

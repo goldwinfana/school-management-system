@@ -44,7 +44,7 @@ function validateMobile() {
 
 function validateEmail() {
 
-        var count =0;
+        let count =0;
         let email = $('#email').val();
         let dotpos = email.indexOf(".");
         let afterDot = email.substr(dotpos,email.length -1);

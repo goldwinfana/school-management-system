@@ -16,9 +16,10 @@
         $(document).ready(function () {
             $('#parent_table').DataTable();
             $('#users_table').DataTable();
-            // $('#student_table').DataTable();
+            $('#driver_table').DataTable();
             $('#teacher_table').DataTable();
             $('#admin_table').DataTable();
+            $('#transport_table').DataTable();
         });
 
     });
