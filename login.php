@@ -1,16 +1,4 @@
-<?php include 'layouts/session.php';
-if(isset($_SESSION["islogged"])){
-
-    if($_SESSION['user']=='admin'){
-        header('location: admin/dashboard.php');
-    }else if($_SESSION['user']=='student'){
-        header('location: student/dashboard.php');
-    }
-    else if($_SESSION['user']=='parent'){
-        header('location: parent/dashboard.php');
-    }
-}
-?>
+<?php include 'layouts/session.php';include 'layouts/alerts.php';$page='login'?>
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -49,25 +37,6 @@ if(isset($_SESSION["islogged"])){
                 <div class="card-header" style="border-bottom: 1px dark solid;">Login</div>
 
                 <div class="card-body">
-                    <?php
-
-                        if(isset($_SESSION['success'])){
-                            echo '
-                            <div class="alert btn-success message-alert"> '
-                                .$_SESSION['success'].'
-                            </div>';
-                            unset($_SESSION['success']);
-                        }
-
-                        if(isset($_SESSION['error'])){
-                            echo '
-                            <div class="alert btn-danger message-alert"> '
-                                .$_SESSION['error'].'
-                            </div>';
-                            unset($_SESSION['error']);
-                        }
-
-                    ?>
                     <form method="POST" action="customRegister.php" >
                         <input name="login" value="login" hidden>
 

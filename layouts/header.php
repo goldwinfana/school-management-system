@@ -140,7 +140,7 @@
                 else{
                     echo '
                         <div class="d-flex">
-                            <a href="login.php" class="dropdown-item d-flex align-items-center">Login</a>
+                            <a href="login.php" class="dropdown-item d-flex align-items-center ">Login</a>
                             <a href="register.php" class=" dropdown-item d-flex align-items-center">Register</a>
                         </div>';
                 }
