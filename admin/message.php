@@ -58,12 +58,12 @@ if(isset($_SESSION['error'])){
                         $user_id='';
                         $init = $pdo->open();
                         if($_GET['user_type']=='teacher'){
-                            $sql = $init->prepare("SELECT * FROM messages,teacher 
+                            $sql = $init->prepare("SELECT * FROM message,teacher 
                                                 WHERE (user_id=teacher_id AND user_type='teacher' AND sender_type='admin' AND user_id=:id AND sender_id=:user_id) 
                                                 OR (sender_id=teacher_id AND sender_type='teacher' AND user_type='admin' AND user_id=:user_id AND sender_id=:id)");
 
                         }else if($_GET['user_type']=='student'){
-                            $sql = $init->prepare("SELECT * FROM messages,student 
+                            $sql = $init->prepare("SELECT * FROM message,student 
                                                 WHERE (user_id=student_id AND user_type='student' AND sender_type='admin' AND user_id=:id AND sender_id=:user_id) 
                                                 OR (sender_id=student_id AND sender_type='student' AND user_type='admin' AND user_id=:user_id AND sender_id=:id)");
                         }

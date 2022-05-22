@@ -29,11 +29,11 @@
 
         if($_SESSION['user'] == 'student'){
             echo '
-            <li class="active"><a href="./../student/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
-            <li><a id="'.$_SESSION['id'].'" class="update-user-profile view-student-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
-            <li><a href="./subject.php" class="maps"> <i class="fa fa-book"></i>Subjects</a></li>
-            <li><a href="./transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
-            <li><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
+            <li class="'.($page=='home'?'active':'').'"><a href="./../student/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
+            <li class="'.($page=='profile'?'active':'').'"><a id="'.$_SESSION['id'].'" class="update-user-profile view-student-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
+            <li class="'.($page=='subject'?'active':'').'"><a href="./subject.php" class="maps"> <i class="fa fa-book"></i>Subjects</a></li>
+            <li class="'.($page=='transport'?'active':'').'"><a href="./transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
+            <li class="'.($page=='message'?'active':'').'"><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
        ';}
 
         if($_SESSION['user'] == 'teacher'){

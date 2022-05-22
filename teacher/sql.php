@@ -219,23 +219,7 @@ if(isset($_POST['delete-student'])){
 
 }
 
-if(isset($_POST['cancelBooking'])){
-    $id = $_SESSION['id'];
-    $bookID = $_POST['cancelBooking'];
 
-    try{
-
-        $sql = $init->prepare("UPDATE session SET status='cancelled' WHERE customerID=:customerID AND id=:id");
-        $sql->execute(['customerID' => $id,'id'=>$bookID]);
-
-        $_SESSION['success'] = 'Booking cancelled successfully';
-
-    }
-    catch(PDOException $e){
-        echo json_encode($e->getMessage());
-    }
-    header('Location: '.$return);
-}
 
 
 if(isset($_POST['booking'])) {
@@ -397,24 +381,63 @@ if (isset($_POST['getSubjects'])) {
     echo json_encode($results);
 }
 
+if (isset($_POST['getMySubjects'])) {
+    $sub= $_POST['getSubjects'];
+
+    $sql = $init->prepare("SELECT * FROM grade WHERE teacher_id=:grade ");
+    $sql->execute(['id' => $sub]);
+    $results = $sql->fetch();
+
+    echo json_encode($results);
+}
+
+if(isset($_POST['createTest'])){
+    parse_str($_POST['createTest'],$data);
+    $grade= $data['create-grade'];
+    $sub= $data['create-subject'];
+    $test= $data['create-test'];
+
+    try{
+        $count=0;
+        $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
+        $s->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
+        if($s->rowCount() > 0){
+
+            $sql = $init->prepare("SELECT COUNT(question_id) AS ques FROM question WHERE exam_id=:exam_id");
+            $sql->execute(['exam_id'=> $s->fetch()['exam_id']]);
+            $count = $sql->fetch()['ques'];
+            echo json_encode(['message'=>'exists','count'=>$count+1]);
+        }else{
+            $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id) VALUES (:grade,:subject,:test_name,:teacher_id)");
+            $sql2->execute(['grade'=>$grade,'subject'=>$sub,'test_name'=>$test,'teacher_id'=>$_SESSION['id']]);
+
+            echo json_encode(['message'=>'Exam created successfully','count'=>$count+1]);
+        }
+
+    }catch (Exception $exception){
+        echo $exception->getMessage();
+    }
+
+}
+
 if (isset($_POST['question_creation'])) {
+    parse_str($_POST['question_creation'],$data);
+    $grade= $data['choose-grade'];
+    $sub= $data['choose-sub'];
+    $test= $data['test_name'];
+    $ques= $data['q_number'];
+    $question = $data['question'];
 
-    $grade= $_POST['choose-grade'];
-    $sub= $_POST['choose-sub'];
-    $test= $_POST['test_name'];
-    $ques= $_POST['q_number'];
-    $question = $_POST['question'];
-
-    $q_type=$_POST['q_type'];
+    $q_type=$data['q_type'];
     if($q_type=='options'){
-        $options = json_encode($_POST['option']);
-        $answer = current($_POST['option']);
+        $options = json_encode($data['option']);
+        $answer = current($data['option']);
     }else if($q_type=='tbox'){
         $options='';
-        $answer = $_POST['tbox'];
+        $answer = $data['tbox'];
     }else{
-        $options = $_POST['tf_option'];
-        $answer = $_POST['tf_option'];
+        $options = json_encode(['true','false']);
+        $answer = $data['tf_option'];
     }
 
     $exam='';
@@ -422,30 +445,46 @@ if (isset($_POST['question_creation'])) {
         $sql = $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
         $sql->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
         $data = $sql->fetch();
-        if($sql->rowCount() < 1){
-            $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id) VALUES (:grade,:subject,:test_name,:teacher_id)");
-            $sql2->execute(['grade'=>$grade,'subject'=>$sub,'test_name'=>$test,'teacher_id'=>$_SESSION['id']]);
-
-        }else{
+        if($sql->rowCount() > 0){
             $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
             $s->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
             $exam = $s->fetch();
 
-            $sql3 = $init->prepare("SELECT * FROM questions WHERE exam_id=:exam_id AND question_id=:question_id ");
+            $sql3 = $init->prepare("SELECT * FROM question WHERE exam_id=:exam_id AND question_id=:question_id ");
             $sql3->execute(['exam_id'=>$data['exam_id'],'question_id'=>$ques]);
             $results = $sql3->fetch();
 
 
             if($sql3->rowCount() < 1){
-                $sql4 = $init->prepare("INSERT INTO questions (question_id,exam_id,question,q_type,options,answer) VALUES (:question_id,:exam_id,:question,:q_type,:options,:answer)");
+                $sql4 = $init->prepare("INSERT INTO question (question_id,exam_id,question,q_type,options,answer) VALUES (:question_id,:exam_id,:question,:q_type,:options,:answer)");
                 $sql4->execute(['question_id'=>$ques,'exam_id'=>$exam['exam_id'],'question'=>$question,'q_type'=>$q_type,'options'=>$options,'answer'=>$answer]);
-                $_SESSION['success']="Question ".$ques." created successfully";
+
+                echo json_encode(['message'=>"Question ".$ques." created successfully",'success'=>1]);
             }else{
-                $_SESSION['error']="Question ".$ques." already exits";
+                echo json_encode(['message'=>"Question ".$ques." already exits",'success'=>0]);
             }
         }
 
     }catch(PDOException $e){
+        echo json_encode(['message'=>$e->getMessage(),'success'=>0]);
+    }
+}
+
+
+if(isset($_POST['teacherGrade'])){
+    $id = $_SESSION['id'];
+    $grade = $_POST['teacherGrade'];
+    $subjects = json_encode($_POST['sub']);
+
+    try{
+
+        $sql = $init->prepare("UPDATE teacher SET grade_code=:grade,subjects=:subjects WHERE teacher_id=:id");
+        $sql->execute(['grade' => $grade,'id'=>$id,'subjects'=>$subjects]);
+
+        $_SESSION['success'] = 'Grade and subjects registered successfully';
+
+    }
+    catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
     }
     header('Location: '.$return);

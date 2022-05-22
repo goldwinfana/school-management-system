@@ -1,32 +1,5 @@
-<?php include './../layouts/session.php'; ?>
-<?php
+<?php include './../layouts/session.php'; include './../layouts/alerts.php'; $page='message'; ?>
 
-    if(isset($_SESSION["islogged"])){
-        $_SESSION['user']=='admin'? header('location: ./../admin/dashboard.php'):'';
-    }else{
-        header('location: ./../login.php');
-    }
-?>
-
-<?php
-
-if(isset($_SESSION['success'])){
-    echo '
-                            <div class="alert btn-success message-alert"> '
-        .$_SESSION['success'].'
-                            </div>';
-    unset($_SESSION['success']);
-}
-
-if(isset($_SESSION['error'])){
-    echo '
-                            <div class="alert btn-danger message-alert"> '
-        .$_SESSION['error'].'
-                            </div>';
-    unset($_SESSION['error']);
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,12 +39,12 @@ if(isset($_SESSION['error'])){
                         $user_id='';
                         $init = $pdo->open();
                         if($_GET['user_type']=='admin'){
-                            $sql = $init->prepare("SELECT * FROM messages,admin 
+                            $sql = $init->prepare("SELECT * FROM message,admin 
                                                 WHERE (user_id=admin_id AND user_type='admin' AND user_id=:id AND sender_id=:user_id) 
                                                 OR (sender_id=admin_id AND sender_type='admin' AND user_id=:user_id AND sender_id=:id)");
 
                         }else{
-                            $sql = $init->prepare("SELECT * FROM messages,teacher 
+                            $sql = $init->prepare("SELECT * FROM message,teacher 
                                                 WHERE (user_id=teacher_id AND user_type='teacher' AND user_id=:id AND sender_id=:user_id) 
                                                 OR (sender_id=teacher_id AND sender_type='teacher' AND user_id=:user_id AND sender_id=:id)");
                         }

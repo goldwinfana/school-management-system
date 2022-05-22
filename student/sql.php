@@ -111,17 +111,23 @@ if(isset($_POST['reg-bus'])) {
     }
     header('Location: '.$return);
 }
-//Admin
 
-if (isset($_POST['getAdmin'])) {
-    $getAdmin = $_POST['getAdmin'];
 
-    $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:admin_id");
-    $sql->execute(['admin_id' => $getAdmin]);
-    $results = $sql->fetch();
+if(isset($_POST['reg-grade'])) {
+    $grade = $_POST['reg-grade'];
 
-    echo json_encode($results);
+    try{
+        $sql = $init->prepare("UPDATE student SET grade=:grade
+                                     WHERE student_id=:id");
+        $sql->execute(['grade'=>$grade,'id'=>$_SESSION['id']]);
+        $_SESSION['success'] = 'Grade registered successfully';
+    }catch (Exception $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+
+    header('Location: '.$return);
 }
+
 
 ///Student
 if (isset($_POST['getStudent'])) {
@@ -204,37 +210,6 @@ if(isset($_POST['endBooking'])){
     header('Location: '.$return);
 }
 
-
-//if(isset($_POST['book-session'])) {
-//    $studNo = $_SESSION['studentNo'];
-//    $tblNumber = $_POST['book-session'];
-//    $startTime = date('H:i:sa');
-//    $duration = $_POST['book-hours'];
-//    $endTime = date('H:i:sa',strtotime('now +'.$duration.' hour'));
-//
-//    $sql = $init->prepare("SELECT * FROM desk where tblNumber=:tblNumber and status='available'");
-//    $sql->execute(['tblNumber'=>$tblNumber]);
-//
-//    if ($sql->rowCount() < 0) {
-//        $_SESSION['error'] = 'Table already booked';
-//    } else {
-//
-//        try{
-//            $sql = $init->prepare("INSERT INTO session (startTime, endTime,duration, studNumber, tblNumber)
-//						VALUES (:startTime, :endTime,:duration, :studNumber,:tblNumber)");
-//            $sql->execute(['startTime'=>$startTime,'endTime'=>$endTime,'duration'=>$duration,'studNumber'=>$studNo,'tblNumber'=>$tblNumber]);
-//
-//            $sql = $init->prepare("UPDATE desk SET status=:status WHERE tblNumber=:tblNumber");
-//            $sql->execute(['tblNumber'=>$tblNumber,'status'=>'available']);
-//
-//            $_SESSION['success'] = 'Session booked successfully at '.$startTime;
-//        }catch (Exception $e){
-//            $_SESSION['error'] = $e->getMessage();
-//        }
-//
-//    }
-//    header('Location: '.$return);
-//}
 
 
 

@@ -1034,6 +1034,14 @@ $(function () {
         $('#edit-student').modal('show');
     });
 
+    $('.register_grade').on('click', function () {
+        var grade = this.id;
+        $('#reg-grade').html('Confirm if you would like to enroll for Grade <span class="text-success mar-5">'+grade+'</span> ?');
+        $('input[name=reg-grade]').val(grade);
+        $('#register_grade').modal('show');
+
+    });
+
 
     //drivers
     $('.add-transport').on('click', function () {
@@ -1111,7 +1119,7 @@ function getSubjects(val) {
 }
 
 function conBtn(){
-    $('.test_name').html('<input name="test_name" class="form-control" minlength="5" maxlength="15" onkeyup="enableConBtn(this.value)" required>');
+    $('.test_name').html('<input name="test_name" placeholder="Enter Test Name..." class="form-control" minlength="5" maxlength="15" onkeyup="enableConBtn(this.value)" required>');
 }
 
 function enableConBtn(val){
@@ -1121,6 +1129,176 @@ function enableConBtn(val){
         $('.confirm-details').attr('disabled',true);
     }
 }
+
+function createTest(){
+    $('input[name=create-grade]').val($('select[name=choose-grade]').val());
+    $('input[name=create-subject]').val($('select[name=choose-sub]').val());
+    $('input[name=create-test]').val($('input[name=test_name]').val());
+    let formData = $('#create-test').serialize();
+
+    var grade = $('select[name=choose-grade]').val();
+    var sub =$('select[name=choose-sub]').val();
+    var test =$('input[name=test_name]').val();
+
+    if(sub==null){
+        $('select[name=choose-sub]').focus();
+        return;
+    }
+    if(test==null){
+        $('input[name=test_name]').focus();
+        return;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: './sql.php',
+        data: {
+            createTest: formData
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log((response));
+            if(response.message=='exists'){
+                $('.q_num').html(response.count);$('.q_number').val(response.count);
+                localStorage.setItem('getQ',
+                    JSON.stringify({
+                        'grade': grade,
+                        'subject': sub,
+                        'question': response.count,
+                        'testName':test
+                    })
+                );
+                alerts('warning','Test already '+response.message+',continue where you left off');
+
+            }else{
+                $('.q_num').html(response.count);$('.q_number').val(response.count);
+                localStorage.setItem('getQ',
+                    JSON.stringify({
+                        'grade': grade,
+                        'subject': sub,
+                        'question': response.count,
+                        'testName':test
+                    })
+                );
+                alerts('success',response.message);
+
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
+function makeQuestions(grade,subject,testName){
+    let getQ = localStorage.getItem('getQ');
+    var qCount=0;
+    if(getQ==null){
+        qCount = 1;
+        localStorage.setItem('getQ',
+            JSON.stringify({
+                    'grade': grade,
+                    'subject': subject,
+                    'question': qCount,
+                    'testName':testName
+                })
+        );
+
+    }else{
+        qCount = JSON.parse(localStorage.getItem('getQ')).question+1;
+        localStorage.setItem('getQ',
+            JSON.stringify({
+                'grade': grade,
+                'subject': subject,
+                'question': qCount,
+                'testName':testName
+            })
+        );
+    }
+$('.q_num').html(qCount);$('.q_number').val(qCount);
+
+}
+
+function submitQuestions(){
+    let formData = $('#submitQuestions').serialize();
+    if($('textarea[name=question]').val()==''){
+        $('textarea[name=question]').focus();
+        return;
+    }
+    if($('.q_type').val()==null){
+        $('.q_type').focus();
+        return;
+    }
+
+    if($('.q_type').val()=='tbox' && $('.q2_type').find('textarea').val()==''){
+            $('textarea[name=tbox]').focus();
+            return;
+    }
+
+    if($('.q_type').val()=='tf' && !$('input[name=tf_option]').is(':checked')){
+        $('input[name=tf_option]').focus();
+        return;
+    }
+    var count=0;
+    if($('.q_type').val()=='options'){
+        $('.q2_type').find('input').each(function () {
+            if($(this).val()==''){
+                $(this).focus();
+                count++;
+            }
+        });
+    }
+    if(count > 0){
+        return;
+    }
+
+   $.ajax({
+        type: 'POST',
+        url: './sql.php',
+        data: {
+            question_creation: formData
+        },
+        success: function (response) {
+            console.log(response)
+            response = JSON.parse(response);
+            if(response.success==1){
+                var count = JSON.parse(localStorage.getItem('getQ')).question+1;
+                var grade = JSON.parse(localStorage.getItem('getQ')).grade;
+                var sub =JSON.parse(localStorage.getItem('getQ')).subject;
+                var test =JSON.parse(localStorage.getItem('getQ')).testName;
+                localStorage.setItem('getQ',
+                    JSON.stringify({
+                        'grade': grade,
+                        'subject': sub,
+                        'question': count,
+                        'testName':test
+                    })
+                );
+
+                $('textarea[name=question]').val('');
+                $('.q_type').val('');
+                $('.q2_type').html('');
+                $('.q_num').html(count);$('.q_number').val(count);
+                alerts('success',response.message);
+            }else{
+                alerts('danger',response.message);
+            }
+
+        },
+        error: function (e) {
+            console.log(e);
+            // alerts('danger',e.message);
+        }
+    });
+}
+
+function alerts(success,message){
+    $('body').append('<div class="alert btn-'+success+' message-alert">'+message+'</div>');
+    setTimeout(function () {
+        $('.message-alert').fadeOut('slow');
+    },10000);
+}
+
 setTimeout(function () {
     $('.message-alert').fadeOut('slow');
 },8000);

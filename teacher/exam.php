@@ -40,8 +40,8 @@
                         ';
 
                         $init = $pdo->open();
-                        $sql = $init->prepare("SELECT *,COUNT(question_id ) AS ques FROM exam,questions 
-                                                WHERE exam.exam_id=questions.exam_id GROUP BY questions.exam_id");
+                        $sql = $init->prepare("SELECT *,COUNT(question_id ) AS ques FROM exam,question 
+                                                WHERE exam.exam_id=question.exam_id GROUP BY question.exam_id");
                         $sql->execute();
 
                         if ($sql->rowCount() > 0) {
@@ -80,7 +80,7 @@
                         ';
 
                             $init = $pdo->open();
-                            $sql = $init->prepare("SELECT * FROM questions,exam WHERE exam.exam_id=:exam_id AND exam.exam_id=questions.exam_id AND grade=:grade AND subject=:subject");
+                            $sql = $init->prepare("SELECT * FROM question,exam WHERE exam.exam_id=:exam_id AND exam.exam_id=question.exam_id AND grade=:grade AND subject=:subject");
                             $sql->execute(['exam_id'=>$_GET['exam_id'],'grade'=>$_GET['grade'],'subject'=>$_GET['subject']]);
 
                             if ($sql->rowCount() > 0) {

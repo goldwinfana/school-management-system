@@ -16,18 +16,21 @@
             </div>
         </div>
 
+        <form id="create-test" hidden>
+            <input name="create-grade">
+            <input name="create-subject">
+            <input name="create-test">
+        </form>
 
-
-        <form action="sql.php" method="post">
-            <input name="question_creation" hidden>
+        <form id="submitQuestions" action="sql.php" method="post">
         <div style="display: flex">
             <div class="select-grade" style="margin:15px;">
-                <select class="form-control" style="width: auto" class="choose-grade" name="choose-grade" onchange="getSubjects(this.value)" required>
+                <select class="form-control" style="width: auto" class="choose-grade" name="choose-grade" required>
                     <option value="" selected disabled>Select grade from list</option>
 
                     <?php
                     $init = $pdo->open();
-                    $sql = $init->prepare("SELECT * FROM grade");
+                    $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id='$_SESSION[id]'");
                     $sql->execute();
 
                     if ($sql->rowCount() > 0) {
@@ -35,26 +38,45 @@
                             echo '<option value="'.$data['grade_code'].'">Grade '.$data['grade_code'].'</option>';
                         }
                     }
-                    $pdo->close();
                     ?>
 
                 </select>
 
             </div>
 
-            <div class="select-sub" style="margin:15px;"></div>
+            <div class="select-sub" style="margin:15px;">
+                <select class="form-control" id="choose-sub" name="choose-sub" onchange="conBtn()" required>
+                    <option value="" selected disabled>Select subject from list</option>
+
+                    <?php
+                    $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id='$_SESSION[id]'");
+                    $sql->execute();
+
+                    if ($sql->rowCount() > 0) {
+                        foreach (json_decode($sql->fetch()['subjects']) as $data) {
+                            echo '<option value="'.$data.'">'.$data.'</option>';
+                        }
+                    }
+                    $pdo->close();
+                    ?>
+
+                </select>
+            </div>
             <div class="test_name" style="margin:15px;"></div>
 
             <div class="confirmD" style="margin:15px;">
-                <button class="btn btn-secondary confirm-details" onclick="event.preventDefault();$('.set_qs').show()" disabled>Confirm and Proceed</button>
+                <button class="btn btn-secondary confirm-details" onclick="event.preventDefault();createTest();$('.set_qs').show();$('.confirm-details').attr('disabled',false)" disabled>Confirm and Proceed</button>
             </div>
+<!--            <div style="margin:15px;">-->
+<!--                <button class="btn btn-secondary undo-" onclick="event.preventDefault();$('.confirm-details').attr('disabled',false)" disabled>Change Test</button>-->
+<!--            </div>-->
 
         </div>
 
 
         <div class="set_qs" style="display: none">
             <div class="block">
-                <h4>Question <input name="q_number" type="number" placeholder="number..." required></h4>
+                <h4>Question <i class="q_num"></i> <input class="q_number" name="q_number" type="number" placeholder="number..." required></h4>
                 <div class="block">
                     <label>Question</label>
                     <textarea name="question" rows="4" placeholder="Type your question here..." style="width: 100%;border-radius: 5px" required></textarea>
@@ -70,7 +92,7 @@
 
                     </div>
 
-                    <button class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-success save-question" onclick="event.preventDefault();submitQuestions();"><i class="fa fa-save"></i> Save</button>
                     <button class="btn btn-secondary" onclick="event.preventDefault();$('.q2_type').html('');$('.set_qs').find('input,textarea,select').each(function () {$(this).val('');});"><i class="fa fa-eraser"></i> Reset</button>
                 </div>
 
@@ -82,7 +104,7 @@
 
         <section class="" style="padding: 30px">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row ms-row">
 
 
 
