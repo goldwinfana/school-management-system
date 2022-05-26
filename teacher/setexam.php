@@ -20,6 +20,8 @@
             <input name="create-grade">
             <input name="create-subject">
             <input name="create-test">
+            <input name="create-date">
+            <input name="create-duration">
         </form>
 
         <form id="submitQuestions" action="sql.php" method="post">
@@ -45,7 +47,7 @@
             </div>
 
             <div class="select-sub" style="margin:15px;">
-                <select class="form-control" id="choose-sub" name="choose-sub" onchange="conBtn()" required>
+                <select class="form-control" id="choose-sub" name="choose-sub" required>
                     <option value="" selected disabled>Select subject from list</option>
 
                     <?php
@@ -62,7 +64,17 @@
 
                 </select>
             </div>
-            <div class="test_name" style="margin:15px;"></div>
+            <div class="test_name" style="margin:15px;">
+                <input name="test_name" placeholder="Enter Test Name..." class="form-control" minlength="5" maxlength="15" required>
+            </div>
+
+            <div class="test_date" style="margin:15px;">
+                    <input class="form-control" type="date" name="test_date" required>
+            </div>
+
+            <div class="test_duration" style="margin:15px;">
+                <input class="form-control" type="number" placeholder="Enter test duration here..." name="test_duration" onkeyup="enableConBtn(this.value)" required>
+            </div>
 
             <div class="confirmD" style="margin:15px;">
                 <button class="btn btn-secondary confirm-details" onclick="event.preventDefault();createTest();$('.set_qs').show();$('.confirm-details').attr('disabled',false)" disabled>Confirm and Proceed</button>

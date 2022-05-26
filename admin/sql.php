@@ -570,16 +570,9 @@ if(isset($_POST['report'])){
     $report = $_POST['report'];
 
     try{
-
-        if($report =='admins'){
             $stmt = $conn->prepare("SELECT * FROM admin");
             $stmt->execute();
             $row = $stmt->fetchAll();
-        }else{
-            $stmt = $conn->prepare("SELECT * FROM farmer");
-            $stmt->execute();
-            $row = $stmt->fetchAll();
-        }
 
     }
     catch(PDOException $e){
@@ -601,22 +594,61 @@ if(isset($_POST['add-transport'])){
     $idNo = $_POST['DidNo'];
     $mobile= $_POST['Dmobile'];
     $bus= $_POST['bus'];
+    $image = md5(microtime()).basename( $_FILES['picture']['name']);
     try {
 
-        $stmt = $init->prepare("INSERT INTO transport (name,surname,id_number,mobile,bus) 
-            VALUES (:name,:surname,:idNo,:mobile,:bus)");
-        $stmt->execute(['name' => $name,'surname' => $surname,'idNo' => $idNo,'mobile' => $mobile,'bus' => $bus]);
+        $stmt = $init->prepare("INSERT INTO transport (name,surname,id_number,mobile,bus,image) 
+            VALUES (:name,:surname,:idNo,:mobile,:bus,:image)");
+        $stmt->execute(['name' => $name,'surname' => $surname,'idNo' => $idNo,'mobile' => $mobile,'bus' => $bus,'image'=>$image]);
 
+        if(!empty($_FILES['picture']))
+        {
+            $path = "uploads/bus/".$image;
+
+            if(move_uploaded_file($_FILES['picture']['tmp_name'], $path)) {
+                echo "The file ".  basename( $_FILES['picture']['name']).
+                    " has been uploaded";
+            } else{
+                echo "There was an error uploading the file, please try again!";
+            }
+        }
         $_SESSION['success'] = 'Driver successfully created';
-        header('location: '.$return);
 
     } catch (PDOException $e) {
         $_SESSION['error'] = $e->getMessage();
-        header('location: '.$return);
+
     }
 
+    header('location: '.$return);
+}
+
+if (isset($_POST['getBus'])) {
+    $id = $_POST['getBus'];
+
+    $sql = $init->prepare("SELECT * FROM transport WHERE transport_id=:id");
+    $sql->execute(['id' => $id]);
+    $results = $sql->fetch();
+
+    echo json_encode($results);
+}
+
+if(isset($_POST['delete-bus'])){
+    $transport = $_POST['delete-bus'];
+
+    try{
+        $sql = $init->prepare("DELETE FROM transport WHERE transport_id=:id");
+        $sql->execute(['id'=>$transport]);
+
+        $_SESSION['success'] = 'Transport deleted successfully';
+
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
 
 }
+
 
 if(isset($_POST['message'])) {
     $message= $_POST['message'];
@@ -637,7 +669,7 @@ if(isset($_POST['message'])) {
             $_SESSION['error'] = 'User does not exits';
         } else {
 
-            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+            $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
 						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
             $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
             $_SESSION['success'] = 'Message sent successfully';

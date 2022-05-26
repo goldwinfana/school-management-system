@@ -73,9 +73,9 @@ if(isset($_SESSION['error'])){
                                         <td>'.$data["mobile"].'</td>
                                         <td>
                                             <div class="d-flex" >
-                                                <a id="'.$data["transport_id"].'" class="contributions bg-info text-white action_spans view-admin-profile" title="View"><i class="fa fa-eye"></i></a>
-                                                <a id="'.$data["transport_id"].'" class="contributions bg-warning text-white action_spans edit-admin" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a id="'.$data["transport_id"].'" class="contributions bg-danger text-white action_spans delete-admin" title="Delete"><i class="fa fa-trash"></i></a>
+                                                <a id="'.$data["transport_id"].'" class="contributions bg-info text-white action_spans view-bus" title="View"><i class="fa fa-eye"></i></a>
+                                                <a hidden id="'.$data["transport_id"].'" class="contributions bg-warning text-white action_spans edit-bus" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a id="'.$data["transport_id"].'" class="contributions bg-danger text-white action_spans delete-bus" title="Delete"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                      </tr>

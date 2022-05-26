@@ -24,6 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <?php
+                    $init = $pdo->open();
                     if(!isset($_GET['exam_id'])){
                     echo '
                     <table id="admin_table" class="table table-bordered" style="width: 100%;">
@@ -39,20 +40,20 @@
                         <tbody>
                         ';
 
-                        $init = $pdo->open();
                         $sql = $init->prepare("SELECT *,COUNT(question_id ) AS ques FROM exam,question 
                                                 WHERE exam.exam_id=question.exam_id GROUP BY question.exam_id");
                         $sql->execute();
 
                         if ($sql->rowCount() > 0) {
                         foreach ($sql as $data) {
-
+                            $status= $data["status"]!=null?'<i class="text-success">'.$data["status"].'</i>' ." <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>":"<a id='$data[exam_id]' for='$data[test_name]' class='btn btn-warning activate_test'>Activate Test</a>";
                             echo '
                         <tr>
                             <td>' . $data["grade"] . '</td>
                             <td>' . $data["subject"] . '</td>
                             <td>' . $data["test_name"] . '</td>
                             <td>' . $data["ques"] . '</td>
+                            <td>' . $status . '</td>
                             <td>
                                 <div class="d-flex" >
                                     <a href="?exam_id=' . $data["exam_id"].'&grade='.$data["grade"].'&subject='.$data["subject"].'" class="contributions bg-info text-white action_spans" title="View Questions"><i class="fa fa-level-up"></i> View Questions</a>
@@ -66,7 +67,7 @@
                     }else{
 
                             echo '
-                    <table id="admin_table" class="table table-bordered" style="width: 100%;">
+                    <table id="users_table" class="table table-bordered" style="width: 100%;">
                         <thead>
                         <tr>
                             <th>Question #No</th>
@@ -79,9 +80,8 @@
                         <tbody>
                         ';
 
-                            $init = $pdo->open();
-                            $sql = $init->prepare("SELECT * FROM question,exam WHERE exam.exam_id=:exam_id AND exam.exam_id=question.exam_id AND grade=:grade AND subject=:subject");
-                            $sql->execute(['exam_id'=>$_GET['exam_id'],'grade'=>$_GET['grade'],'subject'=>$_GET['subject']]);
+                            $sql = $init->prepare("SELECT * FROM question,exam WHERE exam.exam_id=:exam_id AND exam.exam_id=question.exam_id");
+                            $sql->execute(['exam_id'=>$_GET['exam_id']]);
 
                             if ($sql->rowCount() > 0) {
                                 foreach ($sql as $data) {
@@ -131,7 +131,7 @@
 <!--    {{--END BODY--}}-->
 </div>
 
-<?php include('./../layouts/footer.php') ?>
+<?php include('./../layouts/footer.php');include 'modal.php'; ?>
 </body>
 </html>
 

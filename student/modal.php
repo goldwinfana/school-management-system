@@ -170,3 +170,34 @@
     </div>
 </div>
 </div></div>
+
+
+<div class="modal fade" id="saveAnswers">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Confirm Test Submission</span>
+            </div>
+            <div class="modal-body">
+                <h4>
+                    Please note once you click <i class="text-success">submit</i>, all answers will be saved and you will not be able to re-submit,
+                    if you wish to continue writing simple press <i class="text-danger">cancel</i> button.
+                </h4>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-flat" onclick="$('#saveAnswers').modal('hide');"><i class="fa fa-close"></i> Cancel</button>
+                    <button class="btn btn-success btn-flat" onclick="saveAndSubmit();"><i class="fa fa-save"></i> Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+
+<div class="modal fade text-center" id="markAnswers" >
+    <h3 class="text-white" style="margin-top: 20%">Please wait while your test is being marked...</h3><br>
+    <i class="fa fa-spinner fa-spin" style="font-size: xx-large"></i>
+</div></div>
+
+

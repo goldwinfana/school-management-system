@@ -110,13 +110,13 @@ if(isset($_POST['edit-book'])) {
     }
     header('Location: '.$return);
 }
-//Admin
+//Transport
 
-if (isset($_POST['getAdmin'])) {
-    $getAdmin = $_POST['getAdmin'];
+if (isset($_POST['getBus'])) {
+    $id = $_POST['getBus'];
 
-    $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:admin_id");
-    $sql->execute(['admin_id' => $getAdmin]);
+    $sql = $init->prepare("SELECT * FROM transport WHERE transport_id=:id");
+    $sql->execute(['id' => $id]);
     $results = $sql->fetch();
 
     echo json_encode($results);

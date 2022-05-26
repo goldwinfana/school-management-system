@@ -173,28 +173,42 @@ if (isset($_POST['getAllStuff'])) {
     echo json_encode($results);
 }
 
-if(isset($_POST['edit-student'])) {
-    $studNo = $_SESSION['studentNo'];
-    $name = $_POST['edit-name'];
-    $email = $_POST['edit-email'];
-    $id_number = $_POST['edit-idNo'];
-    $gender = $_POST['edit-gender'];
-    $password= $_POST['edit-password'];
+if(isset($_POST['activate_test'])) {
 
-    $sql = $init->prepare("SELECT * FROM student WHERE studentNo=:studentNo ");
-    $sql->execute(['studentNo' => $_POST['studentNo']]);
+    $sql = $init->prepare("SELECT * FROM exam WHERE exam_id=:id ");
+    $sql->execute(['id' => $_POST['activate_test']]);
 
     if ($sql->rowCount() < 0) {
-        $_SESSION['error'] = 'Student does not exit';
+        $_SESSION['error'] = 'Test does not exit';
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE student SET name=:name, email=:email, id_number=:id_number,
-                                         gender=:gender,password=:password
-                                         WHERE studentNo=:studentNo");
-            $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'gender'=>$gender, 'password'=>$password,'studentNo'=>$studNo]);
-            $_SESSION['success'] = 'Student updated successfully';
-            $_SESSION['name'] = $name;
+            $sql = $init->prepare("UPDATE exam SET status='active'
+                                         WHERE exam_id=:id");
+            $sql->execute(['id' => $_POST['activate_test']]);
+            $_SESSION['success'] = 'Test activated successfully';
+        }catch (Exception $e){
+            $_SESSION['error'] = $e->getMessage();
+        }
+
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['deactivate_test'])) {
+
+    $sql = $init->prepare("SELECT * FROM exam WHERE exam_id=:id ");
+    $sql->execute(['id' => $_POST['deactivate_test']]);
+
+    if ($sql->rowCount() < 0) {
+        $_SESSION['error'] = 'Test does not exit';
+    } else {
+
+        try{
+            $sql = $init->prepare("UPDATE exam SET status=NULL 
+                                         WHERE exam_id=:id");
+            $sql->execute(['id' => $_POST['deactivate_test']]);
+            $_SESSION['success'] = 'Test deactivated successfully';
         }catch (Exception $e){
             $_SESSION['error'] = $e->getMessage();
         }
@@ -358,7 +372,7 @@ if(isset($_POST['message'])) {
             $_SESSION['error'] = 'User does not exits';
         } else {
 
-            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+            $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
 						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
             $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
             $_SESSION['success'] = 'Message sent successfully';
@@ -396,10 +410,13 @@ if(isset($_POST['createTest'])){
     $grade= $data['create-grade'];
     $sub= $data['create-subject'];
     $test= $data['create-test'];
+    $date= $data['create-date'];
+    $duration= $data['create-duration'];
 
     try{
         $count=0;
-        $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' AND teacher_id=:id");
+        $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' 
+                            AND teacher_id=:id ");
         $s->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
         if($s->rowCount() > 0){
 
@@ -408,8 +425,9 @@ if(isset($_POST['createTest'])){
             $count = $sql->fetch()['ques'];
             echo json_encode(['message'=>'exists','count'=>$count+1]);
         }else{
-            $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id) VALUES (:grade,:subject,:test_name,:teacher_id)");
-            $sql2->execute(['grade'=>$grade,'subject'=>$sub,'test_name'=>$test,'teacher_id'=>$_SESSION['id']]);
+            $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id,exam_date,duration) 
+                                    VALUES (:grade,:subject,:test_name,:teacher_id,:date,:duration)");
+            $sql2->execute(['grade'=>$grade,'subject'=>$sub,'test_name'=>$test,'teacher_id'=>$_SESSION['id'],'date'=>$date,'duration'=>$duration]);
 
             echo json_encode(['message'=>'Exam created successfully','count'=>$count+1]);
         }

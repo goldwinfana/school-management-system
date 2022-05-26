@@ -104,7 +104,7 @@
         <div class="modal-content">
             <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
             <div class="modal-header">
-                <span>Conform Registration</span>
+                <span>Confirm Registration</span>
             </div>
             <div class="modal-body">
                 <div class=" conSubs"></div>
@@ -121,7 +121,53 @@
 </div>
 </div></div>
 
+<div class="modal fade" id="activate_test">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Activate Test</span>
+            </div>
+            <div class="modal-body">
+                <div id="lbl-test"></div>
+                <form method="post" action="sql.php">
+                    <input name="activate_test" hidden>
 
+                <div class="modal-footer">
+                    <button class="btn btn-danger btn-flat" onclick="$('#activate_test').modal('hide');"><i class="fa fa-close"></i> Cancel</button>
+                    <button class="btn btn-success btn-flat" ><i class="fa fa-check"></i> Activate</button>
+
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div></div>
+
+<div class="modal fade" id="deactivate_test">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Deactivate Test</span>
+            </div>
+            <div class="modal-body">
+                <div id="_test"></div>
+                <form method="post" action="sql.php">
+                    <input name="deactivate_test" hidden>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-danger btn-flat" onclick="$('#deactivate_test').modal('hide');"><i class="fa fa-close"></i> Cancel</button>
+                        <button class="btn btn-success btn-flat" ><i class="fa fa-check"></i> Deactivate</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div></div>
 
 
 

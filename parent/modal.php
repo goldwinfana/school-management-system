@@ -121,3 +121,32 @@
 </div></div>
 
 
+<div class="modal fade" id="view-bus">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Transport Details</span>
+            </div>
+            <div class="modal-body">
+
+
+                <div style="text-align: center"><img src="../assets/img/profile.png" alt="..." class="img-fluid rounded-circle bus-img"></div>
+
+                <hr/>
+                <div style="display: grid;float: left;">
+                    <label class=" col-form-label">Bus Name: <span class="bus-name"></span></label>
+                    <label class=" col-form-label">Driver Name: <span class="driver-name"></span></label>
+                    <label class=" col-form-label">Driver Surname: <span class="driver-surname"></span></label>
+                    <label class=" col-form-label">Driver Contact: <span class="driver-contact"></span></label>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+

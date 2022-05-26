@@ -1057,6 +1057,56 @@ $(function () {
 
     });
 
+    $('.view-bus').on('click', function (){
+        var id = this.id;
+
+        $.ajax({
+            type: 'POST',
+            url: 'sql.php',
+            data: {
+                getBus: id
+            },
+            dataType: 'json',
+            success: function (response) {console.log(response)
+                $('.bus-name').html(response.name);
+                $('.driver-surname').html(response.surname);
+                $('.driver-name').html(response.name);
+                $('.driver-contact').html(response.id_number);
+                $('.bus-img').attr('src','uploads/bus/'+response.image);
+
+            }});
+
+        $('#view-bus').modal('show');
+    });
+
+    $('.view-busx').on('click', function (){
+        var id = this.id;
+
+        $.ajax({
+            type: 'POST',
+            url: 'sql.php',
+            data: {
+                getBus: id
+            },
+            dataType: 'json',
+            success: function (response) {
+                $('.bus-name').html(response.name);
+                $('.driver-surname').html(response.surname);
+                $('.driver-name').html(response.name);
+                $('.driver-contact').html(response.id_number);
+                $('.bus-img').attr('src','../admin/uploads/bus/'+response.image);
+
+            }});
+
+        $('#view-bus').modal('show');
+    });
+
+    $('.delete-bus').on('click', function () {
+        var id = this.id;
+        $('#lbl-bus').html('Confirm deletation of bus with id: '+id+'?');
+        $('input[name=delete-bus]').val(id);
+        $('#delete-bus').modal('show');
+    });
 
     //Exams
     $('.q_type').change(function (){
@@ -1085,6 +1135,20 @@ $(function () {
     });
     $('input[name=tf_option]:checked').on(':checked',function (){
      console.log('ss')
+    });
+
+    $('.activate_test').on('click', function () {
+        let id = this.id;
+        $('#lbl-test').html('Confirm you want to activate the <i class="text-success">'+$(this).attr('for')+'</i> test?');
+        $('input[name=activate_test]').val(id);
+        $('#activate_test').modal('show');
+    });
+
+    $('.deactivate_test').on('click', function () {
+        let id = this.id;
+        $('#_test').html('Confirm you want to deactivate the <i class="text-success">'+$(this).attr('for')+'</i> test?');
+        $('input[name=deactivate_test]').val(id);
+        $('#deactivate_test').modal('show');
     });
 
 });
@@ -1118,12 +1182,56 @@ function getSubjects(val) {
     });
 }
 
-function conBtn(){
-    $('.test_name').html('<input name="test_name" placeholder="Enter Test Name..." class="form-control" minlength="5" maxlength="15" onkeyup="enableConBtn(this.value)" required>');
+function getAnswer(form){
+     var formData = $('#submitAnswer_'+form).serialize();
+    $.ajax({
+        type: 'POST',
+        url: './sql.php',
+        data: {
+            testAnswers: formData
+        },
+        success: function (response) {
+            console.log(response)
+            response = JSON.parse(response);
+            if(response.success==1){
+
+                alerts('success',response.message);
+            }else{
+                alerts('danger',response.message);
+            }
+
+        },
+        error: function (e) {
+            console.log(e);
+            // alerts('danger',e.message);
+        }
+    });
+
+}
+
+function saveAndSubmit(){
+    $('.answerBtn').each(function (a,i) {
+        console.log($(this).click());
+    });
+    $('#saveAnswers').modal('hide');
+    setTimeout(function () {
+        $('#markAnswers').modal('show');
+    },2000);
+
+    setTimeout(function () {
+        $('#markAnswers').html('<i  class="text-success fa fa-check-circle" style="font-size: 100px;margin-top: 20%"></i>');
+        setTimeout(function () {
+            var queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            let test_id = urlParams.get('test_id');
+            window.location.href='?test_id='+test_id;
+        },4000);
+
+    },8000);
 }
 
 function enableConBtn(val){
-    if(val.length > 4){
+    if(val.length > 0){
         $('.confirm-details').attr('disabled',false);
     }else{
         $('.confirm-details').attr('disabled',true);
@@ -1134,11 +1242,15 @@ function createTest(){
     $('input[name=create-grade]').val($('select[name=choose-grade]').val());
     $('input[name=create-subject]').val($('select[name=choose-sub]').val());
     $('input[name=create-test]').val($('input[name=test_name]').val());
+    $('input[name=create-date]').val($('input[name=test_date]').val());
+    $('input[name=create-duration]').val($('input[name=test_duration]').val());
     let formData = $('#create-test').serialize();
 
     var grade = $('select[name=choose-grade]').val();
     var sub =$('select[name=choose-sub]').val();
     var test =$('input[name=test_name]').val();
+    var date =$('input[name=test_date]').val();
+    var duration =$('input[name=test_duration]').val();
 
     if(sub==null){
         $('select[name=choose-sub]').focus();
@@ -1146,6 +1258,16 @@ function createTest(){
     }
     if(test==null){
         $('input[name=test_name]').focus();
+        return;
+    }
+
+    if(duration==null){
+        $('input[name=test_duration]').focus();
+        return;
+    }
+
+    if(date==null){
+        $('input[name=test_date]').focus();
         return;
     }
 
@@ -1291,6 +1413,7 @@ function submitQuestions(){
         }
     });
 }
+
 
 function alerts(success,message){
     $('body').append('<div class="alert btn-'+success+' message-alert">'+message+'</div>');

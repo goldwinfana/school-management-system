@@ -77,7 +77,7 @@ if(isset($_POST['message'])) {
             $_SESSION['error'] = 'User does not exits';
         } else {
 
-            $sql = $init->prepare("INSERT INTO messages(sender_id,sender_type,user_id,user_type,message) 
+            $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
 						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
             $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user_id,'user_type'=>$user_type,'message'=>$message]);
             $_SESSION['success'] = 'Message sent successfully';
@@ -210,7 +210,96 @@ if(isset($_POST['endBooking'])){
     header('Location: '.$return);
 }
 
+if(isset($_POST['upload-file'])){
 
+    $description = $_POST['description'];
+    $image = md5(microtime()).basename( $_FILES['file_name']['name']);
+
+    try{
+        $sql = $init->prepare("INSERT INTO upload (user_id,description,file_name) VALUES (:user_id, :description,:file_name)");
+        $sql->execute(['user_id'=>$_SESSION["id_number"],'description'=>$description,'file_name'=>$image]);
+
+        if(!empty($_FILES['file_name']))
+        {
+            $path = "uploads/".$image;
+
+            if(move_uploaded_file($_FILES['file_name']['tmp_name'], $path)) {
+                echo "The file ".  basename( $_FILES['file_name']['name']).
+                    " has been uploaded";
+            } else{
+                echo "There was an error uploading the file, please try again!";
+            }
+        }
+        $_SESSION['success']='File uploaded successfully...';
+    }catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['testAnswers'])){
+    parse_str($_POST['testAnswers'],$data);
+    $question= $data['question'];
+    $exam= $data['exam_id'];
+
+    try{
+        $mark= $init->prepare("SELECT * FROM mark WHERE question=:question 
+                                     AND exam_id=:exam AND student_id=:id");
+        $mark->execute(['question' => $data['question'],'exam'=>$data['exam_id'],'id'=>$_SESSION['id']]);
+
+        if($mark->rowCount() > 0){
+            $score=0;
+            $answer=$mark->fetch()['answer'];
+            if(isset($data['answer'])){
+                if($data['answer'] !=''){
+                    $answer=$data['answer'];
+                }
+            }
+
+            $question= $init->prepare("SELECT * FROM question WHERE question_id=:question 
+                                     AND exam_id=:exam");
+            $question->execute(['question' => $data['question'],'exam'=>$data['exam_id']]);
+            if($answer==$question->fetch()['answer']){
+                $score=1;
+            }
+
+            $sql = $init->prepare("UPDATE mark SET answer=:answer,score=:score WHERE exam_id=:exam_id 
+                                   AND question=:question AND student_id=:student_id ");
+            $sql->execute(['exam_id'=>$data['exam_id'],'student_id'=>$_SESSION['id'],'question'=>$data['question'],
+                            'answer'=>$answer,'score'=>$score]);
+
+            echo json_encode(['message'=>'Answer successfully updated','success'=>1]);
+
+        }else {
+            $question = $init->prepare("SELECT * FROM question WHERE question_id=:question 
+                                     AND exam_id=:exam");
+            $question->execute(['question' => $data['question'], 'exam' => $data['exam_id']]);
+            if ($question->rowCount() > 0) {
+                $score = 0;
+                $answer = '';
+                if (isset($_POST['answer'])) {
+                    if($data['answer'] !=''){
+                        $answer=$data['answer'];
+                    }
+                    if ($data['answer'] == $question->fetch()['answer']) {
+                        $score = 1;
+                    }
+                }
+                $sql2 = $init->prepare("INSERT INTO mark (exam_id,student_id,question,answer,score)
+                                        VALUES (:exam_id,:student_id,:question,:answer,:score)");
+                $sql2->execute(['exam_id' => $data['exam_id'], 'student_id' => $_SESSION['id'], 'question' => $data['question'],
+                    'answer' => $answer, 'score' => $score]);
+
+                echo json_encode(['message' => 'Answer successfully submitted', 'success' => 1]);
+
+            }
+        }
+    }catch (Exception $exception){
+        echo $exception->getMessage();
+    }
+
+
+}
 
 
 $pdo->close();
