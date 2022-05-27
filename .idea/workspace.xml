@@ -3,20 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/transport.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/transport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/navbar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parent/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/parent/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parent/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/parent/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parent/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/parent/sql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/sql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/exam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/setexam.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/setexam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customRegister.php" beforeDir="false" afterPath="$PROJECT_DIR$/customRegister.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/transport.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/transport.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +50,7 @@
       <workItem from="1652336615717" duration="4347000" />
       <workItem from="1652511557802" duration="42333000" />
       <workItem from="1652946245214" duration="38293000" />
-      <workItem from="1653144773544" duration="82651000" />
+      <workItem from="1653144773544" duration="85580000" />
     </task>
     <task id="LOCAL-00001" summary="third may push">
       <created>1652952972693</created>
@@ -98,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653262684298</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Evening push">
+      <created>1653599702474</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653599702475</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,10 +106,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Evening push" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653262682545">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653599688167">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653262682545" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653599688167" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1651996241512">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -122,10 +118,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1651781511698" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1653262689899">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1653599711814">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653262689899" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653599711814" />
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653599628043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

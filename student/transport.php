@@ -32,7 +32,7 @@
                     <div class="flex" style="display: flex;width: 100%">
                         <div class="card bus-pic" style="width: 40%;padding: 20px">
                             <p>Bus Image</p>
-                            <img src="<?php echo ($results["image"]!=null)? './../assets/img/bus/'.$results["image"] : './../assets/img/profile.png'; ?>" style="height: 90%">
+                            <img src="<?php echo ($results["image"]!=null)? './../admin/uploads/bus/'.$results["image"] : './../assets/img/profile.png'; ?>" style="height: 90%">
                         </div>
                         <div class="card driver-details" style="width: 50%;padding: 20px">
                             <?php
