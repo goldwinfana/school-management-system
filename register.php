@@ -24,7 +24,7 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="assets/assets/img/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9] -->
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
 
 <?php include 'layouts/header.php'; ?>

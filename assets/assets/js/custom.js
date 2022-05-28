@@ -76,6 +76,7 @@ function validateEmail() {
                             else{
                                 $('#verifyEmail').css('color','green').html('<span>Valid Email Provided <i class="fa fa-handshake-o"></i></span>');
                             }
+                        },error: function (e) {
                         }
                     });
 

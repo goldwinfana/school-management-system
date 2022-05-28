@@ -254,7 +254,7 @@ if (isset($_POST['checkEmail'])) {
 
     $sql = $conn->prepare("SELECT * FROM student WHERE email=:email");
     $sql->execute(['email'=>$_POST['checkEmail']]);
-    $results = $sql->fetchAll();
+    $results = $sql->fetch();
     $res=[];
     if($sql->rowCount() >  0){
         $res= $results;
@@ -269,18 +269,19 @@ if (isset($_POST['checkEmail'])) {
 
     $sql = $conn->prepare("SELECT * FROM parent WHERE email=:email ");
     $sql->execute(['email'=>$_POST['checkEmail']]);
-    $results = $sql->fetchAll();
+    $results = $sql->fetch();
     if($sql->rowCount() >  0){
         $res= $results;
     }
     $sql = $conn->prepare("SELECT * FROM admin WHERE email=:email ");
     $sql->execute(['email'=>$_POST['checkEmail']]);
-    $results = $sql->fetchAll();
+    $results = $sql->fetch();
     if($sql->rowCount() >  0){
         $res= $results;
     }
 
     echo json_encode($res);
+    exit(0);
 }
 
 if (isset($_POST['checkValues'])) {
@@ -317,4 +318,5 @@ if (isset($_POST['checkValues'])) {
 
 
 $pdo->close();
+
 ?>

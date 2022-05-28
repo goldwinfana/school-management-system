@@ -114,7 +114,7 @@
 
                 <!-- Name-->
 
-                        <div class="list-inline-item dropdown"><?php if($_SESSION['name']) echo $_SESSION['name'] ?></div>
+                        <div class="list-inline-item dropdown"><?php if(isset($_SESSION['name'])) echo $_SESSION['name'] ?></div>
 
                 <!-- End Name-->
 
