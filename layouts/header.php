@@ -57,21 +57,11 @@
     <!-- Header Navigation-->
     <header class="header">
         <nav class="navbar navbar-expand-lg">
-            <div class="search-panel">
-                <div class="search-inner d-flex align-items-center justify-content-center">
-                    <div class="close-btn">Close <i class="fa fa-close"></i></div>
-                    <form id="searchForm" action="#">
-                        <div class="form-group">
-                            <input type="search" name="search" placeholder="What are you searching for...">
-                            <button type="submit" class="submit">Search</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="navbar-header">
                     <!-- Navbar Header-->
-                    <a href="#" class="navbar-brand" style="display: flex">
+                    <a href="index.php" class="navbar-brand" style="display: flex">
                         <div class="brand-text brand-big visible text-uppercase">
                             <strong class="text-primary full-logo">School Management System <i class="fa fa-book"></i></strong>
 <!--                            <strong class="text-primary short-logo"><img src='--><?php //echo $pth.'/img/short-logo.png'; ?><!--' width="100"></strong>-->

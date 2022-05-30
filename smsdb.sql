@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2022 at 12:12 AM
+-- Generation Time: May 29, 2022 at 08:10 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -55,16 +55,20 @@ CREATE TABLE `exam` (
   `subject` text NOT NULL,
   `test_name` text NOT NULL,
   `teacher_id` int(11) NOT NULL,
-  `exam_date` text NOT NULL
+  `exam_date` text NOT NULL,
+  `duration` int(11) NOT NULL,
+  `status` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`exam_id`, `grade`, `subject`, `test_name`, `teacher_id`, `exam_date`) VALUES
-(26, '9', 'EMS', 'EMS exam', 1, ''),
-(27, '9', 'Arts & Culture ', 'EMS exam', 1, '');
+INSERT INTO `exam` (`exam_id`, `grade`, `subject`, `test_name`, `teacher_id`, `exam_date`, `duration`, `status`) VALUES
+(26, '9', 'EMS', 'EMS exam', 1, '2022-05-24 20:11:55', 1, 'active'),
+(27, '9', 'Arts & Culture ', 'EMS exam', 1, '2022-05-24 20:11:55', 2, 'active'),
+(28, '9', 'Natural Science', 'english exam', 1, '2022-05-24 20:11:55', 3, NULL),
+(30, '9', 'Arts & Culture ', 'EMS examination', 1, '2022-05-25T09:15', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,6 +101,33 @@ INSERT INTO `grade` (`grade_id`, `grade_code`, `subjects`) VALUES
 (12, '12b', '\'Physics\',\'Geography\',\'Life Science\',\'Life Orientation\',\'English\',\'Home Language\',\'Mathematics\''),
 (13, '12c', '\'Tourism\',\'Agriculture\',\'Consumer Studies\',\'Life Orientation\',\'English\',\'Home Language\',\'Mathematics\''),
 (14, '12d', '\'Tourism\',\'Agriculture\',\'CAT\',\'Life Orientation\',\'English\',\'Home Language\',\'Mathematics Literacy\'');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mark`
+--
+
+CREATE TABLE `mark` (
+  `mark_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `answer` text NOT NULL,
+  `score` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mark`
+--
+
+INSERT INTO `mark` (`mark_id`, `exam_id`, `student_id`, `question`, `answer`, `score`, `date`) VALUES
+(1, 27, 2, '1', 'true', 1, '2022-05-25 10:38:26'),
+(3, 27, 2, '2', 'false', 1, '2022-05-25 11:13:19'),
+(4, 27, 2, '3', 'Hi', 0, '2022-05-25 11:14:01'),
+(5, 27, 2, '4', 'Pretoria', 1, '2022-05-25 11:15:43'),
+(6, 27, 2, '5', 'true', 0, '2022-05-25 11:16:37');
 
 -- --------------------------------------------------------
 
@@ -174,7 +205,13 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`question_id`, `exam_id`, `question`, `q_type`, `options`, `answer`) VALUES
 (1, 27, 'jg', 'tf', '[\"true\",\"false\"]', 'true'),
-(2, 27, 'jg', 'tf', '[\"true\",\"false\"]', 'false');
+(2, 27, 'jg', 'tf', '[\"true\",\"false\"]', 'false'),
+(3, 27, 'What is your name', 'tbox', '', 'Enter your own name'),
+(4, 27, 'Which one is the capital city of Gauteng', 'options', '[\"Pretoria\",\"Hammanskarl\",\"Seshego\",\"Germiston\"]', 'Pretoria'),
+(5, 27, 'Are you done writing exams', 'tf', '[\"true\",\"false\"]', 'false'),
+(1, 30, 'Where can we find South Africa', 'options', '[\"Africa\",\"Asia\",\"America\",\"Europe\"]', 'Africa'),
+(2, 30, 'ARe you done', 'tf', '[\"true\",\"false\"]', 'true'),
+(3, 30, 'Find x\r\nx+3=5', 'tbox', '', 'Do your best');
 
 -- --------------------------------------------------------
 
@@ -226,7 +263,8 @@ INSERT INTO `student` (`student_id`, `name`, `surname`, `email`, `id_number`, `p
 (1, 'test', '', 'james@gmail.com', '9002025583086', '8002025583086', '0610217411', '', '1234@Abc', NULL, NULL, NULL, 0),
 (2, 'gg', 'ttttt', 'test1@gmail.com', '8102025583086', '8002025583086', '0610217499', '', '1234@Abc', 9, 2, NULL, 1),
 (4, 'sub', 'subs', 'testing@gmail.com', '8802025583087', '4502025583089', '0610217499', '', '1234@Abc', NULL, NULL, NULL, 0),
-(5, 'stest', 'test', 'tests@gmail.com', '9907136201082', '8702025578081', '0725597811', 'aubrey matlala street', '1234@Abc', NULL, NULL, NULL, 0);
+(5, 'stest', 'test', 'tests@gmail.com', '9907136201082', '8702025578081', '0725597811', 'aubrey matlala street', '1234@Abc', NULL, NULL, NULL, 0),
+(6, 'student', 'test', 'student@gmail.com', '0502025583084', '8802025583089', '0610210000', '477 Sisulu Street', '1234@Abc', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -319,7 +357,29 @@ CREATE TABLE `transport` (
 
 INSERT INTO `transport` (`transport_id`, `name`, `surname`, `id_number`, `mobile`, `bus`, `image`) VALUES
 (1, 'driver', 'driver', '6802025553084', '0824444440', 'Skyline Bu', NULL),
-(2, 'dr', 'mack', '5202025583084', '0821115554', 'Translyk', NULL);
+(2, 'test', 'test', '7702025502084', '0678541222', 'Old bus', '75820556f9d53f5a8697e088a33d46b6supply.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `upload`
+--
+
+CREATE TABLE `upload` (
+  `upload_id` int(11) NOT NULL,
+  `user_id` text NOT NULL,
+  `description` text NOT NULL,
+  `file_name` text NOT NULL,
+  `date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `upload`
+--
+
+INSERT INTO `upload` (`upload_id`, `user_id`, `description`, `file_name`, `date`) VALUES
+(1, '8102025583086', 'Proof of payment', '17e4813d36d038291e4a8c510e85585fDetailed Speeding Detail.pdf', '2022-05-24 20:11:55'),
+(2, '0502025583084', 'Registration proof of payment', '8fd52990c830f505a728a668f9222506Capture2.PNG', '2022-05-29 18:57:38');
 
 --
 -- Indexes for dumped tables
@@ -342,6 +402,12 @@ ALTER TABLE `exam`
 --
 ALTER TABLE `grade`
   ADD PRIMARY KEY (`grade_id`);
+
+--
+-- Indexes for table `mark`
+--
+ALTER TABLE `mark`
+  ADD PRIMARY KEY (`mark_id`);
 
 --
 -- Indexes for table `message`
@@ -386,6 +452,12 @@ ALTER TABLE `transport`
   ADD PRIMARY KEY (`transport_id`);
 
 --
+-- Indexes for table `upload`
+--
+ALTER TABLE `upload`
+  ADD PRIMARY KEY (`upload_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -399,13 +471,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `grade`
 --
 ALTER TABLE `grade`
   MODIFY `grade_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `mark`
+--
+ALTER TABLE `mark`
+  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -429,7 +507,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subject`
@@ -447,7 +525,13 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `transport`
 --
 ALTER TABLE `transport`
-  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `upload`
+--
+ALTER TABLE `upload`
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

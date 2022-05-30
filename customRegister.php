@@ -59,10 +59,28 @@ if(isset($_POST['register'])){
         if($accType =='student'){
             try {
 
+                $description = 'Registration proof of payment';
+                $image = md5(microtime()).basename( $_FILES['file_name']['name']);
+
                 $stmt = $conn->prepare("INSERT INTO student (name,surname, email,id_number,parent_id_number,mobile,address, password,status) 
             VALUES (:name,:surname,:email,:idNo,:p_id,:mobile,:address,:password,:status)");
                 $stmt->execute(['name' => $name,'surname' => $surname, 'email' => $email,'idNo' => $idNumber,'p_id' => $_POST['PidNumber'],
                     'mobile' => $mobile,'address'=>$address,'password' => $password,'status'=>0]);
+
+                $sql = $conn->prepare("INSERT INTO upload (user_id,description,file_name) VALUES (:user_id, :description,:file_name)");
+                $sql->execute(['user_id'=>$idNumber,'description'=>$description,'file_name'=>$image]);
+
+                if(!empty($_FILES['file_name']))
+                {
+                    $path = "student/uploads/".$image;
+
+                    if(move_uploaded_file($_FILES['file_name']['tmp_name'], $path)) {
+                        echo "The file ".  basename( $_FILES['file_name']['name']).
+                            " has been uploaded";
+                    } else{
+                        echo "There was an error uploading the file, please try again!";
+                    }
+                }
 
                 $_SESSION['success'] = 'Account successfully created. Proceed to Login';
                 header('location: login.php');

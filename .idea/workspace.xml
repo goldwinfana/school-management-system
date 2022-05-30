@@ -3,12 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/customRegister.php" beforeDir="false" afterPath="$PROJECT_DIR$/customRegister.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layouts/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/session.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/transport.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/transport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smsdb (7).sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +31,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/teacher" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/js" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\school-management-system" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\school-management-system\assets\js" />
+      <recent name="C:\xampp\htdocs\school-management-system\assets\assets\css" />
+      <recent name="C:\xampp\htdocs\school-management-system" />
       <recent name="C:\xampp\htdocs\school-management-system\teacher" />
       <recent name="C:\xampp\htdocs\school-management-system\student" />
-      <recent name="C:\xampp\htdocs\school-management-system" />
-      <recent name="C:\xampp\htdocs\school-management-system\admin" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -54,6 +60,7 @@
       <workItem from="1652511557802" duration="42333000" />
       <workItem from="1652946245214" duration="38293000" />
       <workItem from="1653144773544" duration="85580000" />
+      <workItem from="1653841318896" duration="8572000" />
     </task>
     <task id="LOCAL-00001" summary="third may push">
       <created>1652952972693</created>
@@ -97,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653599702475</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Evening push">
+      <created>1653721386686</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653721386686</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,26 +123,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="Evening push" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653599688167">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653721377421">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653599688167" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653721377421" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1651996241512">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1651996241512" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1651781511698">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1653841405512">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1651781511698" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1653686622869">
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1653841405512" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1653721393066">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653686622869" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653599628043">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653721393066" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653721286225">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1653599628043" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1653721286225" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1653434587478">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

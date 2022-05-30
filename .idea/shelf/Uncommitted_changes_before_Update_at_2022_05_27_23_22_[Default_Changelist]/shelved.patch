@@ -1,0 +1,74 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"377ee98f-816a-4e34-be28-3ea40a5f2852\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/assets/assets/js/custom.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/assets/assets/js/custom.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/customRegister.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/customRegister.php\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/student/transport.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/student/transport.php\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"28l0ZBLTnlYuS0TPZyk1OMZfUkz\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/teacher\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\xampp\\htdocs\\school-management-system\\teacher\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\school-management-system\\student\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\school-management-system\" />\r\n      <recent name=\"C:\\xampp\\htdocs\\school-management-system\\admin\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"377ee98f-816a-4e34-be28-3ea40a5f2852\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1651775917312</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1651775917312</updated>\r\n      <workItem from=\"1651775918593\" duration=\"4124000\" />\r\n      <workItem from=\"1652153259606\" duration=\"24529000\" />\r\n      <workItem from=\"1652336615717\" duration=\"4347000\" />\r\n      <workItem from=\"1652511557802\" duration=\"42333000\" />\r\n      <workItem from=\"1652946245214\" duration=\"38293000\" />\r\n      <workItem from=\"1653144773544\" duration=\"85580000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"third may push\">\r\n      <created>1652952972693</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1652952972693</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"third may push\">\r\n      <created>1652970514922</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1652970514922</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Evening push\">\r\n      <created>1653257665889</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1653257665889</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Evening push\">\r\n      <created>1653261454294</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1653261454294</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Evening push\">\r\n      <created>1653262684298</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1653262684298</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Evening push\">\r\n      <created>1653599702474</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1653599702475</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"third may push\" />\r\n    <MESSAGE value=\"Evening push\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Evening push\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"308\" y=\"0\" key=\"CommitChangelistDialog2\" timestamp=\"1653599688167\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"308\" y=\"0\" key=\"CommitChangelistDialog2/0.0.1366.728@0.0.1366.728\" timestamp=\"1653599688167\" />\r\n    <state x=\"463\" y=\"119\" key=\"FileChooserDialogImpl\" timestamp=\"1651996241512\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"463\" y=\"119\" key=\"FileChooserDialogImpl/0.0.1366.728@0.0.1366.728\" timestamp=\"1651996241512\" />\r\n    <state x=\"517\" y=\"287\" key=\"NewPhpFileDialog\" timestamp=\"1651781511698\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"517\" y=\"287\" key=\"NewPhpFileDialog/0.0.1366.728@0.0.1366.728\" timestamp=\"1651781511698\" />\r\n    <state x=\"275\" y=\"97\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1653599711814\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"275\" y=\"97\" key=\"Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728\" timestamp=\"1653599711814\" />\r\n    <state x=\"500\" y=\"278\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1653599628043\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"500\" y=\"278\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728\" timestamp=\"1653599628043\" />\r\n    <state x=\"339\" y=\"162\" key=\"run.anything.popup\" timestamp=\"1653434587478\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"339\" y=\"162\" key=\"run.anything.popup/0.0.1366.728@0.0.1366.728\" timestamp=\"1653434587478\" />\r\n    <state x=\"346\" y=\"49\" width=\"672\" height=\"678\" key=\"search.everywhere.popup\" timestamp=\"1652520488583\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"346\" y=\"49\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/0.0.1366.728@0.0.1366.728\" timestamp=\"1652520488583\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 3edc4f864cda093747d8479ff4037e4e6befa3f1)
++++ .idea/workspace.xml	(date 1653686518744)
+@@ -1,12 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/assets/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/custom.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/customRegister.php" beforeDir="false" afterPath="$PROJECT_DIR$/customRegister.php" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/student/transport.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/transport.php" afterDir="false" />
+-    </list>
++    <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -50,7 +45,7 @@
+       <workItem from="1652336615717" duration="4347000" />
+       <workItem from="1652511557802" duration="42333000" />
+       <workItem from="1652946245214" duration="38293000" />
+-      <workItem from="1653144773544" duration="85580000" />
++      <workItem from="1653144773544" duration="85882000" />
+     </task>
+     <task id="LOCAL-00001" summary="third may push">
+       <created>1652952972693</created>
+@@ -94,7 +89,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1653599702475</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="Evening push">
++      <created>1653686488784</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1653686488790</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -106,10 +108,10 @@
+     <option name="LAST_COMMIT_MESSAGE" value="Evening push" />
+   </component>
+   <component name="WindowStateProjectService">
+-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653599688167">
++    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653686482393">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653599688167" />
++    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653686482393" />
+     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1651996241512">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+@@ -122,10 +124,10 @@
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653599711814" />
+-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653599628043">
++    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653686316637">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1653599628043" />
++    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1653686316637" />
+     <state x="339" y="162" key="run.anything.popup" timestamp="1653434587478">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>

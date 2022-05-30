@@ -78,6 +78,7 @@ if(isset($_SESSION['error'])){
                                     <th>E-mail</th>
                                     <th>Mobile</th>
                                     <th>ID Number</th>
+                                    <th>Proof of payment</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -91,6 +92,9 @@ if(isset($_SESSION['error'])){
 
                                 if($sql->rowCount() > 0){
                                     foreach ($sql as $data){
+                                        $img = $init->prepare("SELECT * FROM upload WHERE user_id=:id");
+                                        $img->execute(['id'=>$data["id_number"]]);
+                                        $filename = "../student/uploads/".$img->fetch()["file_name"];
                                         $stBtn='';
                                         if($data["status"]==0){
                                             $stBtn= '<a href="javascript:void(0)" id="'.$data["email"].'" class="bg-success text-white action_spans approve_student" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
@@ -104,6 +108,11 @@ if(isset($_SESSION['error'])){
                                         <td>'.$data["email"].'</td>
                                         <td>'.$data["mobile"].'</td>
                                         <td>'.$data["id_number"].'</td>
+                                         <td>
+                                            <div class="d-flex" >'?>
+                                        <button onclick='window.open("<?php echo $filename; ?>","_blank");' class="btn btn-warning" title="View"><i class="fa fa-file-pdf-o"></i> View File</button>
+                                        <?php echo '</div>
+                                        </td>
                                         <td>'.$data["status_name"].$stBtn.'</td>
                                         <td>
                                             <div class="d-flex" >

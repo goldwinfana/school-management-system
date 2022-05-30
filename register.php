@@ -39,7 +39,7 @@
 
                 <div class="card-body">
 
-                    <form id="regForm" method="POST" action="customRegister.php" onsubmit="return sendForm()">
+                    <form id="regForm" method="POST" action="customRegister.php" enctype="multipart/form-data" onsubmit="return sendForm()">
                         <input name="register" value="register" hidden>
 
                         <div class="form-group row">
@@ -131,6 +131,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">Upload Proof Of Payment</label>
+
+                            <div class="col-md-6">
+                                <input id="file_name" type="file" class="form-control is-invalid" name="file_name" required autocomplete="off">
+                            </div>
+                        </div>
+
 
 
                         <div class="form-group row">
@@ -158,21 +166,6 @@
                                 <strong id="verifyMatch"></strong>
                             </span>
                         </div>
-
-
-
-<!--                        <div class="form-group row">-->
-<!--                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Account Type') }}</label>-->
-<!---->
-<!--                            <div class="col-md-6">-->
-<!--                                <select name="role" class="form-control is-invalid" required>-->
-<!--                                    <option value="" selected disabled>{{ __('Choose Account Type') }}</option>-->
-<!--                                    <option value="2" >{{ __('Employer') }}</option>-->
-<!--                                    <option value="3" >{{ __('Job Seeker') }}</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
 
 
 
