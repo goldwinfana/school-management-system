@@ -17,7 +17,8 @@
                     <label class=" col-form-label">E-Mail Address: <span class="student-email"></span></label>
                     <label class=" col-form-label">ID Number: <span class="student-idNo"></span></label>
                     <label class=" col-form-label">Age: <span class="student-age"></span></label>
-                    <label class=" col-form-label">Gender: <span class="student-parent"></span></label>
+                    <label class=" col-form-label">Gender: <span class="student-gender"></span></label>
+                    <label class=" col-form-label">Parent ID: <span class="student-parent"></span></label>
 
                 </div>
 

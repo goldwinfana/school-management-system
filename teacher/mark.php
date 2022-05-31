@@ -27,11 +27,14 @@
 
             </script>
 
+            <?php
+            $init = $pdo->open();
+            if(isset($_GET['exam_id'])){ ?>
             <select class="form-control" onchange="getMarks(this.value)">
                 <option value="" selected disabled>Select student from list</option>
 
                 <?php
-                $init = $pdo->open();
+
                 $sql = $init->prepare("SELECT * FROM student,mark WHERE student.student_id=mark.student_id GROUP BY student.student_id");
                 $sql->execute();
 
@@ -43,6 +46,7 @@
                 ?>
 
             </select>
+            <?php } ?>
         </div>
 
 
@@ -92,6 +96,23 @@
                       }
                     }else{
                         $hide = (isset($_GET['student_id'])?'':'hidden');
+                        if(isset($_GET['student_id'])){
+                            $exa = $init->prepare("SELECT * FROM exam WHERE exam_id='$_GET[exam_id]'");
+                            $exa->execute();
+
+                            $stud = $init->prepare("SELECT * FROM student WHERE student_id='$_GET[student_id]'");
+                            $stud->execute();
+                            $getStud = $stud->fetch();
+                            if($stud->rowCount() > 0){
+                                echo '
+                            <div class="font-weight-bolder">
+                               <p>Name: '.$getStud["name"].' '.$getStud["surname"].'</p>
+                               <p>ID Number: '.$getStud["id_number"].'</p>
+                               <p>Test Name: '.$exa->fetch()["test_name"].'</p>
+                            </div>';
+                            }
+                        }
+
 
                             echo '
                     <table id="users_table" class="table table-bordered" style="width: 100%;">
@@ -103,8 +124,8 @@
                             <th>Type</th>
                             <th>Answer</th>
                             <th>Score</th>
-                            <th><span '.$hide.'>Student Answer</span></th>
-                            <th><span '.$hide.'>Student Score</span></th>
+                            <th class="text-warning"><span '.$hide.'>Student Answer</span></th>
+                            <th class="text-warning"><span '.$hide.'>Student Score</span></th>
 
                         </tr>
                         </thead>
@@ -148,8 +169,23 @@
                                                 $mark->execute();
                                                 $marks = $mark->fetch();
                                                 $studTotal+=$marks['score'];
-                                                echo '<td>'.$marks['answer'].'</td>
-                                                      <td>'.$marks['score'].'</td>';
+
+                                                if($data["q_type"]=='tbox'){
+                                                  echo '<td class="text-warning">'.$marks['answer'].'</td>';
+                                                  echo '<td>'.$marks['score'].'
+                                                    <form action="sql.php" method="post" onchange="$(this).submit()">
+                                                    <input name="mark_id" value="'.$marks['mark_id'].'" hidden>
+                                                        <select name="change_mark">
+                                                           <option value="" selected disabled>Change Mark</option>
+                                                           <option class="text-success" value="1">Correct</option>
+                                                           <option class="text-danger" value="0">Incorrect</option>
+                                                        </select>
+                                                    </form></td>';
+
+                                                    }else{
+                                                   echo '<td>'.$marks['answer'].'</td><td>'.$marks['score'].'</td>';
+                                                }
+
                                             }
 
                                         echo'</tr>
@@ -165,6 +201,7 @@
                                     <td>'.$total.'/'.$total.'(100%)</td>
                                     <td '.$hide.'><span '.$hide.'></span></td>
                                     <td '.$hide.'><span '.$hide.'>'.$studTotal.'/'.$total.'('.(($studTotal/$total)*100).'%)</span></td>
+                                    
                                     </tr>
                                 ';
                             }

@@ -236,93 +236,6 @@ if(isset($_POST['delete-student'])){
 
 
 
-if(isset($_POST['booking'])) {
-
-    $user = $_SESSION['id'];
-    $stuff = $_POST['stuff'];
-    $saloon = $_POST['saloon'];
-    $service = $_POST['service'];
-    $startTime = $_POST['start'];
-    $price = $_POST['price'];
-    $date = $_POST['date'];
-    $endTime = $_POST['end'];
-    $duration = $_POST['duration'];
-    $bookDate = date('Y M D H:i');
-
-    try{
-        $sql = $init->prepare("INSERT INTO session (startTime, endTime,duration, customerID,stuffID, saloonID,price,service,date,bookDate)
-                    VALUES (:startTime, :endTime,:duration, :customerID,:stuffID, :saloonID,:price,:service,:date,:bookDate)");
-        $sql->execute(['startTime'=>$startTime,'endTime'=>$endTime,'duration'=>$duration,'service'=>$service,'price'=>$price,
-            'customerID'=>$user,'stuffID'=>$stuff,'saloonID'=>$saloon, 'date'=>$date,'bookDate'=>$bookDate]);
-
-        $_SESSION['success'] = 'Booking confirmed successfully at '.$bookDate;
-    }catch (Exception $e){
-        $_SESSION['error'] = $e->getMessage();
-    }
-
-    header('Location: '.$return);
-}
-
-if(isset($_POST['report'])){
-
-    $fugitive_num = $_POST['report'];
-    $lat = $_POST['lat'];
-    $lng = $_POST['lng'];
-    $case_num = substr(rand(),0,6);
-    $id = $_SESSION['id'];
-
-    try{
-
-        $sql = $conn->prepare("INSERT INTO alert(case_number,fugitive_id,user_id,lat,lng) 
-                                        VALUES(:case_number,:fugitive_id,:user_id,:lat,:lng)");
-        $sql->execute(['case_number'=>$case_num,'fugitive_id'=>$fugitive_num,'user_id'=>$id,'lat'=>$lat,'lng'=>$lng]);
-
-
-        $sql = $conn->prepare("SELECT * FROM fugitive WHERE id=:id");
-        $sql->execute(['id'=>$fugitive_num]);
-        $results = $sql->fetch();
-
-
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
-        $mail->Host = "smtp.gmail.com"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-        $mail->Port = 587; // TLS only
-        $mail->SMTPSecure = 'tls'; // ssl is deprecated
-        $mail->SMTPAuth = true;
-
-        $mail->Username   = "crimealertsystem21@gmail.com";
-        $mail->Password   = "1234@Abc";
-
-        $mail->IsHTML(true);
-        $mail->AddAddress("crimealertsystem21@gmail.com", "Admin");
-        $mail->SetFrom("crimealertsystem21@gmail.com", "Police Crime App Support");
-
-        $mail->Subject = 'New Alert';
-        $mail->msgHTML( "
-                <p>Hi Admin</p>
-                <p>".$results['first_name'].' '.$results['last_name']." has been reported, please check alerts on the app for more info...</p>
-                <p>Case Number: ".$case_num."</p><br>
-                <a href='https://policealertapp.000webhostapp.com/admin/alerts.php' style='color: orange'>View Alerts</a>
-             ");
-        $mail->AltBody = 'HTML messaging not supported'; // If html emails is not supported by the receiver, show this body
-// $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
-        $mail->send();
-
-    }
-    catch(PDOException $e){
-        $case_num = $e->getMessage();
-    }
-    $_SESSION['case_number'] = $case_num;
-}
-
 if(isset($_POST['upload-images'])){
 
     $user = $_SESSION['id'];
@@ -504,6 +417,28 @@ if(isset($_POST['teacherGrade'])){
     }
     catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['change_mark'])) {
+
+    $sql = $init->prepare("SELECT * FROM mark WHERE mark_id='$_POST[mark_id]' ");
+    $sql->execute();
+
+    if ($sql->rowCount() < 0) {
+        $_SESSION['error'] = 'Question does not exit';
+    } else {
+
+        try{
+            $sql = $init->prepare("UPDATE mark SET score='$_POST[change_mark]' 
+                                         WHERE mark_id='$_POST[mark_id]'");
+            $sql->execute();
+            $_SESSION['success'] = 'Mark updated successfully';
+        }catch (Exception $e){
+            $_SESSION['error'] = $e->getMessage();
+        }
+
     }
     header('Location: '.$return);
 }

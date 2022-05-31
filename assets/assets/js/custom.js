@@ -265,9 +265,14 @@ $(function () {
         if($('select[name=accountType]').val()=='student'){
             $('.parentID').attr('hidden',false);
             $('#PidNo').attr('required', true);
+            $('.upload-doc').attr('hidden',false);
+            $('#file_name').attr('required', true);
+
         }else{
             $('.parentID').attr('hidden',true);
             $('#PidNo').attr('required', false);
+            $('.upload-doc').attr('hidden',true);
+            $('#file_name').attr('required', false);
         }
     });
 

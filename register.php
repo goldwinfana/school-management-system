@@ -131,7 +131,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row upload-doc" hidden>
                             <label for="address" class="col-md-4 col-form-label text-md-right">Upload Proof Of Payment</label>
 
                             <div class="col-md-6">

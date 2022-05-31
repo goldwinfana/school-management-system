@@ -870,13 +870,15 @@ $(function () {
                 var year = new Date();
                 var age=response.id_number;
                 age = age.substr(0,2);
-                age = "19"+age;
+                age = age < 20? "20"+age:"19"+age;
+
                 age = year.getFullYear()- parseInt(age);
                 $('.student-name').html(response.name);
                 $('.student-surname').html(response.surname);
                 $('.student-email').html(response.email);
                 $('.student-idNo').html(response.id_number);
                 $('.student-age').html(age);
+                $('.student-gender').html(parseInt(response.id_number.substr(7,1)) < 4?'Female':'Male');
                 $('.student-parent').html(response.parent_id_number);
 
             }});
@@ -898,6 +900,7 @@ $(function () {
                 var age=response.id_number;
                 age = age.substr(0,2);
                 age = age < 20? "20"+age:"19"+age;
+
 
                 age = year.getFullYear()- parseInt(age);
                 $('.st-name').html(response.name);
@@ -1026,7 +1029,7 @@ $(function () {
                 $('input[name=edit-st-email]').val(response.email);
                 $('input[name=edit-st-idNo]').val(response.id_number);
                 $('input[name=edit-st-mobile]').val(response.mobile);
-                // $('input[name=edit-st-password]').val(response.password);
+                $('input[name=edit-st-password]').val(response.password);
 
             }});
 
