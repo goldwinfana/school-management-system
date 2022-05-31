@@ -3,16 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/navbar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/sql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/subjects.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/mark.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/mark.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/sql.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +23,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -63,7 +53,7 @@
       <workItem from="1652946245214" duration="38293000" />
       <workItem from="1653144773544" duration="85580000" />
       <workItem from="1653841318896" duration="8874000" />
-      <workItem from="1654024186471" duration="6883000" />
+      <workItem from="1654024186471" duration="7224000" />
     </task>
     <task id="LOCAL-00001" summary="third may push">
       <created>1652952972693</created>
@@ -121,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653887292680</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="remaining errors">
+      <created>1654032274129</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1654032274129</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,13 +128,14 @@
     <MESSAGE value="third may push" />
     <MESSAGE value="Evening push" />
     <MESSAGE value="Landing page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Landing page" />
+    <MESSAGE value="remaining errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="remaining errors" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1653887285784">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1654032267170">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1653887285784" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1654032267170" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1651996241512">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -146,14 +144,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1653841405512" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1653887323722">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1654032279246">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1653887323722" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654031896081">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1654032279246" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1654032108310">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1654031896081" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1654032108310" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1653434587478">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
