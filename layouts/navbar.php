@@ -19,11 +19,13 @@
         <?php
         if($_SESSION['user'] == 'admin'){
             echo '
-            <li class="active"><a href="./../admin/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
-            <li><a id="'.$_SESSION['id'].'" class=" edit-admin" style="cursor:pointer"> <i class="fa fa-user-circle"></i>Profile</a></li>
-            <li><a href="./../admin/users.php" > <i class="fa fa-users"></i>Users</a></li>
-            <li><a href="./../admin/transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
-            <li><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
+            <li class="'.($page=='home'?'active':'').'"><a href="./../admin/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
+            <li class="'.($page=='profile'?'active':'').'"><a id="'.$_SESSION['id'].'" class=" edit-admin" style="cursor:pointer"> <i class="fa fa-user-circle"></i>Profile</a></li>
+            <li class="'.($page=='users'?'active':'').'"><a href="./../admin/users.php" > <i class="fa fa-users"></i>Users</a></li>
+            <li class="'.($page=='transport'?'active':'').'"><a href="./../admin/transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
+            <li class="'.($page=='message'?'active':'').'"><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
+            <li class="'.($page=='attendance'?'active':'').'"><a href="./attendance.php" class="maps"> <i class="fa fa-registered"></i>Attendance</a></li>
+            <li class="'.($page=='library'?'active':'').'"><a href="./library.php" class="maps"> <i class="fa fa-book"></i>Library</a></li>
         
        ';}
 
@@ -36,6 +38,7 @@
             <li class="'.($page=='transport'?'active':'').'"><a href="./transport.php"> <i class="fa fa-bus"></i>Transport</a></li>
             <li class="'.($page=='message'?'active':'').'"><a href="./message.php" class="maps"> <i class="fa fa-comment-o"></i>Messages</a></li>
             <li class="'.($page=='document'?'active':'').'"><a href="./document.php" class="maps"> <i class="fa fa-upload"></i>Documents</a></li>
+             <li class="'.($page=='library'?'active':'').'"><a href="./library.php" class="maps"> <i class="fa fa-book"></i>Library</a></li>
        ';}
 
         if($_SESSION['user'] == 'teacher'){

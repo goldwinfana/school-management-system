@@ -117,8 +117,7 @@ if(isset($_POST['reg-grade'])) {
     $grade = $_POST['reg-grade'];
 
     try{
-        $sql = $init->prepare("UPDATE student SET grade=:grade
-                                     WHERE student_id=:id");
+        $sql = $init->prepare("UPDATE student SET grade=:grade WHERE student_id=:id");
         $sql->execute(['grade'=>$grade,'id'=>$_SESSION['id']]);
         $_SESSION['success'] = 'Grade registered successfully';
     }catch (Exception $e){
@@ -185,28 +184,28 @@ if(isset($_POST['delete-student'])){
 
 }
 
-if(isset($_POST['endBooking'])){
-    $studentNo = $_SESSION['studentNo'];
-
+if(isset($_POST['borrow_book'])){
     try{
+        $sql = $init->prepare("INSERT INTO booking(student_id,book_id,status) VALUES (:student_id,:book_id,0)");
+        $sql->execute(['student_id' => $_SESSION['id'],'book_id'=>$_POST['borrow_book']]);
 
-        $sql = $init->prepare("SELECT * FROM session WHERE studNumber=:studentNo");
-        $sql->execute(['studentNo' => $studentNo]);
-        $results = $sql->fetch();
-
-        $sql = $init->prepare("UPDATE desk SET status=:status WHERE tblNumber=:tblNumber");
-        $sql->execute(['tblNumber' => $results['tblNumber'],'status'=>'available']);
-
-        $sql = $init->prepare("DELETE FROM session WHERE studNumber=:studentNo");
-        $sql->execute(['studentNo'=>$studentNo]);
-
-        if($_POST['end-book']){
-            $_SESSION['success'] = 'Session ended successfully';
-        }
-
+        $_SESSION['success'] = 'Book borrowed successfully';
     }
     catch(PDOException $e){
-        echo json_encode($e->getMessage());
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['return_book'])){
+    try{
+        $sql = $init->prepare("UPDATE booking SET status=1 WHERE booking_id='$_POST[return_book]'");
+        $sql->execute();
+
+        $_SESSION['success'] = 'Book returned successfully';
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
     }
     header('Location: '.$return);
 }

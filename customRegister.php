@@ -143,6 +143,7 @@ if(isset($_POST['login'])){
                 $_SESSION["islogged"] = true;
                 $_SESSION["email"] = $results['email'];
                 header('location: admin/dashboard.php');
+
             }
             else{
                 $_SESSION['error'] = 'Incorrect Password...';
@@ -164,7 +165,23 @@ if(isset($_POST['login'])){
                     $_SESSION['id_number'] = $results['id_number'];
                     $_SESSION["islogged"] = true;
                     $_SESSION["email"] = $results['email'];
+
+                    $sqlD = $conn->prepare("SELECT * FROM attendance WHERE student_id ='$results[student_id]'");
+                    $sqlD->execute();
+                    $res= $sqlD->fetch();
+
+                    if($sqlD->rowCount() >  0) {
+                        if (date('Y-m-d', strtotime($res['date'])) != date('Y-m-d')) {
+                            $stmt = $conn->prepare("INSERT INTO attendance (student_id,date) VALUES (:id,:date)");
+                            $stmt->execute(['id' => $results['student_id'], 'date' => date('Y-m-d H:i')]);
+                        }
+                    }else{
+                        $stmt = $conn->prepare("INSERT INTO attendance (student_id,date) VALUES (:id,:date)");
+                        $stmt->execute(['id' => $results['student_id'], 'date' => date('Y-m-d H:i')]);
+                    }
+
                     header('location: student/dashboard.php');
+
                 }else{
                     $_SESSION['error'] = 'Account Not Yet Active...';
                     header('location: '.$return);

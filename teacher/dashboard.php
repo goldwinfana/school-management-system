@@ -75,7 +75,7 @@ $page='home';
                             ';
 
                         $init = $pdo->open();
-                        $sql = $init->prepare("SELECT * FROM teacher");
+                        $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id='$_SESSION[id]'");
                         $sql->execute();
 
                         if ($sql->rowCount() > 0) {

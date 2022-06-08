@@ -34,6 +34,7 @@
                             <th>Subject</th>
                             <th>Test Name</th>
                             <th>Questions</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -41,12 +42,16 @@
                         ';
 
                         $sql = $init->prepare("SELECT *,COUNT(question_id ) AS ques FROM exam,question 
-                                                WHERE exam.exam_id=question.exam_id GROUP BY question.exam_id");
+                                                WHERE exam.exam_id=question.exam_id AND teacher_id='$_SESSION[id]' GROUP BY question.exam_id");
                         $sql->execute();
 
                         if ($sql->rowCount() > 0) {
                         foreach ($sql as $data) {
-                            $status= $data["status"]!=null?'<i class="text-success">'.$data["status"].'</i>' ." <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>":"<a id='$data[exam_id]' for='$data[test_name]' class='btn btn-warning activate_test'>Activate Test</a>";
+                            if($data["ques"] < 5){
+                                $status='Make sure you have at least five(5) question set for the test';
+                            }else {
+                                $status = $data["status"] != null ? '<i class="text-success">' . $data["status"] . '</i>' . " <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>" : "<a id='$data[exam_id]' for='$data[test_name]' class='btn btn-warning activate_test'>Activate Test</a>";
+                            }
                             echo '
                         <tr>
                             <td>' . $data["grade"] . '</td>
@@ -63,7 +68,9 @@
                         ';
                         }
 
-                      }
+                      }else{
+                            echo'<tr><td></td><td></td><td class="text-center">You Do Not Have Any Questions</td><td></td><td></td></tr>';
+                        }
                     }else{
 
                             echo '

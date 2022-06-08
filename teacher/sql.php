@@ -328,15 +328,16 @@ if(isset($_POST['createTest'])){
 
     try{
         $count=0;
-        $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' 
-                            AND teacher_id=:id ");
-        $s->execute(['grade' => $grade,'subject'=>$sub,'id'=>$_SESSION['id']]);
+        $s= $init->prepare("SELECT * FROM exam WHERE grade=:grade AND subject=:subject AND test_name LIKE '%$test%' ");
+        $s->execute(['grade' => $grade,'subject'=>$sub]);
+        $res=$s->fetch();
         if($s->rowCount() > 0){
 
             $sql = $init->prepare("SELECT COUNT(question_id) AS ques FROM question WHERE exam_id=:exam_id");
-            $sql->execute(['exam_id'=> $s->fetch()['exam_id']]);
+            $sql->execute(['exam_id'=> $res['exam_id']]);
             $count = $sql->fetch()['ques'];
-            echo json_encode(['message'=>'exists','count'=>$count+1]);
+            echo json_encode(['message'=>'exists','count'=>$count+1,'teacher'=>$res['teacher_id']]);
+
         }else{
             $sql2 = $init->prepare("INSERT INTO exam (grade,subject,test_name,teacher_id,exam_date,duration) 
                                     VALUES (:grade,:subject,:test_name,:teacher_id,:date,:duration)");

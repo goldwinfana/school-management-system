@@ -1,4 +1,4 @@
-<?php include 'layouts/alerts.php'; $page='register'?>
+<?php include 'layouts/alerts.php';include 'layouts/session.php'; $page='register'?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

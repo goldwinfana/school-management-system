@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 11:22 PM
+-- Generation Time: Jun 08, 2022 at 12:03 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -46,6 +46,74 @@ INSERT INTO `admin` (`admin_id`, `name`, `surname`, `email`, `password`, `create
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `attendance_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`attendance_id`, `student_id`, `date`) VALUES
+(1, 6, '2022-06-07 22:45:00'),
+(2, 2, '2022-06-06 22:57:00'),
+(3, 2, '2022-06-07 22:58:00'),
+(4, 6, '2022-06-08 00:18:00'),
+(5, 6, '2022-06-08 00:18:00'),
+(6, 6, '2022-06-08 12:00:00'),
+(7, 6, '2022-06-08 12:01:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book`
+--
+
+CREATE TABLE `book` (
+  `book_id` int(11) NOT NULL,
+  `book_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`book_id`, `book_name`) VALUES
+(2, 'DSO'),
+(4, 'c++'),
+(5, 'sql');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `booking_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `borrow_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `return_date` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`booking_id`, `student_id`, `book_id`, `borrow_date`, `return_date`, `status`) VALUES
+(5, 6, 5, '2022-06-08 12:02:28', NULL, 0),
+(6, 6, 2, '2022-06-08 12:03:10', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `exam`
 --
 
@@ -68,7 +136,11 @@ INSERT INTO `exam` (`exam_id`, `grade`, `subject`, `test_name`, `teacher_id`, `e
 (26, '9', 'EMS', 'EMS exam', 1, '2022-05-24 20:11:55', 1, 'active'),
 (27, '9', 'Arts & Culture ', 'EMS exam', 1, '2022-05-24 20:11:55', 2, 'active'),
 (28, '9', 'Natural Science', 'english exam', 1, '2022-05-24 20:11:55', 3, NULL),
-(30, '9', 'Arts & Culture ', 'EMS examination', 1, '2022-05-25T09:15', 3, NULL);
+(30, '9', 'Arts & Culture ', 'EMS examination', 1, '2022-05-25T09:15', 3, NULL),
+(31, '9', 'EMS', 'english exam', 2, '2022-06-07', 3, NULL),
+(32, '9', 'Natural Science', 'english exam', 2, '2022-06-07', 3, NULL),
+(33, '9', 'Arts & Culture ', 'english exam', 2, '2022-06-07', 3, NULL),
+(34, '9', 'Technology', 'english exam', 2, '2022-06-07', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,7 +283,8 @@ INSERT INTO `question` (`question_id`, `exam_id`, `question`, `q_type`, `options
 (5, 27, 'Are you done writing exams', 'tf', '[\"true\",\"false\"]', 'false'),
 (1, 30, 'Where can we find South Africa', 'options', '[\"Africa\",\"Asia\",\"America\",\"Europe\"]', 'Africa'),
 (2, 30, 'ARe you done', 'tf', '[\"true\",\"false\"]', 'true'),
-(3, 30, 'Find x\r\nx+3=5', 'tbox', '', 'Do your best');
+(3, 30, 'Find x\r\nx+3=5', 'tbox', '', 'Do your best'),
+(1, 34, 'Are you okay', 'tf', '[\"true\",\"false\"]', 'true');
 
 -- --------------------------------------------------------
 
@@ -333,7 +406,8 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `name`, `surname`, `email`, `id_number`, `mobile`, `address`, `password`, `grade_code`, `subjects`, `approved_by`, `status`) VALUES
-(1, 'teacher', 'tewach', 'teacher@gmail.com', '9902025583081', '0610217499', '', '1234@Abc', '9', '[\"EMS\",\"Arts & Culture \",\"Natural Science\",\"Socila Science\",\"Technology\"]', NULL, 1);
+(1, 'teacher', 'tewach', 'teacher@gmail.com', '9902025583081', '0610217499', '', '1234@Abc', '9', '[\"EMS\",\"Arts & Culture \",\"Natural Science\",\"Socila Science\",\"Technology\"]', NULL, 1),
+(2, 'teacher1', 'tewach1', 'teacher1@gmail.com', '9902025583082', '0610217498', '', '1234@Abc', '9', '[\"EMS\",\"Arts & Culture \",\"Natural Science\",\"Socila Science\",\"Technology\"]', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -390,6 +464,24 @@ INSERT INTO `upload` (`upload_id`, `user_id`, `description`, `file_name`, `date`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`attendance_id`);
+
+--
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`book_id`);
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`booking_id`);
 
 --
 -- Indexes for table `exam`
@@ -468,10 +560,28 @@ ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -519,7 +629,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transport`

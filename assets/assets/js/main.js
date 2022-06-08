@@ -1283,31 +1283,40 @@ function createTest(){
         success: function (response) {
             response = JSON.parse(response);
             console.log((response));
-            if(response.message=='exists'){
-                $('.q_num').html(response.count);$('.q_number').val(response.count);
-                localStorage.setItem('getQ',
-                    JSON.stringify({
-                        'grade': grade,
-                        'subject': sub,
-                        'question': response.count,
-                        'testName':test
-                    })
-                );
-                alerts('warning','Test already '+response.message+',continue where you left off');
+            if(response.teacher ==$('#teacher_id').val()) {
+                if (response.message == 'exists') {
+                    $('.q_num').html(response.count);
+                    $('.q_number').val(response.count);
+                    localStorage.setItem('getQ',
+                        JSON.stringify({
+                            'grade': grade,
+                            'subject': sub,
+                            'question': response.count,
+                            'testName': test
+                        })
+                    );
+                    alerts('warning', 'Test already ' + response.message + ',continue where you left off');
 
+                } else {
+                    $('.q_num').html(response.count);
+                    $('.q_number').val(response.count);
+                    localStorage.setItem('getQ',
+                        JSON.stringify({
+                            'grade': grade,
+                            'subject': sub,
+                            'question': response.count,
+                            'testName': test
+                        })
+                    );
+                    alerts('success', response.message);
+
+                }
+                $('.set_qs').show();
             }else{
-                $('.q_num').html(response.count);$('.q_number').val(response.count);
-                localStorage.setItem('getQ',
-                    JSON.stringify({
-                        'grade': grade,
-                        'subject': sub,
-                        'question': response.count,
-                        'testName':test
-                    })
-                );
-                alerts('success',response.message);
-
+                alerts('warning','Test already been set by another teacher, please consult admin');
+                $('.set_qs').hide();
             }
+
         },
         error: function (e) {
             console.log(e);
@@ -1428,3 +1437,45 @@ function alerts(success,message){
 setTimeout(function () {
     $('.message-alert').fadeOut('slow');
 },8000);
+
+$('.booking').on('click', function () {
+    let id = this.id;
+    $('#borrow_book').html('Confirm you want to borrow the <i class="text-success">'+$(this).attr('for')+'</i> book?');
+    $('input[name=borrow_book]').val(id);
+    $('#booking').modal('show');
+});
+
+$('.return').on('click', function () {
+    let id = this.id;
+    $('#return_book').html('Confirm you want to return the <i class="text-success">'+$(this).attr('for')+'</i> book?');
+    $('input[name=return_book]').val(id);
+    $('#return').modal('show');
+});
+
+$('.accept_return').on('click', function () {
+    let id = this.id;
+    $('#accept_return_').html('Confirm indeed this book has been returned?');
+    $('input[name=accept_return]').val(id);
+    $('#accept_return').modal('show');
+});
+
+$('.decline_return').on('click', function () {
+    let id = this.id;
+    $('#decline_return_').html('Decline this book has not been returned?');
+    $('input[name=decline_return]').val(id);
+    $('#decline_return').modal('show');
+});
+
+$('.delete_book').on('click', function () {
+    let id = this.id;
+    $('#delete_book_').html('Are you sure you want to delete this book?');
+    $('input[name=delete_book_id]').val(id);
+    $('#delete_book').modal('show');
+});
+
+$('.edit_book').on('click', function () {
+    let id = this.id;
+    $('input[name=edit_book]').val($(this).attr('for'));
+    $('input[name=edit_book_id]').val(id);
+    $('#edit_book').modal('show');
+});

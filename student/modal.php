@@ -202,3 +202,49 @@
 </div></div>
 
 
+<div class="modal fade" id="booking">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Borrow Book</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="borrow_book" hidden>
+                    <h4 id="borrow_book"></h4>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div class="modal fade" id="return">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Return Book</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="return_book" hidden>
+                    <h4 id="return_book"></h4>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+

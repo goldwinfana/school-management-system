@@ -77,7 +77,7 @@
             </div>
 
             <div class="confirmD" style="margin:15px;">
-                <button class="btn btn-secondary confirm-details" onclick="event.preventDefault();createTest();$('.set_qs').show();$('.confirm-details').attr('disabled',false)" disabled>Confirm and Proceed</button>
+                <button class="btn btn-secondary confirm-details" onclick="event.preventDefault();createTest();$('.confirm-details').attr('disabled',false)" disabled>Confirm and Proceed</button>
             </div>
 <!--            <div style="margin:15px;">-->
 <!--                <button class="btn btn-secondary undo-" onclick="event.preventDefault();$('.confirm-details').attr('disabled',false)" disabled>Change Test</button>-->
@@ -128,7 +128,7 @@
     </div>
 <!--    {{--END BODY--}}-->
 </div>
-
+<input value="<?php echo $_SESSION['id']?>" id="teacher_id"  hidden>
 <?php include('./../layouts/footer.php') ?>
 </body>
 </html>

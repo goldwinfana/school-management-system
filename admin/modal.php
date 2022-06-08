@@ -607,3 +607,114 @@
     </div>
 </div>
 </div></div>
+
+<div class="modal fade" id="accept_return">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Confirm Book Return</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="accept_return" hidden>
+                    <h4 class="text-success" id="accept_return_"></h4>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div class="modal fade" id="decline_return">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Decline Book Return</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input name="decline_return" hidden>
+                    <h4 class="text-danger" id="decline_return_"></h4>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div class="modal fade" id="add_book">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Add New Book</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <input class="form-control" name="add_book" type="text" placeholder="Enter book name..." required>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div class="modal fade" id="edit_book">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Edit Book</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+                    <input name="edit_book_id" hidden>
+                    <input class="form-control" name="edit_book" type="text" placeholder="Enter book name..." required>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
+
+<div class="modal fade" id="delete_book">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Delete Book</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+                    <input name="delete_book_id" hidden>
+                    <h4 id="delete_book_"></h4>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger btn-flat"><i class="fa fa-trash-o"></i> Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>

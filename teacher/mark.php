@@ -71,7 +71,7 @@
                         ';
 
                         $sql = $init->prepare("SELECT *,COUNT(question_id ) AS ques FROM exam,question 
-                                                WHERE exam.exam_id=question.exam_id GROUP BY question.exam_id");
+                                                WHERE exam.exam_id=question.exam_id AND teacher_id='$_SESSION[id]' GROUP BY question.exam_id");
                         $sql->execute();
 
                         if ($sql->rowCount() > 0) {
@@ -86,14 +86,16 @@
                             <td>' . $status . '</td>
                             <td>
                                 <div class="d-flex" >
-                                    <a href="?exam_id=' . $data["exam_id"].'&grade='.$data["grade"].'&subject='.$data["subject"].'" class="contributions bg-info text-white action_spans" title="View Questions"><i class="fa fa-level-up"></i> View Questions</a>
+                                    <a href="?exam_id=' . $data["exam_id"].'&grade='.$data["grade"].'&subject='.$data["subject"].'" class="contributions bg-info text-white action_spans" title="View Questions"><i class="fa fa-level-up"></i> View Answers</a>
                                 </div>
                             </td>
                         </tr>
                         ';
                         }
 
-                      }
+                      }else{
+                            echo'<tr><td></td><td></td><td class="text-center">No Student Wrote This Test</td><td></td><td></td></tr>';
+                        }
                     }else{
                         $hide = (isset($_GET['student_id'])?'':'hidden');
                         if(isset($_GET['student_id'])){

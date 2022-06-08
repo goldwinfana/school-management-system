@@ -680,6 +680,85 @@ if(isset($_POST['message'])) {
 
     header('Location: '.$return);
 }
+//Library
+if(isset($_POST['accept_return'])){
+    try{
+        $date = date('Y-m-d H:i');
+        $sql = $init->prepare("UPDATE booking SET status=3,return_date='$date' WHERE booking_id='$_POST[accept_return]'");
+        $sql->execute();
+
+        $_SESSION['success'] = 'Book returned successfully';
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['decline_return'])){
+    try{
+        $sql = $init->prepare("UPDATE booking SET status=0 WHERE booking_id='$_POST[decline_return]'");
+        $sql->execute();
+
+        $_SESSION['success'] = 'Book has not been returned yet';
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+
+if(isset($_POST['add_book'])){
+    try{
+        $sql = $init->prepare("SELECT * FROM book WHERE book_name='$_POST[add_book]' ");
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $_SESSION['error'] = 'Book already exits';
+        } else {
+
+            $sql = $init->prepare("INSERT INTO book(book_name) VALUES ('$_POST[add_book]')");
+            $sql->execute();
+            $_SESSION['success'] = 'Book added successfully';
+        }
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['edit_book'])){
+    try{
+        $sql = $init->prepare("UPDATE book SET book_name='$_POST[edit_book]' WHERE book_id='$_POST[edit_book_id]'");
+        $sql->execute();
+
+        $_SESSION['success'] = 'Book updated successfully';
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['delete_book_id'])){
+    try{
+        $sql = $init->prepare("DELETE FROM book WHERE book_id='$_POST[delete_book_id]'");
+        $sql->execute();
+
+        $sql = $init->prepare("DELETE FROM booking WHERE book_id='$_POST[delete_book_id]'");
+        $sql->execute();
+
+        $_SESSION['success'] = 'Book deleted successfully';
+
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: '.$return);
+
+}
 
 $pdo->close();
 
