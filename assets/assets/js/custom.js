@@ -61,7 +61,7 @@ function validateEmail() {
             if(count > 2 || count ==0){
                 $('#verifyEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
             }else{
-                if(afterDot=='.com' ||afterDot=='.co.za' ||afterDot=='.org.za' ||afterDot=='.org' ||afterDot=='.tv'){
+                if(afterDot=='.com' ||afterDot=='.co.za' ||afterDot=='.org.za' ||afterDot=='.org' ||afterDot=='.tv'||afterDot=='.ac.za'){
 
                     $.ajax({
                         type: 'POST',
@@ -122,6 +122,21 @@ function validateID(idNo) {
                         }
                     }
                 });
+
+                $.ajax({
+                    type: 'POST',
+                    url: './customRegister.php',
+                    data: {
+                        checkID:id},
+                    dataType: 'json',
+                    success: function(response){
+
+                        if(response.length > 0){
+                            $('#verifyID').css('color', 'red').html(' <i>ID number already exist</i>');
+                        }
+                    }
+                });
+
             }else{
                 $.ajax({
                     type: 'POST',
@@ -130,6 +145,7 @@ function validateID(idNo) {
                         checkID:id},
                     dataType: 'json',
                     success: function(response){
+
                         if(response.length > 0){
                             $('#verifyID').css('color', 'red').html(' <i>ID number already exist</i>');
                         }

@@ -282,7 +282,14 @@ if (isset($_POST['checkID'])) {
         $res= $results;
     }
 
-    echo json_encode($results);
+    $sql = $conn->prepare("SELECT * FROM parent WHERE id_number=:checkID ");
+    $sql->execute(['checkID'=>$_POST['checkID']]);
+    $results = $sql->fetchAll();
+    if($sql->rowCount() >  0){
+        $res= $results;
+    }
+
+    echo json_encode($res);
 }
 
 if (isset($_POST['checkEmail'])) {
@@ -349,6 +356,38 @@ if (isset($_POST['checkValues'])) {
     }
 
     echo json_encode($res);
+}
+
+if(isset($_POST['reset'])){
+    try{
+
+        $sql = $conn->prepare("SELECT * FROM student WHERE id_number=:checkID");
+        $sql->execute(['checkID'=>$_POST['idNumber']]);
+        if($sql->rowCount() >  0){
+            $sql = $conn->prepare("UPDATE student SET password='$_POST[password]' WHERE id_number='$_POST[idNumber]'");
+            $sql->execute();
+        }
+
+        $sql = $conn->prepare("SELECT * FROM teacher WHERE id_number=:checkID ");
+        $sql->execute(['checkID'=>$_POST['idNumber']]);
+        if($sql->rowCount() >  0){
+            $sql = $conn->prepare("UPDATE teacher SET password='$_POST[password]' WHERE id_number='$_POST[idNumber]'");
+            $sql->execute();
+        }
+
+        $sql = $conn->prepare("SELECT * FROM parent WHERE id_number=:checkID ");
+        $sql->execute(['checkID'=>$_POST['idNumber']]);
+        if($sql->rowCount() >  0){
+            $sql = $conn->prepare("UPDATE book SET password='$_POST[password]' WHERE id_number='$_POST[idNumber]'");
+            $sql->execute();
+        }
+
+        $_SESSION['success'] = 'Password updated successfully';
+    }
+    catch(PDOException $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+    header('Location: login.php');
 }
 
 

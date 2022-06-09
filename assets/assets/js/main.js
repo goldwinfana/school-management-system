@@ -548,10 +548,6 @@ function sendForm(n){
             $('input[name=edit-st-email]').focus();
             return false;
         }
-        if($('input[name=idNo]').val() =='' && $('#edit-st-verifyID').css('color') =='rgb(220, 53, 69)'){
-            $('input[name=edit-st-idNo]').focus();
-            return false;
-        }
 
     }
 

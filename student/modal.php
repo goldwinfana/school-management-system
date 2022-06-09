@@ -84,16 +84,6 @@
                     </div>
 
 
-                    <div class="form-group row">
-                        <label for="edit-idNo" class="col-md-4 col-form-label text-md-right">ID Number</label>
-
-                        <div class="col-md-6">
-                            <input id="edit-st-idNo" type="text" class="form-control is-invalid" name="edit-st-idNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="validateID('editStudent')" required autocomplete="off">
-                        </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-verifyID"></strong>
-                            </span>
-                    </div>
 
 
                     <input id="edit-gender" type="text" class="form-control is-invalid" name="edit-gender" hidden>

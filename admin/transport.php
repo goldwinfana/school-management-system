@@ -1,4 +1,4 @@
-<?php include './../layouts/session.php'; ?>
+<?php include './../layouts/session.php'; include './../layouts/alerts.php'; $page='transport';?>
 
 <?php
 

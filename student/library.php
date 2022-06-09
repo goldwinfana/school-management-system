@@ -35,12 +35,21 @@
                     $sql->execute();
                     if($sql->rowCount() > 0){
                         foreach ($sql as $key => $data) {
-                            $sql1 = $init->prepare("SELECT * FROM booking WHERE book_id='$data[book_id]' AND student_id='$_SESSION[id]' AND status=0");
+                            $sql1 = $init->prepare("SELECT * FROM booking WHERE book_id='$data[book_id]' AND student_id='$_SESSION[id]'");
                             $sql1->execute();
-                            $book = $sql1->fetch();
+                            $books = $sql1->fetchAll();
+                            
                             $btn ='<a href="#borrow" id="'.$data["book_id"].'" for="'.$data["book_name"].'" class="contributions bg-secondary text-white action_spans booking" title="Book">Borrow Book</a>';
+
                             if($sql1->rowCount() > 0){
-                                $btn = '<a href="#return" id="'.$book["booking_id"].'" for="'.$data["book_name"].'" class="contributions bg-warning text-white action_spans return" title="Book">Return Book</a>';
+                                foreach($books as $book){
+                                    if($book['status']==0){
+                                        $btn = '<a href="#return" id="' . $book["booking_id"] . '" for="' . $data["book_name"] . '" class="contributions bg-warning text-white action_spans return" title="Book">Return Book</a>';
+                                    }else if($book['status']==1){
+                                        $btn='Under Evaluation';
+                                    }
+                                }
+
                             }
 
                             echo '

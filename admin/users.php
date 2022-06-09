@@ -1,33 +1,4 @@
-<?php include './../layouts/session.php'; ?>
-<?php
-
-if(isset($_SESSION["islogged"])){
-    $_SESSION['user']=='student'? header('location: ./../student/dashboard.php'):'';
-}else{
-    header('location: ./../login.php');
-}
-
-?>
-
-<?php
-
-if(isset($_SESSION['success'])){
-    echo '
-                            <div class="alert btn-success message-alert"> '
-        .$_SESSION['success'].'
-                            </div>';
-    unset($_SESSION['success']);
-}
-
-if(isset($_SESSION['error'])){
-    echo '
-                            <div class="alert btn-danger message-alert"> '
-        .$_SESSION['error'].'
-                            </div>';
-    unset($_SESSION['error']);
-}
-
-?>
+<?php include './../layouts/session.php'; include './../layouts/alerts.php'; $page='users';?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +65,11 @@ if(isset($_SESSION['error'])){
                                     foreach ($sql as $data){
                                         $img = $init->prepare("SELECT * FROM upload WHERE user_id=:id");
                                         $img->execute(['id'=>$data["id_number"]]);
-                                        $filename = "../student/uploads/".$img->fetch()["file_name"];
+                                        $filename='';
+                                        if($img->rowCount() > 0){
+                                            $filename = "../student/uploads/".$img->fetch()["file_name"];
+                                        }
+
                                         $stBtn='';
                                         if($data["status"]==0){
                                             $stBtn= '<a href="javascript:void(0)" id="'.$data["email"].'" class="bg-success text-white action_spans approve_student" title="Approve"><i class="fa fa-check-circle-o">Approve Account</i></a>';
