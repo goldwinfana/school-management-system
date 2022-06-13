@@ -544,7 +544,7 @@ function sendForm(n){
 
     if(n == 'editStudent') {
 
-        if($('input[name=edit-st-email]').val() =='' && $('#edit-st-verifyEmail').css('color') =='rgb(220, 53, 69)'){
+        if($('#edit-st-verifyEmail').html()!='' && $('#edit-st-verifyEmail').css('color') =='rgb(220, 53, 69)'){
             $('input[name=edit-st-email]').focus();
             return false;
         }
@@ -553,16 +553,26 @@ function sendForm(n){
 
     if(n == 'editAdmin') {
 
-        if($('#edit-admin-verifyEmail').css('color') =='rgb(220, 53, 69)'){
+        if($('#edit-admin-verifyEmail').html()!='' && $('#edit-admin-verifyEmail').css('color') =='rgb(220, 53, 69)'){
             $('input[name=edit-admin-email]').focus();
             return false;
         }
-        if($('#edit-admin-verifyPass').css('color') =='rgb(220, 53, 69)'){
-            $('input[name=edit-admin-password]').focus();
+
+    }
+
+    if(n == 'editParent') {
+
+        if($('#edit-parent-verifyEmail').html()!='' && $('#edit-parent-verifyEmail').css('color') =='rgb(220, 53, 69)'){
+            $('input[name=edit-parent-email]').focus();
             return false;
         }
-        if($('#edit-admin-verifyID').css('color') =='rgb(220, 53, 69)'){
-            $('input[name=edit-admin-idNo]').focus();
+
+    }
+
+    if(n == 'editTeacher') {
+
+        if($('#edit-teacher-verifyEmail').html()!='' && $('#edit-teacher-verifyEmail').css('color') =='rgb(220, 53, 69)'){
+            $('input[name=edit-teacher-email]').focus();
             return false;
         }
 
@@ -825,7 +835,6 @@ $(function () {
                 $('input[name=edit-p-name]').val(response.name);
                 $('input[name=edit-p-surname]').val(response.surname);
                 $('input[name=edit-p-email]').val(response.email);
-                $('input[name=edit-p-idNo]').val(response.id_number);
                 $('input[name=edit-p-mobile]').val(response.mobile);
                 // $('input[name=edit-st-password]').val(response.password);
 
@@ -912,7 +921,58 @@ $(function () {
 
         $('#view-student').modal('show');
     });
+    //teacher
+    $('.view-teacher-profile').on('click', function (){
+        var id = this.id;
 
+        $.ajax({
+            type: 'POST',
+            url: 'sql.php',
+            data: {
+                getTeacher: id
+            },
+            dataType: 'json',
+            success: function (response) {
+
+                var year = new Date();
+                var age=response.id_number;
+                age = age.substr(0,2);
+                age = age < 20? "20"+age:"19"+age;
+
+                age = year.getFullYear()- parseInt(age);
+                $('.teacher-name').html(response.name);
+                $('.teacher-surname').html(response.surname);
+                $('.teacher-email').html(response.email);
+                $('.teacher-idNo').html(response.id_number);
+                $('.teacher-age').html(age);
+                $('.teacher-gender').html(parseInt(response.id_number.substr(7,1)) < 4?'Female':'Male');
+
+            }});
+
+        $('#view-teacher-profile').modal('show');
+    });
+
+    $('.edit-teacher').on('click', function (){
+        var id = this.id;
+
+        $.ajax({
+            type: 'POST',
+            url: './sql.php',
+            data: {
+                getTeacher: id
+            },
+            dataType: 'json',
+            success: function (response) {
+
+                $('input[name=edit-teacher]').val(id);
+                $('input[name=edit-name]').val(response.name);
+                $('input[name=edit-email]').val(response.email);
+                $('input[name=edit-surname]').val(response.surname);
+            }});
+
+
+        $('#edit-profile').modal('show');
+    });
 
     // admins
     $('.delete-admin').on('click', function () {
@@ -936,10 +996,8 @@ $(function () {
 
                 $('input[name=edit-admin]').val(id);
                 $('input[name=edit-admin-name]').val(response.name);
+                $('input[name=edit-admin-surname]').val(response.surname);
                 $('input[name=edit-admin-email]').val(response.email);
-                $('input[name=edit-admin-idNo]').val(response.id_number);
-                $('input[name=edit-admin-gender]').val(response.gender);
-                $('input[name=edit-admin-password]').val(response.password);
 
             }});
 
@@ -1067,7 +1125,7 @@ $(function () {
             },
             dataType: 'json',
             success: function (response) {console.log(response)
-                $('.bus-name').html(response.name);
+                $('.bus-name').html(response.bus);
                 $('.driver-surname').html(response.surname);
                 $('.driver-name').html(response.name);
                 $('.driver-contact').html(response.id_number);
@@ -1089,7 +1147,7 @@ $(function () {
             },
             dataType: 'json',
             success: function (response) {
-                $('.bus-name').html(response.name);
+                $('.bus-name').html(response.bus);
                 $('.driver-surname').html(response.surname);
                 $('.driver-name').html(response.name);
                 $('.driver-contact').html(response.id_number);
@@ -1138,9 +1196,22 @@ $(function () {
 
     $('.activate_test').on('click', function () {
         let id = this.id;
-        $('#lbl-test').html('Confirm you want to activate the <i class="text-success">'+$(this).attr('for')+'</i> test?');
-        $('input[name=activate_test]').val(id);
-        $('#activate_test').modal('show');
+        const date = new Date();
+        function len(val) {
+            if(val.toString().length < 2){
+                val ='0'+val;
+            }
+            return val;
+        }
+        const today =date.getFullYear()+'-'+len((date.getMonth()+1))+'-'+len(date.getDate());
+        if(today==$(this).attr('is')){
+            $('#lbl-test').html('Confirm you want to activate the <i class="text-success">'+$(this).attr('for')+'</i> test?');
+            $('input[name=activate_test]').val(id);
+            $('#activate_test').modal('show');
+        }else{
+           alert('Test can only be written on '+$(this).attr('is'));
+        }
+
     });
 
     $('.deactivate_test').on('click', function () {

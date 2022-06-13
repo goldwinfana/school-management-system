@@ -397,12 +397,10 @@ if (isset($_POST['getAdmin'])) {
 if(isset($_POST['edit-admin'])) {
     $id = $_POST['edit-admin'];
     $name = $_POST['edit-admin-name'];
+    $surname = $_POST['edit-admin-surname'];
     $email = $_POST['edit-admin-email'];
-    $id_number = $_POST['edit-admin-idNo'];
-    $gender = $_POST['edit-admin-gender'];
-    $password= $_POST['edit-admin-password'];
 
-    $sql = $init->prepare("SELECT * FROM admin WHERE id=:id ");
+    $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:id ");
     $sql->execute(['id' => $id]);
 
     if ($sql->rowCount() < 0) {
@@ -410,11 +408,9 @@ if(isset($_POST['edit-admin'])) {
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE admin SET name=:name, email=:email, id_number=:id_number,
-                                         gender=:gender,password=:password
-                                         WHERE id=:id");
-            $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'gender'=>$gender, 'password'=>$password,'id'=>$id]);
-            $_SESSION['success'] = 'Admin updated successfully';
+            $sql = $init->prepare("UPDATE admin SET name=:name, email=:email, surname=:surname WHERE admin_id=:id");
+            $sql->execute(['name'=>$name,'email'=>$email,'surname'=>$surname,'id'=>$id]);
+            $_SESSION['success'] = 'Profile updated successfully';
             $id == $_SESSION['id']?$_SESSION['name'] = $name: '';
         }catch (Exception $e){
             $_SESSION['error'] = $e->getMessage();

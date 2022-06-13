@@ -41,137 +41,8 @@ if(isset($_POST['user'])) {
     }
 }
 
-if(isset($_POST['add-category'])) {
-    $category = $_POST['category'];
 
-    $sql = $init->prepare("SELECT * FROM category WHERE categoryName=:categoryName ");
-    $sql->execute(['categoryName' => $category]);
 
-    if ($sql->rowCount() > 0) {
-        $_SESSION['error'] = 'Category already exits';
-    } else {
-
-        $sql = $init->prepare("INSERT INTO category(categoryName) VALUES (:categoryName)");
-        $sql->execute(['categoryName'=>$category]);
-        $_SESSION['success'] = 'Category added successfully';
-    }
-    header('Location: '.$return);
-}
-
-if(isset($_POST['add-book'])) {
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
-
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
-
-    if ($sql->rowCount() > 0) {
-        $_SESSION['error'] = 'Book already exits';
-    } else {
-
-        $sql = $init->prepare("INSERT INTO book(bookName, categoryID,quantity,author, shelveNumber, price) 
-						VALUES (:bookName,:categoryID,:quantity,:author, :shelveNumber, :price)");
-        $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price]);
-        $_SESSION['success'] = 'Book added successfully';
-    }
-    header('Location: '.$return);
-}
-
-if(isset($_POST['edit-book'])) {
-    $id = $_POST['edit-book'];
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
-
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
-
-    if ($sql->rowCount() < 0) {
-        $_SESSION['error'] = 'Book does not exit';
-    } else {
-
-        try{
-            $sql = $init->prepare("UPDATE book SET bookName=:bookName, categoryID=:categoryID, quantity=:quantity,
-                                         author=:author,shelveNumber=:shelveNumber,price=:price
-                                         WHERE id=:id");
-            $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price,'id'=>$id]);
-            $_SESSION['success'] = 'Book updated successfully';
-        }catch (Exception $e){
-            $_SESSION['error'] = $e->getMessage();
-        }
-
-    }
-    header('Location: '.$return);
-}
-
-if (isset($_POST['getSaloon'])) {
-    $service = $_POST['getSaloon'];
-
-    $sql = $init->prepare("SELECT *,service.id AS serID FROM service,saloon 
-                                    WHERE service.saloonID=saloon.id
-                                    AND saloon.id=:id");
-    $sql->execute(['id' => $service]);
-    $results = $sql->fetchAll();
-
-    echo json_encode($results);
-}
-
-if (isset($_POST['getService'])) {
-    $service = $_POST['getService'];
-
-    $sql = $init->prepare("SELECT *,service.id AS serID FROM service,category,saloon 
-                                    WHERE service.id=:id AND categoryID=category.id 
-                                    AND saloonID=saloon.id");
-    $sql->execute(['id' => $service]);
-    $results = $sql->fetch();
-
-    echo json_encode($results);
-}
-
-if (isset($_POST['loadData'])) {
-    $id= $_SESSION['id'];
-
-    $sql = $init->prepare("SELECT * FROM session
-                                    WHERE customerID=:id ");
-    $sql->execute(['id' => $id]);
-    $results = $sql->fetchAll();
-
-    echo json_encode($results);
-}
-
-if (isset($_POST['getAllStuff'])) {
-    $saloon = $_POST['getAllStuff'];
-    $start = $_POST['start'];
-    $end = $_POST['end'];
-    try{
-
-//        $sql = $init->prepare("SELECT * FROM session WHERE startTime >= {$start} AND endTime < {$end}");
-//        $sql->execute();
-//        $ids = $sql->fetchAll();
-//        $arr=array(0);
-//        foreach ($ids as $id){
-//            array_push($arr,$id['stuffID']);
-//        }
-//        $iD = implode(',',$arr);
-
-        $sql = $init->prepare("SELECT * FROM stuff,saloon WHERE saloon.id=stuff.saloonID
-                                        AND saloon.id=:id");
-        $sql->execute(['id'=>$saloon]);
-        $results = $sql->fetchAll();
-    }
-    catch(PDOException $e){
-        $results = $e->getMessage();
-    }
-
-    echo json_encode($results);
-}
 
 if(isset($_POST['activate_test'])) {
 
@@ -217,23 +88,34 @@ if(isset($_POST['deactivate_test'])) {
     header('Location: '.$return);
 }
 
-if(isset($_POST['delete-student'])){
-    $studentNo = $_POST['delete-student'];
+if(isset($_POST['edit-teacher'])) {
+    $id = $_SESSION['id'];
+    $name = $_POST['edit-name'];
+    $surname = $_POST['edit-surname'];
+    $email = $_POST['edit-email'];
 
-    try{
-        $sql = $init->prepare("DELETE FROM student WHERE studentNo=:studentNo");
-        $sql->execute(['studentNo'=>$studentNo]);
+    $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id=:id ");
+    $sql->execute(['id' => $id]);
 
-        $_SESSION['success'] = 'Student deleted successfully';
-    }
-    catch(PDOException $e){
-        $_SESSION['error'] = $e->getMessage();
+    if ($sql->rowCount() < 0) {
+        $_SESSION['error'] = 'Teacher does not exit';
+    } else {
+
+        try{
+            $sql = $init->prepare("UPDATE teacher SET name=:name,surname=:surname, email=:email
+                                         WHERE teacher_id=:id");
+            $sql->execute(['name'=>$name,'surname'=>$surname,'email'=>$email,'id'=>$id]);
+            $_SESSION['success'] = 'Profile updated successfully';
+            $_SESSION['name'] = $name.' '.$surname;
+            $_SESSION['surname'] = $surname;
+            $_SESSION['email'] = $email;
+        }catch (Exception $e){
+            $_SESSION['error'] = $e->getMessage();
+        }
+
     }
     header('Location: '.$return);
-
 }
-
-
 
 
 if(isset($_POST['upload-images'])){
@@ -442,6 +324,16 @@ if(isset($_POST['change_mark'])) {
 
     }
     header('Location: '.$return);
+}
+
+if (isset($_POST['getTeacher'])) {
+    $id = $_POST['getTeacher'];
+
+    $sql = $init->prepare("SELECT * FROM teacher WHERE teacher_id=:id");
+    $sql->execute(['id' => $id]);
+    $results = $sql->fetch();
+
+    echo json_encode($results);
 }
 
 $pdo->close();

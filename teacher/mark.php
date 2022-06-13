@@ -76,14 +76,12 @@
 
                         if ($sql->rowCount() > 0) {
                         foreach ($sql as $data) {
-                            $status= $data["status"]!=null?'<i class="text-success">'.$data["status"].'</i>' ." <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>":"<a id='$data[exam_id]' for='$data[test_name]' class='btn btn-warning activate_test'>Activate Test</a>";
                             echo '
                         <tr>
                             <td>' . $data["grade"] . '</td>
                             <td>' . $data["subject"] . '</td>
                             <td>' . $data["test_name"] . '</td>
                             <td>' . $data["ques"] . '</td>
-                            <td>' . $status . '</td>
                             <td>
                                 <div class="d-flex" >
                                     <a href="?exam_id=' . $data["exam_id"].'&grade='.$data["grade"].'&subject='.$data["subject"].'" class="contributions bg-info text-white action_spans" title="View Questions"><i class="fa fa-level-up"></i> View Answers</a>

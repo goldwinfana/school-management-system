@@ -34,6 +34,7 @@
                             <th>Subject</th>
                             <th>Test Name</th>
                             <th>Questions</th>
+                            <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -50,7 +51,7 @@
                             if($data["ques"] < 5){
                                 $status='Make sure you have at least five(5) question set for the test';
                             }else {
-                                $status = $data["status"] != null ? '<i class="text-success">' . $data["status"] . '</i>' . " <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>" : "<a id='$data[exam_id]' for='$data[test_name]' class='btn btn-warning activate_test'>Activate Test</a>";
+                                $status = $data["status"] != null ? '<i class="text-success">' . $data["status"] . '</i>' . " <a id='$data[exam_id]' for='$data[test_name]' class='btn btn-danger deactivate_test'>Deactivate Test</a>" : "<a id='$data[exam_id]' for='$data[test_name]' is='$data[exam_date]' class='btn btn-warning activate_test'>Activate Test</a>";
                             }
                             echo '
                         <tr>
@@ -58,6 +59,7 @@
                             <td>' . $data["subject"] . '</td>
                             <td>' . $data["test_name"] . '</td>
                             <td>' . $data["ques"] . '</td>
+                            <td>'.$data["exam_date"].'</td>
                             <td>' . $status . '</td>
                             <td>
                                 <div class="d-flex" >

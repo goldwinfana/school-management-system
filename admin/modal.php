@@ -311,6 +311,8 @@
                 </div>
 
             </div>
+            <button id="<?php echo $_SESSION['id'] ?>" class="btn btn-warning edit-admin"><i class="fa fa-edit"></i> Edit</button>
+
         </div>
     </div>
 </div>
@@ -341,6 +343,16 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="edit-admin-surname" class="col-md-4 col-form-label text-md-right">Surname</label>
+
+                        <div class="col-md-6">
+                            <input id="edit-admin-surname" type="text" class="form-control is-invalid" name="edit-admin-surname" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
+                        </div>
+                        <span class="text-center" role="alert" style="display: block">
+                            </span>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="edit-admin-email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                         <div class="col-md-6">
@@ -351,34 +363,6 @@
                             </span>
                     </div>
 
-
-                    <div class="form-group row">
-                        <label for="edit-admin-idNo" class="col-md-4 col-form-label text-md-right">ID Number</label>
-
-                        <div class="col-md-6">
-                            <input id="edit-admin-idNo" type="text" class="form-control is-invalid" name="edit-admin-idNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="validateID('editAdmin')" required autocomplete="off">
-                        </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-admin-verifyID"></strong>
-                            </span>
-                    </div>
-
-
-                    <input id="edit-admin-gender" type="text" class="form-control is-invalid" name="edit-admin-gender" hidden>
-
-
-
-                    <div class="form-group row">
-                        <label for="edit-admin-password" class="col-md-4 col-form-label text-md-right">Password&nbsp;</label>
-
-                        <div  class="col-md-6">
-                            <input id="edit-admin-password" type="text" class="form-control" name="edit-admin-password" placeholder="e.g 1234*Abcd" minlength="8" onkeyup="createPassword('editAdmin')" required autocomplete="off">
-                        </div>
-
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-admin-verifyPass"></strong>
-                            </span>
-                    </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Save</button>
