@@ -724,7 +724,7 @@
                     <textarea name="broad_message" placeholder="Type your message here..." class="form-control bg-white" rows="3" style="border-radius: 5px" required></textarea>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-send"></i> Send</button>
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-send fa-lis"></i> Send</button>
                 </form>
             </div>
         </div>

@@ -49,6 +49,12 @@
                         $sql->execute(['id'=>$_GET['user_id'],'user_id'=>$_SESSION['id']]);
 
                         if($sql->rowCount() > 0){
+
+                            $sql3 = $init->prepare("UPDATE message set seen='seen' WHERE sender_type='$_GET[user_type]' 
+                                                       AND sender_id='$_GET[user_id]' AND  user_id='$_SESSION[id]' AND user_type='admin'  
+                                                       AND seen IS NULL");
+                            $sql3->execute();
+
                             foreach ($sql as $data) {
                                 if($data['sender_type']==$_SESSION['user'] &&$data['sender_id']==$_SESSION['id']){
 
@@ -119,6 +125,16 @@
                                     $role='student';
                                 }
 
+                                $sql3 = $init->prepare("SELECT COUNT(*) AS unread FROM message WHERE sender_type='$role' 
+                                                       AND sender_id='$data[teacher_id]' AND  user_id='$_SESSION[id]' AND user_type='admin'  
+                                                       AND seen IS NULL");
+                                $sql3->execute();
+                                $getTot = $sql3->fetch();
+                                $totMessages='';
+                                if($getTot['unread'] > 0){
+                                    $totMessages = '<small style="position: absolute;margin-top: -15px;border-radius: 10px;background: orange;" class="text-white"><i style="margin: 5px">'.$getTot["unread"].'</i></small>';
+                                }
+
 
                                 echo '
                                      <tr>
@@ -127,7 +143,7 @@
                                         <td>' . ucfirst($role). '</td>
                                         <td>
                                             <div class="d-flex" >
-                                                <a href="?user_type='.$role.'&user_id='.$data["teacher_id"].'" class="contributions bg-info text-white action_spans view-admin-profile" title="Open Chat"><i class="fa fa-level-up"></i> Open Chat</a>
+                                                <a href="?user_type='.$role.'&user_id='.$data["teacher_id"].'" class="bg-info text-white action_spans" title="Open Chat"><i class="fa fa-level-up"></i> Open Chat  '.$totMessages.'</a>
                                             </div>
                                         </td>
                                      </tr>

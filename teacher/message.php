@@ -40,7 +40,6 @@
                             $sql = $init->prepare("SELECT * FROM message,admin 
                                                 WHERE (user_id=admin_id AND user_type='admin' AND user_id=:id AND sender_id=:user_id) 
                                                 OR (sender_id=admin_id AND sender_type='admin' AND user_id=:user_id AND sender_id=:id)");
-
                         }else{
                             $sql = $init->prepare("SELECT * FROM message,student 
                                                 WHERE (user_id=student_id AND user_type='student' AND user_id=:id AND sender_id=:user_id) 
@@ -50,6 +49,11 @@
                         $sql->execute(['id'=>$_GET['user_id'],'user_id'=>$_SESSION['id']]);
 
                         if($sql->rowCount() > 0){
+                            $sql3 = $init->prepare("UPDATE message set seen='seen' WHERE sender_type='$_GET[user_type]' 
+                                                       AND sender_id='$_GET[user_id]' AND  user_id='$_SESSION[id]' AND user_type='teacher'  
+                                                       AND seen IS NULL");
+                            $sql3->execute();
+
                             foreach ($sql as $data) {
                                 if($data['sender_type']==$_SESSION['user'] &&$data['sender_id']==$_SESSION['id']){
 
@@ -112,19 +116,32 @@
 
                         if ($sql->rowCount() > 0) {
                             foreach ($sql as $data) {
+                                $user_type = (($data["email"]=='admin@gmail.com')?'admin': 'student');
+                                $sql3 = $init->prepare("SELECT COUNT(*) AS unread FROM message WHERE sender_type='$user_type' 
+                                                       AND sender_id='$data[admin_id]' AND  user_id='$_SESSION[id]' AND user_type='teacher'  
+                                                       AND seen IS NULL");
+                                $sql3->execute();
+                                $getTot = $sql3->fetch();
+                                $totMessages='';
+                                if($getTot['unread'] > 0){
+                                    $totMessages = '<small style="position: absolute;margin-top: -15px;border-radius: 10px;background: orange;" class="text-white"><i style="margin: 5px">'.$getTot["unread"].'</i></small>';
+                                }
+
 
                                 echo '
                                      <tr>
                                         <td>' . $data["name"] . '</td>
                                         <td>' . $data["surname"] . '</td>
-                                        <td>' . (($data["email"]=='admin@gmail.com')?'Admin': 'Student'). '</td>
+                                        <td>' . ucfirst($user_type). '</td>
                                         <td>
                                             <div class="d-flex" >
-                                                <a href="?user_type='.(($data["email"]=='admin@gmail.com')?'admin': 'student').'&user_id='.$data["admin_id"].'" class="contributions bg-info text-white action_spans view-admin-profile" title="Open Chat"><i class="fa fa-level-up"></i> Open Chat</a>
+                                                <a href="?user_type='.(($data["email"]=='admin@gmail.com')?'admin': 'student').'&user_id='.$data["admin_id"].'" class="bg-info text-white action_spans " title="Open Chat">
+                                                <i class="fa fa-level-up"></i> Open Chat '.$totMessages.'</a>
                                             </div>
                                         </td>
                                      </tr>
                                 ';
+
 
                             }
                             $pdo->close();

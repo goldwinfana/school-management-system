@@ -5,14 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/message.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sql.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parent/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/parent/modal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parent/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/parent/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/navbar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smsdb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/smsdb.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/message.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/sql.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,16 +32,16 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\school-management-system\admin" />
-      <recent name="C:\xampp\htdocs\school-management-system" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\school-management-system" />
       <recent name="C:\xampp\htdocs\school-management-system\student" />
       <recent name="C:\xampp\htdocs\school-management-system\admin" />
       <recent name="C:\xampp\htdocs\school-management-system\assets\js" />
       <recent name="C:\xampp\htdocs\school-management-system\assets\assets\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\school-management-system\admin" />
+      <recent name="C:\xampp\htdocs\school-management-system" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -69,7 +64,7 @@
       <workItem from="1654624818140" duration="25678000" />
       <workItem from="1654757696858" duration="16673000" />
       <workItem from="1655102995208" duration="371000" />
-      <workItem from="1655145743384" duration="3883000" />
+      <workItem from="1655145743384" duration="9271000" />
     </task>
     <task id="LOCAL-00001" summary="third may push">
       <created>1652952972693</created>
@@ -155,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655103300781</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Final adjustments">
+      <created>1655149687306</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1655149687306</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,10 +173,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Final adjustments" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1655103294874">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1655149677865">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1655103294874" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1655149677865" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1651996241512">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -183,14 +185,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1653841405512" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1655103404097">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1655149932662">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1655103404097" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1655103182382">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1655149932662" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1655149561945">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1655103182382" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1655149561945" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1653434587478">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
