@@ -137,6 +137,7 @@ if(isset($_POST['edit-parent'])) {
     $name = $_POST['edit-p-name'];
     $surname = $_POST['edit-p-surname'];
     $email = $_POST['edit-p-email'];
+    $mobile = $_POST['edit-p-mobile'];
 
     $sql = $init->prepare("SELECT * FROM parent WHERE parent_id=:parent_id ");
     $sql->execute(['parent_id' => $_SESSION['id']]);
@@ -146,8 +147,8 @@ if(isset($_POST['edit-parent'])) {
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE parent SET name=:name, email=:email,surname=:surname WHERE parent_id=:parent_id");
-            $sql->execute(['name'=>$name,'surname'=>$surname,'email'=>$email,'parent_id'=>$_SESSION['id']]);
+            $sql = $init->prepare("UPDATE parent SET name=:name, email=:email,surname=:surname,mobile=:mobile WHERE parent_id=:parent_id");
+            $sql->execute(['name'=>$name,'surname'=>$surname,'email'=>$email,'mobile'=>$mobile,'parent_id'=>$_SESSION['id']]);
             $_SESSION['success'] = 'Parent updated successfully';
             $_SESSION['name'] = $name;
         }catch (Exception $e){

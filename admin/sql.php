@@ -645,6 +645,42 @@ if(isset($_POST['delete-bus'])){
 
 }
 
+if(isset($_POST['broad_cast'])) {
+    $message= $_POST['broad_message'];
+    $user_type = $_POST['broad_cast'];
+
+    try{
+        if($user_type=='teacher'){
+            $sql = $init->prepare("SELECT * FROM teacher");
+            $sql->execute();
+            if ($sql->rowCount() > 0) {
+                foreach ($sql as $user){
+                    $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
+						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+                    $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user['teacher_id'],'user_type'=>$user_type,'message'=>$message]);
+
+                }
+            }
+        }elseif ($user_type=='student'){
+            $sql = $init->prepare("SELECT * FROM student");
+            $sql->execute();
+            if ($sql->rowCount() > 0) {
+                foreach ($sql as $user){
+                    $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
+						VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+                    $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user['student_id'],'user_type'=>$user_type,'message'=>$message]);
+
+                }
+            }
+        }
+        $_SESSION['success'] = 'Message sent successfully';
+    }catch (Exception $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+
+    header('Location: '.$return);
+}
+
 
 if(isset($_POST['message'])) {
     $message= $_POST['message'];

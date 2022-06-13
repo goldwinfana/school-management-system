@@ -15,6 +15,7 @@
                     <label class=" col-form-label">Name: <span class="p-name"></span></label>
                     <label class=" col-form-label">Surname: <span class="p-surname"></span></label>
                     <label class=" col-form-label">E-Mail Address: <span class="p-email"></span></label>
+                    <label class=" col-form-label">Mobile: <span class="p-mobile"></span></label>
                     <label class=" col-form-label">ID Number: <span class="p-idNo"></span></label>
                     <label class=" col-form-label">Age: <span class="p-age"></span></label>
 
@@ -77,7 +78,7 @@
                             <input id="edit-p-mobile" type="text" class="form-control is-invalid" name="edit-p-mobile" maxlength="30" onkeyup="validateMobile()"  required autocomplete="">
                         </div>
                         <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-verifyMobile"></strong>
+                                <strong id="verifyMobile"></strong>
                             </span>
                     </div>
 

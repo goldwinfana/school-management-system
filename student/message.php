@@ -22,8 +22,8 @@
 
 
         <section class="" style="padding: 30px">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid" style="height: 600px;overflow-y: scroll">
+                <div class="row" style="margin-left: 15px">
 
 <!--                    <div class="ms-container ms-darker ms-gray-bg">-->
 <!--                        <img src="../assets/img/profile.png" alt="Avatar" class="left" style="width:10%;">-->
@@ -91,7 +91,7 @@
                                     <input name="user_type" value="'.$_GET['user_type'].'" hidden>
                                     <input name="user_id" value="'.$_GET['user_id'].'" hidden>
                                     <textarea name="message" placeholder="Type your message here..." class="form-control bg-white" rows="3" style="border-radius: 5px" required></textarea>
-                                    <button class="btn btn-success"><i class="fa fa-save"></i> Send</button>
+                                    <button class="btn btn-success"><i class="fa fa-send"></i> Send</button>
                                 </form>
                             ';
                     }else{

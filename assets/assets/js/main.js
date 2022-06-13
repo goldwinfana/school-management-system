@@ -567,6 +567,11 @@ function sendForm(n){
             return false;
         }
 
+        if($('#verifyMobile').html()!='' && $('#verifyMobile').css('color') =='rgb(220, 53, 69)'){
+            $('input[name=edit-p-mobile]').focus();
+            return false;
+        }
+
     }
 
     if(n == 'editTeacher') {
@@ -813,6 +818,7 @@ $(function () {
                 $('.p-surname').html(response.surname);
                 $('.p-email').html(response.email);
                 $('.p-idNo').html(response.id_number);
+                $('.p-mobile').html(response.mobile);
                 $('.p-age').html(age);
 
             }});
@@ -836,7 +842,6 @@ $(function () {
                 $('input[name=edit-p-surname]').val(response.surname);
                 $('input[name=edit-p-email]').val(response.email);
                 $('input[name=edit-p-mobile]').val(response.mobile);
-                // $('input[name=edit-st-password]').val(response.password);
 
             }});
 
@@ -1036,10 +1041,10 @@ $(function () {
 
     });
 
-    // $('.book-session').on('click', function () {
-    //     $('#book-session').modal('show');
-    //
-    // });
+    $('.broadcast-btn').on('click', function () {
+        $('#broadcast-modal').modal('show');
+
+    });
 
     //  Delete Post
     $('.approve_student').on('click', function () {

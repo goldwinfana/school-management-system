@@ -155,7 +155,7 @@ if(isset($_POST['message'])) {
 
     try{
         if($user_type=='student'){
-            $sql = $init->prepare("SELECT * FROM student WHERE teacher_id=:user_id ");
+            $sql = $init->prepare("SELECT * FROM student WHERE student_id=:user_id ");
         }elseif ($user_type=='admin'){
             $sql = $init->prepare("SELECT * FROM admin WHERE admin_id=:user_id ");
         }else{

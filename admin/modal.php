@@ -702,3 +702,32 @@
     </div>
 </div>
 </div></div>
+
+<div class="modal fade" id="broadcast-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Broadcast Message</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <select name="broad_cast" class="form-control" required>
+                        <option value="" selected disabled>Select Audience</option>
+                        <option value="teacher">Teachers</option>
+                        <option value="student">Students</option>
+                    </select>
+                    <br>
+
+                    <textarea name="broad_message" placeholder="Type your message here..." class="form-control bg-white" rows="3" style="border-radius: 5px" required></textarea>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-send"></i> Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
