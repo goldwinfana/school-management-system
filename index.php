@@ -339,7 +339,8 @@
                                        * Write assessments online<br>
                                         * Same time results<br>
                                         * Transportation system<br>
-                                        * Send messages
+                                        * Send messages<br>
+                                        * Library Management
                                     </p>
 	                            </div>
 	                        </div>

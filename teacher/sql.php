@@ -146,6 +146,29 @@ if(isset($_POST['upload-images'])){
 
 }
 
+if(isset($_POST['broad_message'])) {
+    $message= $_POST['broad_message'];
+
+    try{
+
+        $sql = $init->prepare("SELECT * FROM student");
+        $sql->execute();
+        if ($sql->rowCount() > 0) {
+            foreach ($sql as $user){
+                $sql = $init->prepare("INSERT INTO message(sender_id,sender_type,user_id,user_type,message) 
+                    VALUES (:sender_id,:sender_type,:user_id,:user_type,:message)");
+                $sql->execute(['sender_id'=>$_SESSION['id'],'sender_type'=>$_SESSION['user'], 'user_id'=>$user['student_id'],'user_type'=>'student','message'=>$message]);
+
+            }
+        }
+
+        $_SESSION['success'] = 'Message sent successfully';
+    }catch (Exception $e){
+        $_SESSION['error'] = $e->getMessage();
+    }
+
+    header('Location: '.$return);
+}
 
 
 if(isset($_POST['message'])) {

@@ -69,7 +69,7 @@
             </div>
 
             <div class="test_date" style="margin:15px;">
-                    <input class="form-control" type="date" name="test_date" required>
+                    <input class="form-control" type="date" min="<?php echo date('Y-m-d',strtotime(date('Y-m-d').'+1 days')) ?>" name="test_date" required>
             </div>
 
             <div class="test_duration" style="margin:15px;">

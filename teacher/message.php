@@ -24,11 +24,9 @@
             <div class="container-fluid" style="height: 600px;overflow-y: scroll">
                 <div class="row" style="margin-left: 15px">
 
-<!--                    <div class="ms-container ms-darker ms-gray-bg">-->
-<!--                        <img src="../assets/img/profile.png" alt="Avatar" class="left" style="width:10%;">-->
-<!--                        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>-->
-<!--                        <span class="ms-time-left">11:05</span>-->
-<!--                    </div>-->
+                    <div class="ms-container ms-darker ms-gray-bg">
+                        <button class="text-black" onclick="$('#broadcast-modals').modal('show');">Send Broadcast Message <i class="fa fa-microphone"></i></button>
+                    </div>
 
 
                     <?php
@@ -165,6 +163,30 @@
 <?php include('./../layouts/footer.php') ?>
 </body>
 </html>
+<div class="modal fade" id="broadcast-modals">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
+            <div class="modal-header">
+                <span>Broadcast Message</span>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data">
+
+                    <label class="form-control">Send a broadcast message to all students</label>
+                    <br>
+
+                    <textarea name="broad_message" placeholder="Type your message here..." class="form-control bg-white" rows="3" style="border-radius: 5px" required></textarea>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-send fa-lis"></i> Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div></div>
 
 
 

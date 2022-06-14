@@ -459,7 +459,7 @@
                 <span>Add Transportation</span>
             </div>
             <div class="modal-body">
-                <form id="regForm" method="POST" action="sql.php" enctype="multipart/form-data">
+                <form id="regForm" method="POST" action="sql.php" enctype="multipart/form-data" onsubmit="return SendFormNow();">
                     <input name="add-transport" value="register" hidden>
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
@@ -486,11 +486,11 @@
                         <label class="col-md-4 col-form-label text-md-right">ID Number</label>
 
                         <div class="col-md-6">
-                            <input id="DidNo" type="text" class="form-control is-invalid idNumber" name="DidNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" autocomplete="off" required>
+                            <input id="DidNo" type="text" class="form-control is-invalid idNumber" name="DidNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="ValidateDID()" autocomplete="off" required>
                         </div>
 
                         <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyDiD"></strong>
+                                <strong id="verifyDID"></strong>
                             </span>
                     </div>
 
@@ -499,10 +499,10 @@
                         <label for="Dmobile" class="col-md-4 col-form-label text-md-right">Mobile</label>
 
                         <div class="col-md-6">
-                            <input id="Dmobile" type="text" class="form-control is-invalid" name="Dmobile" minlength="10" maxlength="10" onkeyup="ValidateMobile()" onkeypress="return /[0-9]/i.test(event.key)" required autocomplete="off">
+                            <input id="Dmobile" type="text" class="form-control is-invalid" name="Dmobile" minlength="10" maxlength="10" onkeyup="ValidateMobileNo()" onkeypress="return /[0-9]/i.test(event.key)" required autocomplete="off">
                         </div>
                         <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="verifyDmobile"></strong>
+                                <strong id="verifyDMobile"></strong>
                             </span>
                     </div>
 
@@ -731,3 +731,96 @@
     </div>
 </div>
 </div></div>
+
+<script>
+    function ValidateDID() {
+
+            let id = $('#DidNo').val();
+            let month = id.substr(2,2);
+            let day = id.substr(4,2);
+            let gender = id.substr(6,1);
+
+            if(month > 0 && month < 13 && day > 0 && day < 32 && id.length == 13){
+                $.ajax({
+                    type: 'POST',
+                    url: 'sql.php',
+                    data: {
+                        checkID:id},
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.length > 0){
+                            $('#verifyDID').css('color', 'red').html(' <i>ID number already exist</i>');
+                        }
+                        else{
+                            gender >= 5 ? $('#verifyDID').css('color','green').html('<span>Identity Number Is Valid (<i class="fa fa-male"></i></span> male)')
+                                : $('#verifyDID').css('color','green').html('<span>Identity Number Is Valid (<i class="fa fa-female"></i></span> female)');
+
+                        }
+                    }
+                });
+
+            }else{
+                $('#verifyDID').css('color','#dc3545').html('<span>Identity Number Is Invalid <i class="fa fa-warning"></i></span>');
+
+            }
+
+    }
+
+    function ValidateMobileNo() {
+        let contact = $('input[name=Dmobile]').val();
+        if (contact.length === 0) {
+            $('#verifyDMobile').html('');
+        }
+
+        if (contact.length < 10) {
+            $('#verifyDMobile').css('color', '#dc3545').html('<i>**the number is invalid!**</i>');
+        }
+
+        if ((contact.length === 10 && contact[0] === "0" && (contact[1] === "6" || contact[1] === "7" || contact[1] === "8"))
+            || (contact.length === 11 && contact[0] === "2" && contact[1] === "7")) {
+
+            // $.ajax({
+            //     type: 'POST',
+            //     url: './customRegister.php',
+            //     data: {
+            //         checkValues:contact},
+            //     dataType: 'json',
+            //     success: function(response){
+            //         console.log(response)
+            //         if(response.length > 0){
+            //             $('#verifyMobile').css('color', 'red').html(' <i>the number already exist</i>');
+            //         }
+            //         else{
+            //
+            //             $('#verifyMobile').css('color', 'Green').html(' <i>the number is valid</i>');
+            //         }
+            //     }
+            // });
+            $('#verifyDMobile').css('color', 'Green').html(' <i>the number is valid</i>');
+
+        } else if (contact.length > 10) {
+            $('#verifyDMobile').css('color', '#dc3545').html('<i>**the number is invalid!**</i>');
+
+        }
+        else {
+            $('#verifyDMobile').css('color', '#dc3545').html('<i>**the number is invalid!**</i>');
+
+        }
+    }
+
+    function SendFormNow(){
+
+        if($('#verifyDMobile').css('color') =='rgb(220, 53, 69)'){
+            $('input[name=Dmobile]').focus();
+            return false;
+        }
+
+        if($('#verifyDID').css('color') =='rgb(220, 53, 69)'){
+            $('#DidNo').focus();
+            return false;
+        }
+
+
+        return true;
+    }
+</script>

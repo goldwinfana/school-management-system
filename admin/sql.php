@@ -225,18 +225,18 @@ if(isset($_POST['acc_approval'])){
 
     try{
         if(isset($_POST['acc_parent'])){
-            $stmt = $init->prepare("UPDATE parent SET status=1 WHERE email=:email");
-            $stmt->execute(['email'=>$email]);
+            $stmt = $init->prepare("UPDATE parent SET status=1,approved_by=:id WHERE email=:email");
+            $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
         if(isset($_POST['acc_student'])){
-            $stmt = $init->prepare("UPDATE student SET status=1 WHERE email=:email");
-            $stmt->execute(['email'=>$email]);
+            $stmt = $init->prepare("UPDATE student SET status=1,approved_by=:id WHERE email=:email");
+            $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
         if(isset($_POST['acc_teacher'])){
-            $stmt = $init->prepare("UPDATE teacher SET status=1 WHERE email=:email");
-            $stmt->execute(['email'=>$email]);
+            $stmt = $init->prepare("UPDATE teacher SET status=1,approved_by=:id WHERE email=:email");
+            $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
         $_SESSION['success'] = 'Record approved successfully';

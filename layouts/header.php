@@ -69,7 +69,7 @@
 
 <!--                     Sidebar Toggle Btn-->
                         <?php if(isset($_SESSION['islogged'])) {
-                            echo '<button class="sidebar-toggle btn-secondary">☰</button>';
+//                            echo '<button class="sidebar-toggle btn-secondary">☰</button>';
                         }?>
                     </a></div>
                 <div class="right-menu list-inline no-margin-bottom">

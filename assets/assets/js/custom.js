@@ -103,6 +103,7 @@ function validateID(idNo) {
         let month = id.substr(2,2);
         let day = id.substr(4,2);
         let gender = id.substr(6,1);
+        $('#PidNo').val('');
 
         if(month > 0 && month < 13 && day > 0 && day < 32 && id.length == 13){
             if($('select[name=accountType]').val()=='parent'){
@@ -116,6 +117,7 @@ function validateID(idNo) {
                     success: function(response){
                         if(response.length > 0){
                             $('#verifyID').css('color', 'green').html(' <i>ID Number Found</i>');
+
                         }
                         else{
                             $('#verifyID').css('color', 'red').html(' <i>ID Number Not Found</i>');
@@ -138,6 +140,7 @@ function validateID(idNo) {
                 });
 
             }else{
+
                 $.ajax({
                     type: 'POST',
                     url: './customRegister.php',
@@ -167,17 +170,33 @@ function validateID(idNo) {
             $('input[name=gender]').val('');
         }
     }else{
+        if($('#idNo').val()==''){
+            $('#PidNo').val('');
+            alert('Please enter student ID first');
+            return;
+        }
+
         let id = $('#PidNo').val();
         let month = id.substr(2,2);
         let day = id.substr(4,2);
         let gender = id.substr(6,1);
 
         if(month > 0 && month < 13 && day > 0 && day < 32 && id.length == 13){
+            let pAage = id.substr(0,2);
+            let oldAge = pAage < 20? "20"+pAage:"19"+pAage;
 
-            gender >= 5 ? $('#verifyPID').css('color','green').html('<span>Parent Identity Number Is Valid (<i class="fa fa-male"></i></span> male)')
-                : $('#verifyPID').css('color','green').html('<span>Parent Identity Number Is Valid (<i class="fa fa-female"></i></span> female)');
+            let sAage = $('#idNo').val().substr(0,2);
+            let newAge = sAage < 20? "20"+sAage:"19"+sAage;
+            if(oldAge < newAge){
+                gender >= 5 ? $('#verifyPID').css('color','green').html('<span>Parent Identity Number Is Valid (<i class="fa fa-male"></i></span> male)')
+                    : $('#verifyPID').css('color','green').html('<span>Parent Identity Number Is Valid (<i class="fa fa-female"></i></span> female)');
 
-            gender >= 5 ? $('input[name=gender]').val('male') : $('input[name=gender]').val('female');
+                gender >= 5 ? $('input[name=gender]').val('male') : $('input[name=gender]').val('female');
+            }else{
+                $('#verifyPID').css('color','#dc3545').html('<span>ID No Of Parent Must Be Greater Than Students ID No<i class="fa fa-warning"></i></span>');
+                $('input[name=gender]').val('');
+            }
+
         }else{
             $('#verifyPID').css('color','#dc3545').html('<span>Identity Number Is Invalid <i class="fa fa-warning"></i></span>');
             $('input[name=gender]').val('');
