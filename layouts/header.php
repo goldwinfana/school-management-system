@@ -61,7 +61,7 @@
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="navbar-header">
                     <!-- Navbar Header-->
-                    <a href="index.php" class="navbar-brand" style="display: flex">
+                    <a href="#" class="navbar-brand" style="display: flex" onclick="location.reload()">
                         <div class="brand-text brand-big visible text-uppercase">
                             <strong class="text-primary full-logo">School Management System <i class="fa fa-book"></i></strong>
 <!--                            <strong class="text-primary short-logo"><img src='--><?php //echo $pth.'/img/short-logo.png'; ?><!--' width="100"></strong>-->
