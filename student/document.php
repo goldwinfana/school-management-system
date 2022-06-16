@@ -15,6 +15,20 @@
                 <h2 class="h5 no-margin-bottom">Documents</h2>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="row">
+            <?php
+                $init = $pdo->open();
+                $grade = '';
+                $sql = $init->prepare("SELECT * FROM student WHERE student_id='$_SESSION[id]'");
+                $sql->execute();
+                if($sql->fetch()['grade'] ==NULL){
+                   echo '<h1 class="text-warning">You currently do not have any grade, upload a report and admin will assign you a grade</h1>';
+                }
+                $pdo->close();
+            ?>
+            </div>
+        </div>
 
         <form action="sql.php" method="post" enctype="multipart/form-data">
             <h4>Upload you documents here</h4>
@@ -56,7 +70,7 @@
                     <?php
 
                     $init = $pdo->open();
-                    $sql = $init->prepare("SELECT * FROM upload WHERE user_id='$_SESSION[id_number]'");
+                    $sql = $init->prepare("SELECT * FROM upload WHERE user_id='$_SESSION[id]'");
                     $sql->execute();
                     if($sql->rowCount() > 0){
                             foreach ($sql as $key => $data) {

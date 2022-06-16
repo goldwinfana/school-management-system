@@ -49,7 +49,7 @@
                                     <th>E-mail</th>
                                     <th>Mobile</th>
                                     <th>ID Number</th>
-                                    <th>Proof of payment</th>
+                                    <th>Documents</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -85,7 +85,7 @@
                                         <td>'.$data["id_number"].'</td>
                                          <td>
                                             <div class="d-flex" >'?>
-                                        <button onclick='window.open("<?php echo $filename; ?>","_blank");' class="btn btn-warning" title="View"><i class="fa fa-file-pdf-o"></i> View File</button>
+                                        <button onclick='window.location.href="document.php?stud=<?php echo $data["student_id"]?>";' class="btn btn-warning" title="View"><i class="fa fa-file-pdf-o"></i> View Documents</button>
                                         <?php echo '</div>
                                         </td>
                                         <td>'.$data["status_name"].$stBtn.'</td>

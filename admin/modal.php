@@ -214,8 +214,6 @@
                         <div class="col-md-6">
                             <input id="edit-st-name" type="text" class="form-control is-invalid" name="edit-st-name" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
                         </div>
-                        <span class="text-center" role="alert" style="display: block">
-                            </span>
                     </div>
 
                     <div class="form-group row">
@@ -224,8 +222,6 @@
                         <div class="col-md-6">
                             <input id="edit-st-surname" type="text" class="form-control is-invalid" name="edit-st-surname" onkeypress="return /[a-z]/i.test(event.key)" required autocomplete="false">
                         </div>
-                        <span class="text-center" role="alert" style="display: block">
-                            </span>
                     </div>
 
                     <div class="form-group row">
@@ -249,6 +245,24 @@
                         <span class="invalid-feedback text-center" role="alert" style="display: block">
                                 <strong id="edit-st-verifyID"></strong>
                             </span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="edit-st-grade" class="col-md-4 col-form-label text-md-right">Grade</label>
+
+                        <div class="col-md-6">
+                            <select id="edit-st-grade" type="text" class="form-control" name="edit-st-grade" required autocomplete="false">
+                              <option value="" selected disabled>Select grade</option>
+                                <?php
+                                $init = $pdo->open();
+                                $sql = $init->prepare("SELECT * FROM grade");
+                                $sql->execute();
+                                foreach ($sql as $grade){
+                                    echo '<option value="'.$grade['grade_code'].'">'.$grade['grade_code'].'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
 
 

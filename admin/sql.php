@@ -346,6 +346,7 @@ if(isset($_POST['edit-st'])) {
     $surname = $_POST['edit-st-surname'];
     $email = $_POST['edit-st-email'];
     $id_number = $_POST['edit-st-idNo'];
+    $grade= $_POST['edit-st-grade'];
 
     $sql = $init->prepare("SELECT * FROM student WHERE student_id=:student_id ");
     $sql->execute(['student_id' => $studNo]);
@@ -355,7 +356,7 @@ if(isset($_POST['edit-st'])) {
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE student SET name=:name,surname=:surname, email=:email, id_number=:id_number
+            $sql = $init->prepare("UPDATE student SET name=:name,surname=:surname, email=:email, id_number=:id_number,grade='$grade'
                                          WHERE student_id=:student_id");
             $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'surname'=>$surname, 'student_id'=>$studNo]);
             $_SESSION['success'] = 'Student updated successfully';

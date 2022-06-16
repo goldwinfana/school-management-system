@@ -3,8 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="377ee98f-816a-4e34-be28-3ea40a5f2852" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/document.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/document.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/library.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/library.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/subject.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/subject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/transport.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/transport.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,20 +36,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\school-management-system" />
-      <recent name="C:\xampp\htdocs\school-management-system\student" />
-      <recent name="C:\xampp\htdocs\school-management-system\admin" />
-      <recent name="C:\xampp\htdocs\school-management-system\assets\js" />
-      <recent name="C:\xampp\htdocs\school-management-system\assets\assets\css" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\school-management-system\admin" />
       <recent name="C:\xampp\htdocs\school-management-system" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\school-management-system\admin" />
+      <recent name="C:\xampp\htdocs\school-management-system" />
+      <recent name="C:\xampp\htdocs\school-management-system\student" />
+      <recent name="C:\xampp\htdocs\school-management-system\assets\js" />
+      <recent name="C:\xampp\htdocs\school-management-system\assets\assets\css" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -62,7 +73,7 @@
       <workItem from="1654757696858" duration="16673000" />
       <workItem from="1655102995208" duration="371000" />
       <workItem from="1655145743384" duration="10763000" />
-      <workItem from="1655237736009" duration="9011000" />
+      <workItem from="1655237736009" duration="14309000" />
     </task>
     <task id="LOCAL-00001" summary="third may push">
       <created>1652952972693</created>
@@ -169,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655246557552</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Final adjustments">
+      <created>1655276389446</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1655276389447</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,10 +203,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Final adjustments" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1655246535744">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1655276377461">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1655246535744" />
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1655276377461" />
     <state x="129" y="55" key="DiffContextDialog" timestamp="1655156265830">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -201,14 +219,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1653841405512" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1655246564401">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1655276414299">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1655246564401" />
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1655246441355">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1655276414299" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1655377119018">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1655246441355" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1655377119018" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1653434587478">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

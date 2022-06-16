@@ -27,11 +27,7 @@
     </head>
     <?php
 
-//    if(isset($_SESSION["islogged"])){
-//        $_SESSION['user']=='user'? header('location: user/dashboard.php'):header('location: admin/dashboard.php');
-//    }else{
-//        header('location: ./../login.php');
-//    }
+
 
     $pth = isset($_SESSION['islogged'])? '../assets' : 'assets';
 
@@ -45,6 +41,10 @@
         }
         if($_SESSION['user'] =='student'){
             $class='view-student-profile';
+
+
+
+
         }else if($_SESSION['user'] =='admin'){
             $class='view-admin-profile';
         }else if($_SESSION['user'] =='parent'){

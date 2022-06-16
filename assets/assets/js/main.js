@@ -1088,6 +1088,7 @@ $(function () {
                 $('input[name=edit-st-email]').val(response.email);
                 $('input[name=edit-st-idNo]').val(response.id_number);
                 $('input[name=edit-st-mobile]').val(response.mobile);
+                $('select[name=edit-st-grade]').val(response.grade);
                 $('input[name=edit-st-password]').val(response.password);
 
             }});

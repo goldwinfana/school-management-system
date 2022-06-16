@@ -216,7 +216,7 @@ if(isset($_POST['upload-file'])){
 
     try{
         $sql = $init->prepare("INSERT INTO upload (user_id,description,file_name) VALUES (:user_id, :description,:file_name)");
-        $sql->execute(['user_id'=>$_SESSION["id_number"],'description'=>$description,'file_name'=>$image]);
+        $sql->execute(['user_id'=>$_SESSION["id"],'description'=>$description,'file_name'=>$image]);
 
         if(!empty($_FILES['file_name']))
         {

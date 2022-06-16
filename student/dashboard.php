@@ -1,4 +1,18 @@
-<?php include './../layouts/session.php';  include './../layouts/alerts.php'; $page='home';?>
+<?php include './../layouts/session.php';  include './../layouts/alerts.php'; $page='home';
+
+if($_SERVER['REQUEST_URI']!='/school-management-system/document.php'){
+    $init = $pdo->open();
+    $sql = $init->prepare("SELECT * FROM student WHERE student_id='$_SESSION[id]'");
+    $sql->execute();
+    if($sql->fetch()['grade'] ==NULL){
+    ?>
+    <script>window.location.href='./document.php';</script>
+    <?php
+    }
+    $pdo->close();
+}
+
+?>
 
 
 <!DOCTYPE html>
