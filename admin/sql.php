@@ -225,17 +225,17 @@ if(isset($_POST['acc_approval'])){
 
     try{
         if(isset($_POST['acc_parent'])){
-            $stmt = $init->prepare("UPDATE parent SET status=1,approved_by=:id WHERE email=:email");
+            $stmt = $init->prepare("UPDATE parent SET status=1,admin_id=:id WHERE email=:email");
             $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
         if(isset($_POST['acc_student'])){
-            $stmt = $init->prepare("UPDATE student SET status=1,approved_by=:id WHERE email=:email");
+            $stmt = $init->prepare("UPDATE student SET status=1,admin_id=:id WHERE email=:email");
             $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
         if(isset($_POST['acc_teacher'])){
-            $stmt = $init->prepare("UPDATE teacher SET status=1,approved_by=:id WHERE email=:email");
+            $stmt = $init->prepare("UPDATE teacher SET status=1,admin_id=:id WHERE email=:email");
             $stmt->execute(['email'=>$email,'id'=>$_SESSION['id']]);
         }
 
@@ -302,30 +302,6 @@ if(isset($_POST['add-category'])) {
     }
     header('Location: '.$return);
 }
-
-if(isset($_POST['add-book'])) {
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
-
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
-
-    if ($sql->rowCount() > 0) {
-        $_SESSION['error'] = 'Book already exits';
-    } else {
-
-        $sql = $init->prepare("INSERT INTO book(bookName, categoryID,quantity,author, shelveNumber, price) 
-						VALUES (:bookName,:categoryID,:quantity,:author, :shelveNumber, :price)");
-        $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price]);
-        $_SESSION['success'] = 'Book added successfully';
-    }
-    header('Location: '.$return);
-}
-
 
 
 //student
@@ -510,32 +486,6 @@ if (isset($_POST['search'])) {
     header('Location: welcome.php');
 }
 
-if(isset($_POST['addStudent'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $gender = $_POST['gender'];
-    $mobile = $_POST['mobile'];
-    $address = $_POST['address'];
-
-    $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM farmer,admin WHERE farmer.email=:email OR admin.email=:email");
-    $stmt->execute(['email' => $email]);
-    $row = $stmt->fetch();
-    if ($row['numrows'] > 0) {
-        $_SESSION['error'] = 'Email already exits';
-    } else {
-
-        $stmt = $conn->prepare("INSERT INTO farmer (firstName, lastName,gender, mobile, address, email, password) 
-						VALUES (:firstName, :lastName,:gender, :mobile, :address, :email,:password)");
-        $stmt->execute(['firstName'=>$firstname, 'lastName'=>$lastname, 'gender'=>$gender,'mobile'=>$mobile, 'address'=>$address, 'email'=>$email, 'password'=>$password]);
-        $userid = $conn->lastInsertId();
-        $_SESSION['success'] = 'Book added successfully';
-
-    }
-    header('Location: '.$return);
-}
-
 
 
 if(isset($_POST['addAdmin'])) {
@@ -594,8 +544,8 @@ if(isset($_POST['add-transport'])){
     $image = md5(microtime()).basename( $_FILES['picture']['name']);
     try {
 
-        $stmt = $init->prepare("INSERT INTO transport (name,surname,id_number,mobile,bus,image) 
-            VALUES (:name,:surname,:idNo,:mobile,:bus,:image)");
+        $stmt = $init->prepare("INSERT INTO transport (name,surname,id_number,mobile,bus,image,admin_id) 
+            VALUES (:name,:surname,:idNo,:mobile,:bus,:image,'$_SESSION[id]')");
         $stmt->execute(['name' => $name,'surname' => $surname,'idNo' => $idNo,'mobile' => $mobile,'bus' => $bus,'image'=>$image]);
 
         if(!empty($_FILES['picture']))
@@ -751,7 +701,7 @@ if(isset($_POST['add_book'])){
             $_SESSION['error'] = 'Book already exits';
         } else {
 
-            $sql = $init->prepare("INSERT INTO book(book_name) VALUES ('$_POST[add_book]')");
+            $sql = $init->prepare("INSERT INTO book(book_name,admin_id) VALUES ('$_POST[add_book]','$_SESSION[id]')");
             $sql->execute();
             $_SESSION['success'] = 'Book added successfully';
         }

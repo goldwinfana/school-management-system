@@ -246,6 +246,9 @@ if(isset($_POST['login'])){
             }
         }
 
+        $_SESSION['error'] = 'Account Does Not Exists...';
+        header('location: '.$return);
+
     }
     catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
